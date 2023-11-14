@@ -1,12 +1,10 @@
 # JJFloatingActionButton
 Floating Action Button for iOS
 
-Until reaching milestone 1.0.0 there might be breaking changes in minor versions!
-
 ----
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Swift-4.0-orange.svg" alt="Swift 4.0" /> 
+  <img src="https://img.shields.io/badge/Swift-5.0-orange.svg" alt="Swift 5.0" /> 
   <a href="https://cocoapods.org/pods/JJFloatingActionButton"><img src="https://img.shields.io/cocoapods/v/JJFloatingActionButton.svg?style=flat" alt="Version" /></a> 
   <a href="https://cocoapods.org/pods/JJFloatingActionButton"><img src="https://img.shields.io/cocoapods/l/JJFloatingActionButton.svg?style=flat" alt="License" /></a> 
   <a href="https://cocoapods.org/pods/JJFloatingActionButton"><img src="https://img.shields.io/cocoapods/p/JJFloatingActionButton.svg?style=flat" alt="Platform" /></a> 
@@ -49,8 +47,8 @@ Until reaching milestone 1.0.0 there might be breaking changes in minor versions
 ## <a name="requirements"></a>Requirements
 
 - iOS 9.0+
-- Xcode 9.0+
-- Swift 4.0+
+- Xcode 10.2+
+- Swift 5.0
 
 
 ## <a name="installation"></a>Installation
@@ -67,7 +65,7 @@ To integrate JJFloatingActionButton into your Xcode project using CocoaPods, spe
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '11.0'
+platform :ios, '9.0'
 use_frameworks!
 
 target '<Your Target Name>' do
@@ -119,10 +117,13 @@ actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnc
 Button appearance and behavior can be customized:
 
 ```swift
+actionButton.handleSingleActionDirectly = false
+actionButton.buttonDiameter = 65
 actionButton.overlayView.backgroundColor = UIColor(white: 0, alpha: 0.3)
 actionButton.buttonImage = UIImage(named: "Dots")
 actionButton.buttonColor = .red
 actionButton.buttonImageColor = .white
+actionButton.buttonImageSize = CGSize(width: 30, height: 30)
 
 actionButton.buttonAnimationConfiguration = .transition(toImage: UIImage(named: "X"))
 actionButton.itemAnimationConfiguration = .slideIn(withInterItemSpacing: 14)
@@ -156,6 +157,7 @@ item.titleLabel.text = "Owl"
 item.imageView.image = UIImage(named: "Owl")
 item.buttonColor = .black
 item.buttonImageColor = .white
+item.buttonImageColor = CGSize(width: 30, height: 30)
 item.action = { item in
     // Do something
 }

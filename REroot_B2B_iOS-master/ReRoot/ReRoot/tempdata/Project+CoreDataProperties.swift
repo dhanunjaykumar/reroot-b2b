@@ -35,6 +35,7 @@ extension Project {
     @NSManaged public var segment: String?
     @NSManaged public var short_name: String?
     @NSManaged public var state: String?
+    @NSManaged public var info: String?
     @NSManaged public var stats: NSObject?
     @NSManaged public var status: Int16
     @NSManaged public var orderId: Int64

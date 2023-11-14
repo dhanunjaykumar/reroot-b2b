@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Italic.otf">
+            <string>Montserrat-Italic</string>
+        </array>
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+        <array key="Montserrat-SemiBold.otf">
+            <string>Montserrat-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemHistory" id="KGk-i7-Jjw" customClass="HandOverHistoryTableViewCell" customModule="REroot" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ar0-rP-3kR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PBP-9B-T9s">
+                                <rect key="frame" x="0.0" y="0.0" width="55" height="59.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crp-F5-9w0">
+                                        <rect key="frame" x="10.5" y="0.0" width="34" height="24"/>
+                                        <color key="backgroundColor" red="0.0" green="0.30980392159999998" blue="0.56078431370000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="34" id="CLE-el-glo"/>
+                                            <constraint firstAttribute="height" constant="24" id="EEb-e9-caj"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Montserrat-SemiBold" family="Montserrat" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d9h-ZK-bx4">
+                                        <rect key="frame" x="27" y="24" width="1" height="35.5"/>
+                                        <color key="backgroundColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="1" id="OBH-eC-VIz"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="crp-F5-9w0" firstAttribute="centerX" secondItem="PBP-9B-T9s" secondAttribute="centerX" id="1Gl-vh-a65"/>
+                                    <constraint firstAttribute="width" constant="55" id="5Gp-hr-XRb"/>
+                                    <constraint firstItem="d9h-ZK-bx4" firstAttribute="top" secondItem="crp-F5-9w0" secondAttribute="bottom" id="7Y3-X4-hfI"/>
+                                    <constraint firstItem="d9h-ZK-bx4" firstAttribute="centerX" secondItem="crp-F5-9w0" secondAttribute="centerX" id="9Hv-k2-aWh"/>
+                                    <constraint firstAttribute="bottom" secondItem="d9h-ZK-bx4" secondAttribute="bottom" id="ObD-2f-Ywi"/>
+                                    <constraint firstItem="crp-F5-9w0" firstAttribute="top" secondItem="PBP-9B-T9s" secondAttribute="top" id="vy3-Gg-ZTV"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7SR-0a-X0h">
+                                <rect key="frame" x="63" y="0.0" width="249" height="22.5"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Italic" family="Montserrat" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="sWV-pe-wX6">
+                                <rect key="frame" x="60" y="27.5" width="22" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="22" id="lih-oG-eHs"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yxl-B6-72H">
+                                <rect key="frame" x="90" y="27.5" width="219" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="Nj7-4I-Y4m"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="15"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="sWV-pe-wX6" firstAttribute="top" secondItem="Yxl-B6-72H" secondAttribute="top" id="51p-bl-Zox"/>
+                            <constraint firstItem="PBP-9B-T9s" firstAttribute="top" secondItem="Ar0-rP-3kR" secondAttribute="top" id="FnN-0A-EMa"/>
+                            <constraint firstAttribute="trailing" secondItem="Yxl-B6-72H" secondAttribute="trailing" constant="11" id="I7h-dp-jvK"/>
+                            <constraint firstItem="7SR-0a-X0h" firstAttribute="top" secondItem="PBP-9B-T9s" secondAttribute="top" id="JYx-eL-q1j"/>
+                            <constraint firstAttribute="bottom" secondItem="PBP-9B-T9s" secondAttribute="bottom" id="PSP-wQ-Uqz"/>
+                            <constraint firstItem="7SR-0a-X0h" firstAttribute="trailing" secondItem="Ar0-rP-3kR" secondAttribute="trailingMargin" id="Sn0-C1-1fV"/>
+                            <constraint firstAttribute="bottom" secondItem="sWV-pe-wX6" secondAttribute="bottom" id="bcw-ca-sSF"/>
+                            <constraint firstAttribute="bottom" secondItem="Yxl-B6-72H" secondAttribute="bottom" constant="8" id="gUK-jc-ufk"/>
+                            <constraint firstItem="Yxl-B6-72H" firstAttribute="leading" secondItem="sWV-pe-wX6" secondAttribute="trailing" constant="8" symbolic="YES" id="pOy-9a-Gfa"/>
+                            <constraint firstItem="Yxl-B6-72H" firstAttribute="top" secondItem="7SR-0a-X0h" secondAttribute="bottom" constant="5" id="qSy-53-3pW"/>
+                            <constraint firstItem="7SR-0a-X0h" firstAttribute="leading" secondItem="PBP-9B-T9s" secondAttribute="trailing" constant="8" symbolic="YES" id="qlK-JT-TOr"/>
+                            <constraint firstItem="sWV-pe-wX6" firstAttribute="leading" secondItem="PBP-9B-T9s" secondAttribute="trailing" constant="5" id="wt6-T0-4fv"/>
+                            <constraint firstItem="PBP-9B-T9s" firstAttribute="leading" secondItem="Ar0-rP-3kR" secondAttribute="leading" id="yw4-Oi-hLl"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Ar0-rP-3kR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Bqc-BS-IAX"/>
+                    <constraint firstItem="Ar0-rP-3kR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="J0X-pR-KRP"/>
+                    <constraint firstAttribute="bottom" secondItem="Ar0-rP-3kR" secondAttribute="bottom" id="cG6-le-WWk"/>
+                    <constraint firstAttribute="trailing" secondItem="Ar0-rP-3kR" secondAttribute="trailing" id="kZX-ct-NQq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateImageView" destination="sWV-pe-wX6" id="21f-dr-Wk7"/>
+                <outlet property="dateLabel" destination="Yxl-B6-72H" id="FRl-wf-isS"/>
+                <outlet property="handOverStatusHistoryLabel" destination="7SR-0a-X0h" id="k3r-Jh-Cls"/>
+                <outlet property="heightOfDateLabel" destination="Nj7-4I-Y4m" id="NZw-ju-36g"/>
+                <outlet property="hoStateLabel" destination="crp-F5-9w0" id="rAp-Dw-4Id"/>
+                <outlet property="vLineView" destination="d9h-ZK-bx4" id="pev-m5-BtF"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="130.58035714285714"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="calendar" width="24" height="24"/>
+    </resources>
+</document>

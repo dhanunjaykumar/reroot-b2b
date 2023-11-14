@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import ReRoot
+@testable import RERoot
 
 class ReRootTests: XCTestCase {
     

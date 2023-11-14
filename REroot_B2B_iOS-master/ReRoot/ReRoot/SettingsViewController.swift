@@ -42,8 +42,8 @@ class SettingsViewController: UIViewController , UITableViewDelegate,UITableView
 
         // Do any additional setup after loading the view.
         
-        titlesArray = ["Unit Name"]
-        subTitlesArray = ["Unit Description Enabled"]
+        titlesArray = ["Unit Name","Filter by Action Date"]
+        subTitlesArray = ["Unit Description Enabled","Filter by Action Date"]
         
 //        if(UserDefaults.standard.bool(forKey: "Unit Description Enabled") == nil){
 //            UserDefaults.standard.set(false, forKey: "Unit Description Enabled")
@@ -65,18 +65,21 @@ class SettingsViewController: UIViewController , UITableViewDelegate,UITableView
     }
     @objc func enableSettings(_ sender: UISwitch){
         
-        if(sender.tag == 0)  // remove this to make it work for any row ****
-        {
+//        if(sender.tag == 0)  // remove this to make it work for any row ****
+//        {
             var shouldEnable = UserDefaults.standard.bool(forKey: subTitlesArray[sender.tag])
             shouldEnable = !shouldEnable
             UserDefaults.standard.set(shouldEnable, forKey: subTitlesArray[sender.tag])
             UserDefaults.standard.synchronize()
             tableView.reloadData()
-        }
+//        }
+//        else{
+//
+//        }
     }
     //MARK: - Tableview Delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return titlesArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,7 +89,14 @@ class SettingsViewController: UIViewController , UITableViewDelegate,UITableView
             for: indexPath) as! SettingsTableViewCell
 
         cell.titleLabel.text = titlesArray[indexPath.row]
-        cell.subTitleLbel.text = subTitlesArray[indexPath.row]
+        
+        if(indexPath.row+1 <= subTitlesArray.count){
+            cell.subTitleLbel.text = subTitlesArray[indexPath.row]
+        }
+        
+        if(titlesArray[indexPath.row] == "Filter by Action Date"){
+            cell.subTitleLbel.text = (UserDefaults.standard.bool(forKey: "Filter by Action Date")) ? "Yes" : "No"
+        }
         let shouldEnable = UserDefaults.standard.bool(forKey: subTitlesArray[indexPath.row])
 
         cell.enableSwitch.setOn(shouldEnable, animated: true)

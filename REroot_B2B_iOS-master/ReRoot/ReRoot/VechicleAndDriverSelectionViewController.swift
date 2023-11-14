@@ -7,82 +7,172 @@
 //
 
 import UIKit
-import DropDown
+//import DropDown
 import Alamofire
 import PKHUD
 
 protocol VechicleAndDriverDelegate: class {
-    func didSelectVehicleAndDriver(driveID: String,vehicleID: String,selectedAction : Int)
+    func didSelectVehicleAndDriver(driveID: String?,vehicleID: String?,selectedAction : Int)
 }
 
 class VechicleAndDriverSelectionViewController: UIViewController ,UITextFieldDelegate{
 
+    var isOwnVehicel : Bool = false
+    @IBOutlet var driverInfoLabel: UILabel!
+    @IBOutlet var vehicleInfoLabel: UILabel!
+    var keyboardHeight: CGFloat!
+    @IBOutlet var vechicleSelectoinView: UIView!
+    @IBOutlet var heightOfVechileSelectionView: NSLayoutConstraint!
+    var selectedDriverID : String!
+    var selectedVehicelID : String!
+    var comment : String!
+    
+    @IBOutlet var travelTypeTextField: UITextField!
+    var emailId : String!
     var statusID : Int? = 0
     var selectedAction = 0 //Selected option should be > 0 for server
-    
+    var isFromNotification = false
     weak var delegate:VechicleAndDriverDelegate?
-    
+    var viewType : VIEW_TYPE!
+    var tabId : Int!
     var selectedProject : Project!
     var selctedScheduleCallOption : Int!
-    var prospectDetails : REGISTRATIONS_RESULT!
+//    var prospectDetails : REGISTRATIONS_RESULT!
     var selectedDate : Date!
+    var comments : String!
     var selectedProjectId : String!
     var selectedUnitId : String!
+    var selectedSchemeID : String!
+    
     var selectedProspect : REGISTRATIONS_RESULT!
     var isFromRegistrations = false
     
     let vehicleSelectionDropDown = DropDown()
     let driverSelectionDropDown = DropDown()
+    let transportTypeSelectionDropDown = DropDown()
     
     @IBOutlet var driverTextField: UITextField!
     @IBOutlet var vehicleTextField: UITextField!
     
+    var transportTypeArray : [String]!
     
-    var vehiclesArray : [String] = []
-    var driversArray : [String] = []
+    var vehiclesArray : [Vehicle] = []
+    var driversArray : [Driver] = []
     
+    // MARK:- Controller
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+    }
+    @objc
+    func keyboardWillAppear(notification: NSNotification?) {
+        
+        guard let keyboardFrame = notification?.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            return
+        }
+        
+        if #available(iOS 11.0, *) {
+            keyboardHeight = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
+        } else {
+            keyboardHeight = keyboardFrame.cgRectValue.height
+        }
+        
+//        transportTypeSelectionDropDown.direction = .top
+//        transportTypeSelectionDropDown.topOffset = CGPoint(x: 0, y: keyboardHeight)
+//
+//        vehicleSelectionDropDown.direction = .top
+//        vehicleSelectionDropDown.topOffset = CGPoint(x: 0, y: keyboardHeight)
+//
+//        driverSelectionDropDown.direction = .top
+//        driverSelectionDropDown.topOffset = CGPoint(x: 0, y: keyboardHeight)
+        
+    }
+    @objc func injected(){
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
         definesPresentationContext = true
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(hideAll), name: NSNotification.Name(rawValue: NOTIFICATIONS.HIDE_ALL), object: nil)
+
         driverTextField.delegate = self
         vehicleTextField.delegate = self
+        travelTypeTextField.delegate = self
         
-        let drivers = RRUtilities.sharedInstance.drivers
+        transportTypeArray = ["Own","Company"]
         
-        for driver in drivers{
-            self.driversArray.append(driver.name!)
-        }
+        print(selectedProject)
+        print(selectedProspect)
         
-        let vehicles = RRUtilities.sharedInstance.vehicles
+        self.driversArray = RRUtilities.sharedInstance.model.getAllDrivers()
+        self.vehiclesArray = RRUtilities.sharedInstance.model.getAllVehicles()
+
+        vehicleSelectionDropDown.showingVehicles = true
+        driverSelectionDropDown.showingDrivers = true
+        transportTypeSelectionDropDown.showingTrasportType = true
         
-        for vehicle in vehicles{
-            self.vehiclesArray.append(vehicle.vehicleType!)
-        }
+        heightOfVechileSelectionView.constant = 0
+        vechicleSelectoinView.isHidden = true
+        travelTypeTextField.rightView = UIImageView.init(image: UIImage.init(named: "downArrow"))
+        travelTypeTextField.rightViewMode = .always
+        self.isOwnVehicel = true
         self.setupDriversDropDown()
         self.setupVehiclesDropDown()
+        self.setupTransportDropDown()
+        
+    }
+    func setupTransportDropDown(){
+        
+        transportTypeSelectionDropDown.anchorView = travelTypeTextField
+        transportTypeSelectionDropDown.topOffset = CGPoint(x: 0, y: travelTypeTextField.bounds.height)
+        transportTypeSelectionDropDown.dataSource = self.transportTypeArray
+
+        transportTypeSelectionDropDown.selectionAction = { [weak self] (index, item) in
+            self?.travelTypeTextField.text = item as? String
+            
+            if(index == 0){
+                self?.isOwnVehicel = true
+                self?.heightOfVechileSelectionView.constant = 0
+                self?.vechicleSelectoinView.isHidden = true
+            }
+            else{
+                self?.isOwnVehicel = false
+                self?.heightOfVechileSelectionView.constant = 200
+                self?.vechicleSelectoinView.isHidden = false
+            }
+        }
     }
     func setupVehiclesDropDown(){
+        
+        if(self.vehiclesArray.count == 0){
+            HUD.flash(.label("There are no vehicle!"), delay: 1.0)
+            return
+        }
         
         vehicleSelectionDropDown.anchorView = vehicleTextField
         
         // By default, the dropdown will have its origin on the top left corner of its anchor view
         // So it will come over the anchor view and hide it completely
         // If you want to have the dropdown underneath your anchor view, you can do this:
-        vehicleSelectionDropDown.bottomOffset = CGPoint(x: 0, y: vehicleTextField.bounds.height)
+        vehicleSelectionDropDown.topOffset = CGPoint(x: 0, y: vehicleInfoLabel.bounds.height)
+        vehicleSelectionDropDown.direction = .top
         
         // You can also use localizationKeysDataSource instead. Check the docs.
         vehicleSelectionDropDown.dataSource = self.vehiclesArray
         
         // Action triggered on selection
         vehicleSelectionDropDown.selectionAction = { [weak self] (index, item) in
-            //            self?.projectNameTextField.setTitle(item, for: .normal)
-            self?.vehicleTextField.text = item
+            let vehicle : Vehicle = item as! Vehicle
+            self?.vehicleTextField.text = vehicle.plateNo
+            self?.selectedVehicelID = vehicle.id
         }
-        
     }
     
     func setupDriversDropDown(){
@@ -92,15 +182,17 @@ class VechicleAndDriverSelectionViewController: UIViewController ,UITextFieldDel
         // By default, the dropdown will have its origin on the top left corner of its anchor view
         // So it will come over the anchor view and hide it completely
         // If you want to have the dropdown underneath your anchor view, you can do this:
-        driverSelectionDropDown.bottomOffset = CGPoint(x: 0, y: driverTextField.bounds.height)
+        driverSelectionDropDown.topOffset = CGPoint(x: 0, y: driverInfoLabel.bounds.height)
+        driverSelectionDropDown.direction = .top
         
         // You can also use localizationKeysDataSource instead. Check the docs.
         driverSelectionDropDown.dataSource = self.driversArray
         
         // Action triggered on selection
         driverSelectionDropDown.selectionAction = { [weak self] (index, item) in
-            //            self?.projectNameTextField.setTitle(item, for: .normal)
-            self?.driverTextField.text = item
+            let driver : Driver = item as! Driver
+            self?.driverTextField.text = driver.name
+            self?.selectedDriverID = driver.id
         }
     }
     @IBAction func okAction(_ sender: Any) {
@@ -120,13 +212,38 @@ class VechicleAndDriverSelectionViewController: UIViewController ,UITextFieldDel
     // MARK: - Textfield delegate
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
+        if(textField == travelTypeTextField){
+            transportTypeSelectionDropDown.show()
+        }
         if(textField == driverTextField){
             driverSelectionDropDown.show()
+            driverSelectionDropDown.topOffset = CGPoint(x: 0, y: driverInfoLabel.bounds.height)
+            print(driverTextField.bounds,driverTextField.frame)
+//            return true
         }
         if(textField == vehicleTextField){
             vehicleSelectionDropDown.show()
         }
         
+        return false
+    }
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        let searchStr = textField.text! + string
+        if(textField == driverTextField){
+            
+            self.driversArray = RRUtilities.sharedInstance.model.getAllDrivers()
+            self.driversArray = self.driversArray.filter({ ($0.name!.localizedCaseInsensitiveContains(searchStr)) })
+            
+            if(self.driversArray.count == 0){
+                HUD.flash(.label("No Driver with name \(searchStr)"), delay: 1.0)
+            }
+            else{
+                self.setupDriversDropDown()
+                driverSelectionDropDown.show()
+            }
+            
+        }
         return true
     }
     // MARK: - SITE VISIT CALLL
@@ -148,24 +265,28 @@ class VechicleAndDriverSelectionViewController: UIViewController ,UITextFieldDel
         var siteVisitParameters : Dictionary<String,Any> = [:]
         
         let selectedDriver = driverTextField.text
-        
-        let selectedDrivers = RRUtilities.sharedInstance.drivers.filter { ($0.name! == selectedDriver) }
-        
-        let selectedDriverID = selectedDrivers[0]._id
-
         let selectedVehicle = vehicleTextField.text
+
+//        if(!self.isOwnVehicel && selectedVehicle!.count <= 0){
+//            HUD.flash(.label("Select Vechicle"), delay: 1.0)
+//            return
+//        }
+//
+//        if(!self.isOwnVehicel && selectedDriver!.count <= 0){
+//            HUD.flash(.label("Select Driver"), delay: 1.0)
+//            return
+//        }
         
-        let selectedVehicles = RRUtilities.sharedInstance.vehicles.filter { ($0.vehicleType! == selectedVehicle) }
+        let selectedDriverID = self.selectedDriverID
         
-        let selectedVehicleID = selectedVehicles[0]._id
-        
+        let selectedVehicleID = selectedVehicelID
         
         if(isFromRegistrations){
             
             siteVisitParameters["registrationStatus"] = 1  //{type: Number, require: true}, // 1 - Interested, 2 - Not Interested
             
-            siteVisitParameters["project"] = selectedProspect.project?._id
-            siteVisitParameters["registrationDate"] = selectedProspect.registrationDate
+            siteVisitParameters["project"] = self.selectedProspect.project?._id
+            siteVisitParameters["registrationDate"] = self.selectedProspect.registrationDate
             
             if(selectedProspect.regInfo != nil){
                 siteVisitParameters["regInfo"] = selectedProspect.regInfo
@@ -179,44 +300,86 @@ class VechicleAndDriverSelectionViewController: UIViewController ,UITextFieldDel
             action["label"] = ACTION_TYPE_STRING.SITE_VISTI.rawValue
             
             var actionInfo : Dictionary<String,Any> = [:]
-            
+            print(siteVisitParameters["date"])
+            print(Formatter.ISO8601.string(from: selectedDate))
             actionInfo["date"] = Formatter.ISO8601.string(from: selectedDate)
             actionInfo["projects"] = [selectedProjectId]
+            actionInfo["comment"] = comment
             actionInfo["units"] = [selectedUnitId]
-            actionInfo["drivers"] = selectedDriverID
-            actionInfo["vehicle"] = selectedVehicleID
-
+            if(!self.isOwnVehicel && selectedDriverID != nil && selectedVehicleID != nil){
+                actionInfo["driver"] = selectedDriverID
+                actionInfo["vehicle"] = selectedVehicleID
+            }
+            
             siteVisitParameters["action"] = action
             siteVisitParameters["actionInfo"] = actionInfo
+            
+            var salesPerson : Dictionary<String,Any> = [:]
+            salesPerson["_id"] = selectedProspect.salesPerson?._id
+            salesPerson["email"] = selectedProspect.salesPerson?.email
+            
+            var userInfo : Dictionary<String,String> = [:]
+            userInfo["_id"] = selectedProspect.salesPerson?.userInfo?._id
+            userInfo["email"] = selectedProspect.salesPerson?.userInfo?.email
+            userInfo["name"] = selectedProspect.salesPerson?.userInfo?.name
+            userInfo["phone"] = selectedProspect.salesPerson?.userInfo?.phone
+            
+            salesPerson["userInfo"] = userInfo
+            
+            siteVisitParameters["salesPerson"] = salesPerson
             
         }
         else{
             
             siteVisitParameters["registrationDate"] = selectedProspect.registrationDate
-            siteVisitParameters["project"] = selectedProspect.project?._id
+            siteVisitParameters["project"] =  selectedProjectId ?? selectedProspect.project?._id
             siteVisitParameters["regInfo"] = selectedProspect.regInfo
             siteVisitParameters["registrationStatus"] = 1 //{type: Number, require: true}, // 1 - Interested, 2 - Not Interested
             
+            siteVisitParameters["unit"] = selectedProspect.unit?._id
+            
             var action : Dictionary<String,String> = [:]
             action["id"] = String(format: "%d", selectedAction)
-            action["label"] = ACTION_TYPE_STRING.SCHEDULE_CALL.rawValue
+            if(selectedAction == 1){
+                action["label"] = ACTION_TYPE_STRING.SCHEDULE_CALL.rawValue
+            }
+            else if(selectedAction == 2){
+                action["label"] = ACTION_TYPE_STRING.SEND_OFFER.rawValue
+            }
+            else if(selectedAction == 3){
+                action["label"] = ACTION_TYPE_STRING.SITE_VISTI.rawValue
+            }
+            else if(selectedAction == 4){
+                action["label"] = ACTION_TYPE_STRING.DISCOUNT_REQUEST.rawValue
+            }
+            else if(selectedAction == 5){
+                action["label"] = ACTION_TYPE_STRING.NEW_TASK.rawValue
+            }
+            
             
             var actionInfo : Dictionary<String,Any> = [:]
             
-            actionInfo["projects"] = [selectedProspect.project?._id]
+            actionInfo["projects"] = selectedProjectId ?? [selectedProspect.project?._id]
             actionInfo["date"] = Formatter.ISO8601.string(from: selectedDate)
-            
+            actionInfo["comment"] = comment
+            if(selectedAction == 2 || selectedAction == 4){
+                let date = Calendar.current.date(bySettingHour: 23, minute: 59, second: 0, of: Date())!
+                actionInfo["date"] = Formatter.ISO8601.string(from: date)
+            }
+
             var prevLeadStatus : Dictionary<String,Any> = [:]
             
-            if(selectedProspect.action != nil)
-            {
-                prevLeadStatus["actionType"] = selectedProspect.action?.id
-            }
-            else
-            {
-                prevLeadStatus["actionType"] = ACTION_TYPE.SITE_VISIT.rawValue
-            }
+//            if(selectedProspect.action != nil)
+//            {
+//                prevLeadStatus["actionType"] = selectedProspect.action?.id
+//            }
+//            else
+//            {
+                prevLeadStatus["actionType"] = self.statusID //ACTION_TYPE.SITE_VISIT.rawValue
+//            }
             prevLeadStatus["id"] = selectedProspect._id ////*** should pass ACTION TYPE IDDD
+            
+            siteVisitParameters["viewType"] = self.viewType.rawValue
             
             var status : Dictionary<String,String> = [:]
             
@@ -238,15 +401,49 @@ class VechicleAndDriverSelectionViewController: UIViewController ,UITextFieldDel
                 else if(selctedScheduleCallOption == 4){
                     status["label"] = SCHEDULE_CALL_ACTIONS_STRING.NOT_INTERESTED.rawValue
                 }
+                
+                prevLeadStatus["status"] = status
+                
+                actionInfo["projects"] = [selectedProjectId]
+                actionInfo["units"] = [selectedUnitId]
+                if(!self.isOwnVehicel && selectedVehicleID != nil && selectedDriverID != nil){
+                    actionInfo["vehicle"] = selectedVehicleID
+                    actionInfo["driver"] = selectedDriverID
+                }
+                actionInfo["date"] = Formatter.ISO8601.string(from: selectedDate)
+                actionInfo["comment"] = comment
+                
+                var salesPerson : Dictionary<String,Any> = [:]
+                salesPerson["_id"] = selectedProspect.salesPerson?._id
+                salesPerson["email"] = selectedProspect.salesPerson?.email
+                
+                
+                if(self.viewType == VIEW_TYPE.LEADS){
+                    siteVisitParameters["prevLeadStatus"] = prevLeadStatus
+                }
+                else if(self.viewType == VIEW_TYPE.OPPORTUNITIES){
+                    siteVisitParameters["prevOpportunityStatus"] = prevLeadStatus
+                }
+                
 
+                siteVisitParameters["action"] = action
+                if(selectedProspect.salesPerson?._id != nil){
+                    siteVisitParameters["salesPerson"] = salesPerson
+                }
+                siteVisitParameters["unit"] = selectedUnitId
+                siteVisitParameters["actionInfo"] = actionInfo
+                siteVisitParameters["unit"] = selectedProspect.unit?._id
             }
             else if(statusID == 2){ //Offers controller
                 
                 siteVisitParameters["_id"] = selectedProspect._id
 
-                actionInfo["driver"] = selectedDriverID
-                actionInfo["vehicle"] = selectedVehicleID
-                
+                if(!self.isOwnVehicel && selectedVehicleID != nil && selectedDriverID != nil){
+                    actionInfo["vehicle"] = selectedVehicleID
+                    actionInfo["driver"] = selectedDriverID
+                }
+                actionInfo["comment"] = comment
+
                 siteVisitParameters["enquirySource"]  = selectedProspect.enquirySource
                 
                 var project : Dictionary<String,String> = [:]
@@ -293,35 +490,271 @@ class VechicleAndDriverSelectionViewController: UIViewController ,UITextFieldDel
                 
                 siteVisitParameters["unit"] = unit
                 
-                siteVisitParameters["userEmail"] = selectedProspect.userEmail
+                siteVisitParameters["userEmail"] = self.emailId ?? selectedProspect.userEmail
                 siteVisitParameters["userName"] = selectedProspect.userName
                 siteVisitParameters["userPhone"] = selectedProspect.userPhone
                 
+                prevLeadStatus["status"] = status
+                
+                if(self.viewType == VIEW_TYPE.LEADS){
+                    siteVisitParameters["prevLeadStatus"] = prevLeadStatus
+                }
+                else if(self.viewType == VIEW_TYPE.OPPORTUNITIES){
+                    siteVisitParameters["prevOpportunityStatus"] = prevLeadStatus
+                }
+                siteVisitParameters["action"] = action
+                siteVisitParameters["actionInfo"] = actionInfo
+
+                
             }
-            
-            prevLeadStatus["status"] = status
-            
-            siteVisitParameters["prevLeadStatus"] = prevLeadStatus
-            siteVisitParameters["action"] = action
-            siteVisitParameters["actionInfo"] = actionInfo
+            else if(statusID == 3){
+                
+                status["id"] = String(format: "%d", selctedScheduleCallOption)
+                
+                if(selctedScheduleCallOption == 1){
+                    status["label"] = SITE_VISIT_ACTIONS_STRING.GOOD.rawValue
+                }
+                else if(selctedScheduleCallOption == 2){
+                    status["label"] = SITE_VISIT_ACTIONS_STRING.SATISFIED.rawValue
+                }
+                else if(selctedScheduleCallOption == 3){
+                    status["label"] = SITE_VISIT_ACTIONS_STRING.DISSATISFIED.rawValue
+                }
+                else if(selctedScheduleCallOption == 4){
+                    status["label"] = SITE_VISIT_ACTIONS_STRING.NOT_VISITED.rawValue
+                }
+                else if(selctedScheduleCallOption == 5){
+                    status["label"] = SITE_VISIT_ACTIONS_STRING.NOT_INTERESTED.rawValue
+                }
+
+                var salesPerson : Dictionary<String,Any> = [:]
+                salesPerson["_id"] = selectedProspect.salesPerson?._id
+                salesPerson["email"] = selectedProspect.salesPerson?.email
+                
+                prevLeadStatus["status"] = status
+                
+//                actionInfo["comment"] = ""
+                if(!self.isOwnVehicel && selectedVehicleID != nil && selectedDriverID != nil){
+                    actionInfo["vehicle"] = selectedVehicleID
+                    actionInfo["driver"] = selectedDriverID
+                }
+                actionInfo["projects"] = [selectedProjectId]
+                actionInfo["units"] = [selectedUnitId]
+                actionInfo["date"] = Formatter.ISO8601.string(from: selectedDate)
+                actionInfo["comment"] = comment
+                
+                siteVisitParameters["salesPerson"] = salesPerson
+                if(self.viewType == VIEW_TYPE.LEADS){
+                    siteVisitParameters["prevLeadStatus"] = prevLeadStatus
+                }
+                else if(self.viewType == VIEW_TYPE.OPPORTUNITIES){
+                    siteVisitParameters["prevOpportunityStatus"] = prevLeadStatus
+                }
+                siteVisitParameters["action"] = action
+                siteVisitParameters["actionInfo"] = actionInfo
+
+            }
+            else if(statusID == 4){
+                
+                    var action : Dictionary<String,String> = [:]
+                    
+                    action["id"] = String(format: "%d", selectedAction)
+                    action["label"] = ACTION_TYPE_STRING.SITE_VISTI.rawValue
+                    
+                    var actionInfo : Dictionary<String,Any> = [:]
+
+                    actionInfo["date"] = Formatter.ISO8601.string(from: selectedDate)
+                    actionInfo["projects"] = [selectedProjectId]
+                    actionInfo["units"] = [selectedUnitId]
+                    if(!self.isOwnVehicel && selectedVehicleID != nil && selectedDriverID != nil){
+                        actionInfo["vehicle"] = selectedVehicleID
+                        actionInfo["driver"] = selectedDriverID
+                    }
+                    actionInfo["comment"] = comment
+                    
+                    var prevLeadStatus : Dictionary<String,Any> = [:]
+                    prevLeadStatus["actionType"] = self.statusID
+                    prevLeadStatus["id"] = selectedProspect._id
+                    
+                    status["id"] = String(format: "%d", selctedScheduleCallOption)
+                    
+                    if(selctedScheduleCallOption == 1){
+                        status["label"] = OTHER_TASK_ACTIONS_STRING.COMPLETED.rawValue
+                    }
+                    else if(selctedScheduleCallOption == 2){
+                        status["label"] = OTHER_TASK_ACTIONS_STRING.ON_HOLD.rawValue
+                    }
+                    else if(selctedScheduleCallOption == 3){
+                        status["label"] = OTHER_TASK_ACTIONS_STRING.NOT_INTERESTED.rawValue
+                    }
+                    
+                    prevLeadStatus["status"] = status
+                    var salesPerson : Dictionary<String,Any> = [:]
+                    salesPerson["_id"] = selectedProspect.salesPerson?._id
+                    salesPerson["email"] = selectedProspect.salesPerson?.email
+                    
+                    siteVisitParameters["salesPerson"] = salesPerson
+                    siteVisitParameters["action"] = action
+                    siteVisitParameters["actionInfo"] = actionInfo
+                    if(self.viewType == VIEW_TYPE.LEADS){
+                        siteVisitParameters["prevLeadStatus"] = prevLeadStatus
+                    }
+                    else if(self.viewType == VIEW_TYPE.OPPORTUNITIES){
+                        siteVisitParameters["prevOpportunityStatus"] = prevLeadStatus
+                    }
+
+                    siteVisitParameters["prospectId"] = selectedProspect.prospectId
+                    siteVisitParameters["unit"] = selectedProspect.unit?._id
+
+                
+            }
+            else if(statusID == 5){
+                
+                var action : Dictionary<String,String> = [:]
+                
+                action["id"] = String(format: "%d", selectedAction)
+                action["label"] = ACTION_TYPE_STRING.SITE_VISTI.rawValue
+                
+                var actionInfo : Dictionary<String,Any> = [:]
+
+                actionInfo["date"] = Formatter.ISO8601.string(from: selectedDate)
+                actionInfo["projects"] = [selectedProjectId]
+                actionInfo["units"] = [selectedUnitId]
+                if(!self.isOwnVehicel && selectedVehicleID != nil && selectedDriverID != nil){
+                    actionInfo["vehicle"] = selectedVehicleID
+                    actionInfo["driver"] = selectedDriverID
+                }
+                actionInfo["comment"] = comment
+                
+                var prevLeadStatus : Dictionary<String,Any> = [:]
+                prevLeadStatus["actionType"] = self.statusID
+                prevLeadStatus["id"] = selectedProspect._id
+                
+                status["id"] = String(format: "%d", selctedScheduleCallOption)
+                
+                if(selctedScheduleCallOption == 1){
+                    status["label"] = OTHER_TASK_ACTIONS_STRING.COMPLETED.rawValue
+                }
+                else if(selctedScheduleCallOption == 2){
+                    status["label"] = OTHER_TASK_ACTIONS_STRING.ON_HOLD.rawValue
+                }
+                else if(selctedScheduleCallOption == 3){
+                    status["label"] = OTHER_TASK_ACTIONS_STRING.NOT_INTERESTED.rawValue
+                }
+                
+                prevLeadStatus["status"] = status
+                var salesPerson : Dictionary<String,Any> = [:]
+                salesPerson["_id"] = selectedProspect.salesPerson?._id
+                salesPerson["email"] = selectedProspect.salesPerson?.email
+                
+                siteVisitParameters["salesPerson"] = salesPerson
+                siteVisitParameters["action"] = action
+                siteVisitParameters["actionInfo"] = actionInfo
+                if(self.viewType == VIEW_TYPE.LEADS){
+                    siteVisitParameters["prevLeadStatus"] = prevLeadStatus
+                }
+                else if(self.viewType == VIEW_TYPE.OPPORTUNITIES){
+                    siteVisitParameters["prevOpportunityStatus"] = prevLeadStatus
+                }
+
+                siteVisitParameters["prospectId"] = selectedProspect.prospectId
+                siteVisitParameters["unit"] = selectedProspect.unit?._id
+                
+            }
+            else if(statusID == 6){
+             
+                
+                action["id"] = String(format: "%d", selectedAction)
+                
+                if(selectedAction == 3){
+                    action["label"] = ACTION_TYPE_STRING.SITE_VISTI.rawValue
+                }
+                
+                var actionInfo : Dictionary<String,Any> = [:]
+//                print(siteVisitParameters["date"])
+//                print(Formatter.ISO8601.string(from: selectedDate))
+                actionInfo["date"] = Formatter.ISO8601.string(from: selectedDate)
+                actionInfo["projects"] = [selectedProjectId]
+                actionInfo["units"] = [selectedUnitId]
+                actionInfo["comment"] = comment
+                if(!self.isOwnVehicel && selectedVehicleID != nil && selectedDriverID != nil){
+                    actionInfo["vehicle"] = selectedVehicleID
+                    actionInfo["driver"] = selectedDriverID
+                }
+                
+
+                var action : Dictionary<String,String> = [:]
+                
+                action["id"] = String(format: "%d", selectedAction)
+                action["label"] = ACTION_TYPE_STRING.SITE_VISTI.rawValue
+
+                var salesPerson : Dictionary<String,Any> = [:]
+                salesPerson["_id"] = selectedProspect.salesPerson?._id
+                salesPerson["email"] = selectedProspect.salesPerson?.email
+
+                var prevLeadStatus : Dictionary<String,Any> = [:]
+
+//                if(selectedProspect.action != nil)
+//                {
+//                    prevLeadStatus["actionType"] = selectedProspect.action?.id
+//                }
+//                else
+//                {
+                    prevLeadStatus["actionType"] = self.statusID //ACTION_TYPE.SITE_VISIT.rawValue
+//                }
+                
+                prevLeadStatus["id"] = selectedProspect._id ////*** should pass ACTION TYPE IDDD
+
+                var status : Dictionary<String,Any> = [:]
+                status["id"] = 1
+                
+                prevLeadStatus["status"] = status
+                
+                siteVisitParameters["salesPerson"] = salesPerson
+                siteVisitParameters["action"] = action
+                siteVisitParameters["actionInfo"] = actionInfo
+                if(self.viewType == VIEW_TYPE.LEADS){
+                    siteVisitParameters["prevLeadStatus"] = prevLeadStatus
+                }
+                else if(self.viewType == VIEW_TYPE.OPPORTUNITIES){
+                    siteVisitParameters["prevOpportunityStatus"] = prevLeadStatus
+                }
+            }
         }
-        print(siteVisitParameters.keys)
-        print(siteVisitParameters)
+        if(self.selectedSchemeID != nil){
+            siteVisitParameters["scheme"] = self.selectedSchemeID
+        }
+        
+        siteVisitParameters["prospectId"] = selectedProspect.prospectId
+        siteVisitParameters["userName"] = selectedProspect.userName
+        siteVisitParameters["userPhone"] = selectedProspect.userPhone
+        siteVisitParameters["userEmail"] = emailId ?? selectedProspect.userEmail
+        siteVisitParameters["src"] = 3
+//        print(siteVisitParameters.keys)
+//        print(siteVisitParameters)
         
         var urlString = ""
-        
-        if(statusID == 1){
-            urlString = RRAPI.CHANGE_PROSPECT_STATE
+        print(statusID)
+        if(statusID == 0 || isFromRegistrations || statusID == 1 || statusID == 3 || statusID == 5 || statusID == 6 || statusID == 4){
+            
+            if(self.viewType == VIEW_TYPE.LEADS || isFromRegistrations){
+                urlString = RRAPI.CHANGE_PROSPECT_STATE
+            }
+            else if(self.viewType == VIEW_TYPE.OPPORTUNITIES){
+                urlString = RRAPI.CHANGE_OPPORTUNITY_PROSPECT_STATE
+            }
         }
         else if(statusID == 2){
-            urlString = String(format:RRAPI.API_OFFERS_PROSPECT_CHANGE,"2")
+            urlString = String(format:RRAPI.API_OFFERS_PROSPECT_CHANGE,self.viewType.rawValue)
         }
         
-        Alamofire.request(urlString, method: .post, parameters: siteVisitParameters, encoding: JSONEncoding.default, headers: headers).responseJSON{
+        HUD.show(.progress)
+        
+        AF.request(urlString, method: .post, parameters: siteVisitParameters, encoding: JSONEncoding.default, headers: headers).responseJSON{
             response in
             switch response.result {
             case .success( _):
-                print(response)
+//                print(response)
                 guard let responseData = response.data else {
                     print("Error: did not receive data")
                     return
@@ -329,20 +762,29 @@ class VechicleAndDriverSelectionViewController: UIViewController ,UITextFieldDel
                 //SEARCH_RESULT
                 HUD.hide()
                 
-                let urlResult = try! JSONDecoder().decode(PROSPECT_SUBMIT_RESULT.self, from: responseData)
-                
-                if(urlResult.status == 1){ // success
-                    HUD.flash(.label("Success"), delay: 1.0)
-                    self.dismiss(animated: true, completion: nil)
-                    NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.FETCH_ON_ACTION), object: nil)
-                    NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.FETCH_REGISTRATIONS), object: nil)
-                    NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.POP_CONTROLLERS), object: nil)
+                do{
+                    let urlResult = try JSONDecoder().decode(PROSPECT_SUBMIT_RESULT.self, from: responseData)
+                    
+                    if(urlResult.status == 1){ // success
+                        HUD.flash(.label("Success"), delay: 1.0)
+                        if(!self.isFromNotification){
+                            NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.FETCH_ON_ACTION), object: nil)
+                            NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.FETCH_REGISTRATIONS), object: nil)
+                            NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.POP_CONTROLLERS), object: nil)
+                        }
+                        else{
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: NOTIFICATIONS.DELETE_NOTIFICATION), object: nil)
+                        }
+                        //                    self.dismiss(animated: true, completion: nil)
+                    }
+                    else
+                    {
+                        HUD.flash(.label(urlResult.err!.actionInfo?.description ?? "Falid! Try Again"), delay: 1.0)
+                    }
                 }
-                else
-                {
-                    HUD.flash(.label(urlResult.err!.actionInfo), delay: 1.0)
+                catch let error{
+                    HUD.flash(.label(error.localizedDescription))
                 }
-                
                 // make tableview data
                 break
             case .failure(let error):
@@ -352,7 +794,12 @@ class VechicleAndDriverSelectionViewController: UIViewController ,UITextFieldDel
             }
         }
     }
-    
+    @objc func hideAll(){
+        NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.FETCH_ON_ACTION), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.FETCH_REGISTRATIONS), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.POP_CONTROLLERS), object: nil)
+    }
+
     
     /*
     // MARK: - Navigation

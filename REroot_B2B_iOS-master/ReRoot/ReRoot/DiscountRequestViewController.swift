@@ -9,32 +9,24 @@
 import UIKit
 import Alamofire
 import PKHUD
-import DropDown
+//import DropDown
 
-struct DISOCUNT_INPUT : Codable{
-    var billingElement : String?
-    var discountedAmt : Int?
-    var discountedPercent  : Int?
-    var discountedRate : Int?
-    var prospectLead : String?
-    var rate : Int?
-    var regInfo : String?
-    var status : Int?
-    var unit : String?
-}
 
 
 class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource{
     
     @IBOutlet var subPremiumElementsTextField: UITextField!
+    var viewType : VIEW_TYPE!
+    var isFromNotification = false
     
     @IBOutlet var heightOfSubElementsView: NSLayoutConstraint!
     @IBOutlet var heightOfSubDiscountTextField: NSLayoutConstraint!
     var isLeads = false
     
     @IBOutlet var heightOfTableView: NSLayoutConstraint!
+    var discountInputDictionay : Dictionary<String,Any> = [:]
     var selectedDiscountElements : [DISOCUNT_INPUT] = []
-    var selectedBillAmount : Int = 0
+    var selectedBillAmount : Double = 0
     
     var selectedBillingElements : [BILLING_INFO] = []
     
@@ -67,19 +59,26 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
     @IBOutlet var billingTypeInfoLabel: UILabel!
     @IBOutlet var billingTypeSelectionView: UIView!
     
-    var billingTypesArray : [String] = []
-    var premiumBillingTypesArray : [String] = []
-    var subPremiumBillingTypesArray : [String] = []
+    var billingTypesArray : [BILLING_INFO] = []
+    var premiumBillingTypesArray : [PREMIUM_BILLING_INFO] = []
+    var subPremiumBillingTypesArray : [BILLING_INFO] = []
     
     var billingElements : [BILLING_INFO]?
     var premiumBillingElements : [PREMIUM_BILLING_INFO]?
     var subPremiumBillingElements : [BILLING_INFO]?
     
+    @objc func injected(){
+        
+    }
     override func viewDidLoad() {
         
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(hideAll), name: NSNotification.Name(rawValue: NOTIFICATIONS.HIDE_ALL), object: nil)
+
+        billingElementSelectionDropDown.showingBillingElementTypes = true
         
         heightOfSubElementsView.constant = heightOfSubElementsView.constant - 50
         heightOfSubDiscountTextField.constant = 0
@@ -99,7 +98,6 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
             unitNameLabel.text = unitDetails.description
         }
         
-
         let billingInfo = unitBillingInfo.billingInfo
         
         billingElements = unitBillingInfo.billingInfo
@@ -108,36 +106,40 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
         
         billingTypesArray.removeAll()
         
-        for billType in billingInfo!{
-            billingTypesArray.append(billType.name!)
-        }
+        billingTypesArray = unitBillingInfo.billingInfo!
+        
+//        for billType in billingInfo!{
+//            billingTypesArray.append(billType.name!)
+//        }
         
         print(billingTypesArray)
         
-        costTypeTextField.text = billingTypesArray[0]
+        costTypeTextField.text = billingTypesArray[0].name
         let tempBill = billingInfo![0]
         selectedBillingElement = tempBill
         currentRateLabel.text = String(format: "%d", tempBill.cost!)
-        selectedBillAmount = tempBill.cost!
-        
+        selectedBillAmount = Double(tempBill.cost!)
+        billingElementSubDropDown.showingBillingElements = true
         self.setUpBllingElements()
         
         let premiumBillingInfo = unitBillingInfo.premiumBillingInfo
         premiumBillingTypesArray.removeAll()
         
-        for billType in premiumBillingInfo!{
-            premiumBillingTypesArray.append(billType.name!)
-        }
+        premiumBillingTypesArray = unitBillingInfo.premiumBillingInfo!
         
-        if(premiumBillingInfo!.count > 0){
+//        for billType in premiumBillingInfo!{
+//            premiumBillingTypesArray.append(billType.name!)
+//        }
+        
+        if((premiumBillingInfo?.count)! > 0){
             let billInfo = premiumBillingInfo?[0].billings
             if(billInfo?.count != 0){
                 for tempBill in billInfo!{
-                    subPremiumBillingTypesArray.append(tempBill.name!)
+                    subPremiumBillingTypesArray.append(tempBill)
                 }
             }
+            self.subPremiumElementsTextField.text = self.subPremiumBillingTypesArray[0].name
         }
-        self.subPremiumElementsTextField.text = self.subPremiumBillingTypesArray[0]
         print(subPremiumBillingTypesArray)
         
         print(premiumBillingTypesArray)
@@ -162,6 +164,11 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
 //        unitNameLabel.text = selectedProspect
         
     }
+    @objc func hideAll(){
+        NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.FETCH_ON_ACTION), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.FETCH_REGISTRATIONS), object: nil)
+        NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.POP_CONTROLLERS), object: nil)
+    }
     @IBAction func addBillingElement(_ sender: Any) {
         
         //Clear text fields on addig?
@@ -174,7 +181,17 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
             return
         }
         
-        let discountAmt = Int(discountAmtTextField.text!)
+        if((discountAmtTextField.text?.count)! <= 0)
+        {
+            HUD.flash(.label("Enter discount amount"), delay: 0.8)
+            return
+        }
+        if((discountPercentageTextField.text?.count)! <= 0){
+            HUD.flash(.label("Enter discount percentage"), delay: 0.8)
+            return
+        }
+        
+        let discountAmt = Double(discountAmtTextField.text!)
         let discountPercentage = Double(discountPercentageTextField.text!)
         
         let rate = selectedBillingElement?.rate
@@ -188,13 +205,13 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
         
         requestedDiscountDetails.unit = selectedProspect.project?._id // ***
         
-        requestedDiscountDetails.discountedAmt =  Int(discountAmtTextField.text!)
-        requestedDiscountDetails.discountedPercent = Int(discountPercentageTextField.text!)
+        requestedDiscountDetails.discountedAmt =  Double(discountAmtTextField.text!)
+        requestedDiscountDetails.discountedPercent = Double(discountPercentageTextField.text!)
         
         var temprate = Double(rate!)
         let tempAmt  = Double(discountAmt!)
         temprate = temprate - tempAmt
-        requestedDiscountDetails.discountedRate = Int(temprate)
+        requestedDiscountDetails.discountedRate =  temprate//Int(temprate)
         
         let tempUnits = selectedProspect.actionInfo?.units
         let counter = tempUnits?.count
@@ -246,7 +263,7 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
         
     }
     func submitDiscountRequest(){
-        
+
         if !RRUtilities.sharedInstance.getNetworkStatus()
         {
             HUD.flash(.label("Couldn't connect to internet"), delay: 1.0)
@@ -268,49 +285,119 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
         
         parameters["_id"] = selectedProspect._id
         
-        if(selectedProspect.viewType == nil){
-            parameters["viewType"] = "2"
-        }else{
-            parameters["viewType"] = selectedProspect.viewType
+//        if(selectedProspect.viewType == nil){
+            parameters["viewType"] = self.viewType.rawValue
+//        }else{
+//            parameters["viewType"] = selectedProspect.viewType
+//        }
+        
+        var billingElementesArray : Array<Dictionary<String,Any>> = []
+        
+        for tempBillingElement in selectedDiscountElements{
+            
+            var billingElementDict : Dictionary<String,Any> = [:]
+            billingElementDict["billingElement"] = tempBillingElement.billingElement
+            billingElementDict["discountedAmt"] = tempBillingElement.discountedAmt
+            billingElementDict["discountedPercent"] = tempBillingElement.discountedPercent
+            billingElementDict["discountedRate"] = tempBillingElement.discountedRate
+            billingElementDict["prospectlead"] = tempBillingElement.prospectLead
+            billingElementDict["qty"] = tempBillingElement.qty
+            billingElementDict["rate"] = tempBillingElement.rate
+            billingElementDict["regInfo"] = tempBillingElement.regInfo
+//            billingElementDict["status"] = tempBillingElement.status
+            billingElementDict["unit"] = tempBillingElement.unit
+            billingElementDict["type"] = tempBillingElement.type
+            
+            billingElementesArray.append(billingElementDict)
         }
-        parameters["unitBillingInfos"] = selectedDiscountElements
-
+        
+        parameters["unitBillingInfos"] =  billingElementesArray //selectedDiscountElements
+        parameters["src"] = 3
         var urlString = ""
         
-        if(isLeads){
-            urlString = String(format:RRAPI.API_APPLY_DISCOUNT)
+        var towerId : String = ""
+        var blockId : String = ""
+        
+        if(selectedProspect.unit?.tower != nil){
+            towerId = selectedProspect.unit?.tower ?? ""
         }
         else{
-            urlString = String(format:RRAPI.API_APPLY_DISCOUNT)
+            
+            if let units = selectedProspect.actionInfo?.units{
+                if(units.count > 0){
+                    if let unit = selectedProspect.actionInfo?.units?.last as? UNITS{
+                        towerId = unit.tower ?? ""
+                    }
+                }
+            }
+        }
+        
+        if(selectedProspect.unit?.block != nil){
+            blockId = selectedProspect.unit?.block ?? ""
+        }
+        else{
+            if let units = selectedProspect.actionInfo?.units{
+                if(units.count > 0){
+                    if let unit = selectedProspect.actionInfo?.units?.last as? UNITS{
+                        blockId = unit.block ?? ""
+                    }
+                }
+            }
         }
 
-        print(urlString)
         
-        Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON{
+        if(isLeads){
+            urlString = String(format:RRAPI.API_APPLY_DISCOUNT,towerId)
+        }
+        else{
+            urlString = String(format:RRAPI.API_APPLY_DISCOUNT,towerId)
+        }
+        parameters["tower"] = towerId
+        parameters["block"] = blockId
+        
+        
+
+        print(urlString)
+//        print(parameters)
+        
+        AF.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON{
             response in
             switch response.result {
             case .success( _):
-                print(response)
+//                print(response)
                 guard let responseData = response.data else {
                     print("Error: did not receive data")
                     return
                 }
-                
-                let urlResult = try! JSONDecoder().decode(REGISTRATIONS.self, from: responseData)
-                print(urlResult)
-                
-                if(urlResult.status == -1){
-                    // Logout
-                }
-                
-                if(urlResult.result != nil){
+                do{
+                    let urlResult = try JSONDecoder().decode(REGISTRATIONS.self, from: responseData)
+                    //                print(urlResult)
+                    
+                    if(urlResult.status == -1){
+                        // Logout
+                    }
+                    HUD.hide()
+                    
                     if(urlResult.status == 1){
-                        self.dismiss(animated: true, completion: nil)
+                        DispatchQueue.main.async {
+                            HUD.flash(.label("Unit Discount Submitted"), delay: 1.5)
+                            if(!self.isFromNotification){
+                                NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.FETCH_ON_ACTION), object: nil)
+                                NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.FETCH_REGISTRATIONS), object: nil)
+                                NotificationCenter.default.post(name: NSNotification.Name(NOTIFICATIONS.POP_CONTROLLERS), object: nil)
+                            }
+                            else{
+                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: NOTIFICATIONS.DELETE_NOTIFICATION), object: nil)
+                            }
+                            //                        self.dismiss(animated: true, completion: nil)
+                        }
                     }
                 }
-                
-                HUD.hide()
-                
+                catch let error{
+                    HUD.hide()
+                    HUD.flash(.label(error.localizedDescription))
+                }
+
                 break
             case .failure(let error):
                 print(error)
@@ -327,6 +414,7 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
     func setUpBillingTypesDropDown(){ ///PARENT
         
         billingElementSelectionDropDown.anchorView = billingTypeSelectionView
+        billingElementSelectionDropDown.showingBillingElements = true
         
         // By default, the dropdown will have its origin on the top left corner of its anchor view
         // So it will come over the anchor view and hide it completely
@@ -340,24 +428,24 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
         billingElementSelectionDropDown.selectionAction = { [weak self] (index, item) in
             //            self?.projectNameTextField.setTitle(item, for: .normal)
 //            self?.blockNameTextField.text = item
-            self?.billingTypeInfoLabel.text  = item
+//            let temmm = item
+            self?.billingTypeInfoLabel.text  = (item as! String)
 //            self?.setupTowersDropDown(selectedBlockName: item)
             if(index == 0){
                 //premiumBillingElementSubDropDown
                 
-                self?.heightOfSubElementsView.constant = self!.heightOfSubElementsView.constant - 50
+                self?.heightOfSubElementsView.constant = 80
                 self?.heightOfSubDiscountTextField.constant = 0
 
-                
                 self?.selectedIndex = index
-                self?.costTypeTextField.text = self?.billingTypesArray[0]
-                let itemName = self?.billingTypesArray[0]
+                self?.costTypeTextField.text = self?.billingTypesArray[0].name
+                let itemName = self?.billingTypesArray[0].name
                 let filterBillElement = self?.billingElements?.filter{ ($0.name?.localizedCaseInsensitiveContains(itemName!))! }
                 //            print(filterBillElement)
                 if(filterBillElement!.count > 0){
                     let billElement = filterBillElement![0]
                     self?.currentRateLabel.text = String(format: "%d", billElement.rate ?? "")
-                    self?.selectedBillAmount = billElement.rate!
+                    self?.selectedBillAmount = Double(billElement.rate!)
                 }
             }
             else if(index == 1){
@@ -366,14 +454,14 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
                 self?.heightOfSubDiscountTextField.constant = 50
 
                 self?.selectedIndex = index
-                self?.costTypeTextField.text = self?.premiumBillingTypesArray[0]
-                let itemName = self?.premiumBillingTypesArray[0]
+                self?.costTypeTextField.text = self?.premiumBillingTypesArray[0].name
+                let itemName = self?.premiumBillingTypesArray[0].name
                 let filterBillElement = self?.premiumBillingElements?.filter{ ($0.name?.localizedCaseInsensitiveContains(itemName!))! }
                 //            print(filterBillElement)
                 if(filterBillElement!.count > 0){
                     let billElement = filterBillElement![0]
                     self?.currentRateLabel.text = String(format: "%d", billElement.agreeValItem ?? "")
-                    self?.selectedBillAmount = billElement.agreeValItem!
+                    self?.selectedBillAmount = Double(billElement.agreeValItem!)
                 }
             }
         }
@@ -393,18 +481,18 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
         
         // Action triggered on selection9
         billingElementSubDropDown.selectionAction = { [weak self] (index, item) in
-
-            self?.costTypeTextField.text  = item
+            let tempBillingInfo = item as! BILLING_INFO
+            self?.costTypeTextField.text  = tempBillingInfo.name
             // filter the item form array
 //            billingElements
             
-            let filterBillElement = self?.billingElements?.filter{ ($0.name?.localizedCaseInsensitiveContains(item))! }
+            let filterBillElement = self?.billingElements?.filter{ ($0.name?.localizedCaseInsensitiveContains(tempBillingInfo.name!))! }
 //            print(filterBillElement)
             if(filterBillElement!.count > 0){
                 let billElement = filterBillElement![0]
                 self?.selectedBillingElement = filterBillElement![0]
                 self?.currentRateLabel.text = String(format: "%d", billElement.rate ?? "")
-                self?.selectedBillAmount = billElement.rate!
+                self?.selectedBillAmount = Double(billElement.rate!)
             }
         }
         
@@ -413,6 +501,7 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
         //unitBillingInfo
         
         premiumBillingElementSubDropDown.anchorView = costTypeTextField
+        premiumBillingElementSubDropDown.showingPremiumBillingElements = true
         
         // By default, the dropdown will have its origin on the top left corner of its anchor view
         // So it will come over the anchor view and hide it completely
@@ -424,12 +513,12 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
         
         // Action triggered on selection9
         premiumBillingElementSubDropDown.selectionAction = { [weak self] (index, item) in
-
-            self?.costTypeTextField.text = item
+            let premiumBillInfo = item as! PREMIUM_BILLING_INFO
+            self?.costTypeTextField.text = premiumBillInfo.name
             // filter the item form array
             //            billingElements
             
-            let filterBillElement = self?.premiumBillingElements?.filter{ ($0.name?.localizedCaseInsensitiveContains(item))! }
+            let filterBillElement = self?.premiumBillingElements?.filter{ ($0.name?.localizedCaseInsensitiveContains(premiumBillInfo.name!))! }
             //            print(filterBillElement)
             if(filterBillElement!.count > 0){
                 let billElement = filterBillElement![0].billings
@@ -445,10 +534,10 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
                 self?.subPremiumBillingTypesArray.removeAll()
                     if(billElement?.count != 0){
                         for tempBill in billElement!{
-                            self?.subPremiumBillingTypesArray.append(tempBill.name!)
+                            self?.subPremiumBillingTypesArray.append(tempBill)
                         }
                     }
-                self?.subPremiumElementsTextField.text = self?.subPremiumBillingTypesArray[0]
+                self?.subPremiumElementsTextField.text = self?.subPremiumBillingTypesArray[0].name
                 let tempBillElement = billElement![0]
                 self?.currentRateLabel.text = String(format: "%d", tempBillElement.rate ?? "0")
                 self?.setUpChildPremiumElementes()
@@ -464,6 +553,7 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
         //subPremiumBillingTypesArray
         
         subElementsOfPremiumBillingDropDown = DropDown()
+        subElementsOfPremiumBillingDropDown.showingBillingElements = true
         
         subElementsOfPremiumBillingDropDown.anchorView = subPremiumElementsTextField
         
@@ -477,25 +567,21 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
         
         // Action triggered on selection9
         subElementsOfPremiumBillingDropDown.selectionAction = { [weak self] (index, item) in
-            
-            self?.subPremiumElementsTextField.text = item
+            let subBillingElement = item as! BILLING_INFO
+            self?.subPremiumElementsTextField.text = subBillingElement.name
             // filter the item form array
             //            billingElements
-            
-            let filterBillElement = self?.subPremiumBillingElements?.filter{ ($0.name?.localizedCaseInsensitiveContains(item))! }
+        
+            let filterBillElement = self?.subPremiumBillingElements?.filter{ ($0.name?.localizedCaseInsensitiveContains(subBillingElement.name!))! }
             //            print(filterBillElement)
             if(filterBillElement!.count > 0){
                 let billElement = filterBillElement![0]
                 self?.selectedBillingElement = filterBillElement![0]
                 self?.currentRateLabel.text = String(format: "%d", billElement.rate ?? "")
-                self?.selectedBillAmount = billElement.rate!
+                self?.selectedBillAmount = Double(billElement.rate!)
             }
         }
-
-        
     }
-    
-
     @IBAction func close(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
         self.dismiss(animated: true, completion: nil)
@@ -522,7 +608,6 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
                 
                 premiumBillingElementSubDropDown.show()
             }
-            
             return false
         }
         if(textField == subPremiumElementsTextField){
@@ -550,11 +635,30 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
             }
 
             print(selectedBillAmount)
-            let totalString = String(format: "%@%@", discountAmtTextField.text!,string)
-            let reqAmt = Int(totalString)
-            if(reqAmt == nil){
-                print((Double(reqAmt!) / Double(selectedBillAmount)))
+            var totalString = String(format: "%@%@", discountAmtTextField.text!,string)
+            
+            if (string.count == 0) { //Delete any cases
+                if(range.length > 1){
+                    //Delete whole word
+                    totalString = "0.0"
+                }
+                else if(range.length == 1){
+                    //Delete single letter
+                    let stringer =  discountAmtTextField.text
+                    let tempStr = String(stringer!.dropLast())
+                    totalString = String(format: "%@%@", tempStr,string)
+                    if(totalString.count == 0){
+                        totalString = "0.0"
+                    }
+                }
+                else if(range.length == 0){
+                    //Tap delete key when textField empty
+                    totalString = "0.0"
+                }
             }
+
+            
+            let reqAmt = Double(totalString)
             let percentage : Double = (Double(reqAmt!) / Double(selectedBillAmount)) * 100.0
             
             if(percentage >= 100 ){
@@ -579,23 +683,42 @@ class DiscountRequestViewController: UIViewController ,UITextFieldDelegate,UITab
                 self.resetAllLabels()
                 return false
             }
-            
-            let totalString = String(format: "%@%@", discountPercentageTextField.text!,string)
-            let reqAmt = Int(totalString)
-            
-            print((reqAmt! * selectedBillAmount) / 100)
-            let discountAmt = (reqAmt! * selectedBillAmount) / 100
+            var totalString = String(format: "%@%@", discountPercentageTextField.text!,string)
+
+            if (string.count == 0) { //Delete any cases
+                if(range.length > 1){
+                    //Delete whole word
+                    totalString = "0.0"
+                }
+                else if(range.length == 1){
+                    //Delete single letter
+                    let stringer =  discountPercentageTextField.text
+                    let tempStr = String(stringer!.dropLast())
+                    totalString = String(format: "%@%@", tempStr,string)
+                    if(totalString.count == 0){
+                        totalString = "0.0"
+                    }
+                }
+                else if(range.length == 0){
+                    //Tap delete key when textField empty
+                    totalString = "0.0"
+                }
+            }
+
+            var reqAmt = Double(totalString)
+            reqAmt = reqAmt ?? 0.0
+            print((reqAmt! * Double(selectedBillAmount)) / 100)
+            let discountAmt = (reqAmt! * Double(selectedBillAmount)) / 100
             
             print(discountAmt)
-            let tem = selectedBillAmount - discountAmt
-            revisedRateLabel.text = String(format: "%d", tem)
-
+            let tem = Double(selectedBillAmount) - discountAmt
+            revisedRateLabel.text = String(format: "%.2f", tem)
             
             
             selectedBillingElement?.selectedDiscountAmt = Double(discountAmt)
             selectedBillingElement?.selectedDiscountPercentage = Double(reqAmt!)
             
-            discountAmtTextField.text = String(format: "%d", discountAmt)
+            discountAmtTextField.text = String(format: "%.2f", discountAmt)
             
         }
         

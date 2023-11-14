@@ -10,7 +10,11 @@ import UIKit
 
 class PopUpHeaderView: UITableViewHeaderFooterView {
 
-    @IBOutlet var headerTitleLabel: UILabel!
+    @IBOutlet weak var widthOfHeaderImageView: NSLayoutConstraint!
+    @IBOutlet weak var headerImageView: UIImageView!
+    @IBOutlet weak var topConstraintOfLabel: NSLayoutConstraint!
+    @IBOutlet weak var headerTitleLabel: UILabel!
+    @IBOutlet weak var subContentView: UIView!
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

@@ -12,10 +12,13 @@ import PKHUD
 
 class NotInterestedViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
+    var selectedProspectRow : Int = -1
     @IBOutlet var changeButton: UIButton!
+    var refreshControl: UIRefreshControl?
     var tableViewDataSourceArray : [REGISTRATIONS_RESULT] = []
     var currentTableViewDataSourceArray : [REGISTRATIONS_RESULT] = []
     @IBOutlet var tableView: UITableView!
+    var statusChangeView : StatusChangeView! = nil
     var tabID : Int!
     var projectID : String!
     var statusID : Int?
@@ -23,6 +26,7 @@ class NotInterestedViewController: UIViewController,UITableViewDataSource,UITabl
     @IBOutlet var statusInfoView: UIView!
     @IBOutlet var heightOfStatusInfoView: NSLayoutConstraint!
     var isLeads = false
+    var isLongPress = false
     
     override func viewDidLoad() {
         
@@ -35,6 +39,7 @@ class NotInterestedViewController: UIViewController,UITableViewDataSource,UITabl
         tableView.tableFooterView = UIView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(getProspectsAsPerStatus), name: NSNotification.Name(rawValue: NOTIFICATIONS.FETCH_ON_ACTION), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(popControllers), name: NSNotification.Name(rawValue: NOTIFICATIONS.POP_CONTROLLERS), object: nil)
         
         if(notInteretedCount > 0){
             self.getProspectsAsPerStatus()
@@ -48,7 +53,39 @@ class NotInterestedViewController: UIViewController,UITableViewDataSource,UITabl
         changeButton.layer.cornerRadius = 8
         
         changeButton.isHidden = true
+        self.addRefreshControl()
         
+    }
+    func addObservers(){
+        NotificationCenter.default.addObserver(self, selector: #selector(getProspectsAsPerStatus), name: NSNotification.Name(rawValue: NOTIFICATIONS.FETCH_ON_ACTION), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(popControllers), name: NSNotification.Name(rawValue: NOTIFICATIONS.POP_CONTROLLERS), object: nil)
+    }
+    @objc func popControllers(){
+        _ = self.hideCheckBox()
+        self.dismiss(animated: true, completion: nil)
+        if(isLongPress == false){
+            self.navigationController?.popViewController(animated: true)
+        }
+        self.isLongPress = false
+        _ = self.hideCheckBox()
+        self.hideStatusChangeView()
+    }
+    func hideStatusChangeView(){
+        if(self.statusChangeView != nil){
+            self.statusChangeView.isHidden = true
+            self.statusChangeView.removeFromSuperview()
+            self.statusChangeView = nil
+        }
+    }
+    func addRefreshControl() {
+        
+        refreshControl = UIRefreshControl()
+        refreshControl?.tintColor = UIColor.black
+        refreshControl?.addTarget(self, action: #selector(refreshList), for: .valueChanged)
+        tableView.addSubview(refreshControl!)
+    }
+    @objc func refreshList() {
+        self.getProspectsAsPerStatus()
     }
     @objc func getProspectsAsPerStatus(){
         
@@ -62,13 +99,13 @@ class NotInterestedViewController: UIViewController,UITableViewDataSource,UITabl
             "Cookie" : RRUtilities.sharedInstance.keychain["Cookie"]!
         ]
         
-        HUD.show(.progress)
-        
+        self.refreshControl?.beginRefreshing()
         //rospectleads?tab=1&id=5a64a02cc145c62d977954f0&status=4
         
-        print(tabID)
-        print(projectID)
-        print(statusID)
+//        print(tabID)
+//        print(projectID)
+//        print(statusID)
+        
         if(projectID == nil)
         {
             projectID = "null"
@@ -77,14 +114,21 @@ class NotInterestedViewController: UIViewController,UITableViewDataSource,UITabl
         var urlString = ""
         
         if(isLeads){
-            urlString = String(format:RRAPI.GET_LEADS_PROSPECTS_AS_PER_ORDER,tabID,projectID,statusID ?? -1)
+            urlString = String(format:RRAPI.GET_LEADS_PROSPECTS_AS_PER_ORDER,tabID,projectID,statusID ?? -1,RRUtilities.sharedInstance.prospectsStartDate,RRUtilities.sharedInstance.prospectsEndDate)
         }
         else{
-            urlString = String(format:RRAPI.GET_OPPORTUNITIES_PROSPECTS_AS_PER_ORDER,tabID,projectID,statusID ?? -1)
+            urlString = String(format:RRAPI.GET_OPPORTUNITIES_PROSPECTS_AS_PER_ORDER,tabID,projectID,statusID ?? -1,RRUtilities.sharedInstance.prospectsStartDate,RRUtilities.sharedInstance.prospectsEndDate)
         }
 
-        
-        print(urlString)
+        urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+
+        if(UserDefaults.standard.bool(forKey: "Filter by Action Date")){
+            urlString.append("&filterByActionDate=1")
+        }
+
+        HUD.show(.labeledProgress(title: "", subtitle: nil), onView: self.view)
+
+//        print(urlString)
         
         //        if(registrationID != nil){
         //            urlString =  RRAPI.GET_QR_PROSPECT_DATA + tabID + "&id=" + registrationID
@@ -93,42 +137,60 @@ class NotInterestedViewController: UIViewController,UITableViewDataSource,UITabl
         //            urlString =  RRAPI.GET_QR_PROSPECT_DATA + tabID + "&id="
         //        }
         
-        print(urlString)
+//        print(urlString)
         
-        Alamofire.request(urlString, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON{
+        AF.request(urlString, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON{
             response in
             switch response.result {
             case .success( _):
-                print(response)
+//                print(response)
                 guard let responseData = response.data else {
                     print("Error: did not receive data")
                     return
                 }
                 
-                let urlResult = try! JSONDecoder().decode(REGISTRATIONS.self, from: responseData)
-                print(urlResult)
-                
-                if(urlResult.status == -1){
+                do{
+                    let urlResult = try JSONDecoder().decode(REGISTRATIONS.self, from: responseData)
+                    //                print(urlResult)
                     
+//                    let str = String(bytes: responseData, encoding: .utf8)
+//                    print(str)
+                    
+                    self.currentTableViewDataSourceArray.removeAll()
+                    self.tableViewDataSourceArray.removeAll()
+                    self.refreshControl?.endRefreshing()
+                    if(urlResult.result != nil){
+                        self.tableViewDataSourceArray = urlResult.result ?? []
+                        self.currentTableViewDataSourceArray = self.tableViewDataSourceArray
+                    }
+                    var infoDict : Dictionary<String,Int> = [:]
+                    infoDict["count"] = self.tableViewDataSourceArray.count
+                    infoDict["pType"] = 5
+                    if(self.tableViewDataSourceArray.count > 0){
+                        self.title = "Not Interested(\(self.tableViewDataSourceArray.count))"
+                    }
+                    else{
+                        self.title = "Not Interested"
+                    }
+                    
+                    self.tableView.delegate = self
+                    self.tableView.dataSource = self
+                    self.tableView.reloadData()
+                    sleep(UInt32(0.10))
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: NOTIFICATIONS.UPDATE_PROSPECT_COUNT), object: nil, userInfo: infoDict)
+                    HUD.hide()
+
                 }
-                
-                self.currentTableViewDataSourceArray.removeAll()
-                self.tableViewDataSourceArray.removeAll()
-                
-                if(urlResult.result != nil){
-                    self.tableViewDataSourceArray = urlResult.result!
-                    self.currentTableViewDataSourceArray = self.tableViewDataSourceArray
+                catch let error{
+                    HUD.flash(.label(error.localizedDescription))
+                    HUD.hide()
                 }
-                
-                self.tableView.delegate = self
-                self.tableView.dataSource = self
-                self.tableView.reloadData()
-                HUD.hide()
-                
+
                 break
             case .failure(let error):
                 print(error)
                 HUD.hide()
+                self.refreshControl?.endRefreshing()
                 break
             }
         }
@@ -166,37 +228,290 @@ class NotInterestedViewController: UIViewController,UITableViewDataSource,UITabl
         
         let prospect = self.currentTableViewDataSourceArray[indexPath.row]
         cell.nameLabel.text = prospect.userName
+        cell.emailButton.addTarget(self, action:#selector(openWhatsapp(_:)), for: .touchUpInside)
+        cell.callButton.addTarget(self, action:#selector(openDialer(_:)), for: .touchUpInside)
+        cell.emailButton.tag = indexPath.row
+        cell.callButton.tag = indexPath.row
+        let tapGesture = UILongPressGestureRecognizer.init(target: self, action: #selector(showStatusChangeView(_:)))
+        cell.subContentView.addGestureRecognizer(tapGesture)
+        cell.subContentView.tag = indexPath.row
+        
+        if(selectedProspectRow == -1){
+            cell.widthOfCheckBox.constant = 0
+            cell.checkBoxImageView.isHidden = true
+        }
+        else{
+            cell.widthOfCheckBox.constant = 30
+            cell.checkBoxImageView.isHidden = false
+        }
+        
+        if(selectedProspectRow == indexPath.row){
+            cell.checkBoxImageView.image = UIImage.init(named: "checkbox_on")
+        }
+        else{
+            cell.checkBoxImageView.image = UIImage.init(named: "checkbox_off")
+        }
+
         return cell
 
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      
         //show customer details
-        
-       let prospect = self.currentTableViewDataSourceArray[indexPath.row]
-
+        if(selectedProspectRow != -1){
+            selectedProspectRow = indexPath.row
+            self.tableView.reloadData()
+            return
+        }
+        self.hideStatusChangeView()
+        let prospect = self.currentTableViewDataSourceArray[indexPath.row]
+        self.hideStatusChangeView()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let detailsController = storyboard.instantiateViewController(withIdentifier :"cusDetailsController") as! CustomerDetailsViewController
         detailsController.prospectDetails = prospect
         detailsController.isFromNotInterested = true
+        detailsController.statusID = self.statusID
+        detailsController.tabId = self.tabID
         detailsController.prospectType = .LEADS
+        if(isLeads){
+            detailsController.viewType = VIEW_TYPE.LEADS
+        }
+        else{
+            detailsController.viewType = VIEW_TYPE.OPPORTUNITIES
+        }
         self.navigationController?.pushViewController(detailsController, animated: true)
         
+    }
+    func hideCheckBox()->Bool{
+        if(selectedProspectRow != -1){
+            selectedProspectRow = -1
+            self.tableView.reloadData()
+            self.hideStatusChangeView()
+            return true
+        }
+        self.isLongPress = false
+        return false
+    }
+    func shouldShowStatusChangeView(fromIndex : Int)->Bool{
+        
+        let prospectDetails  = self.currentTableViewDataSourceArray[fromIndex]
+        
+        if(prospectDetails.salesPerson != nil && PermissionsManager.shared.isEmployePermittedForPresales(employeeID: (prospectDetails.salesPerson?._id ?? ""))){
+            return true
+        }
+        else{
+            _ = self.hideCheckBox()
+            return false
+        }
+    }
+    @objc func showStatusChangeView(_ sender : UILongPressGestureRecognizer){
+
+        if sender.state == .began{
+            
+            statusChangeView = (StatusChangeView.instanceFromNib() as! StatusChangeView)
+            let tag = sender.view?.tag
+            selectedProspectRow = tag!
+            if(!self.shouldShowStatusChangeView(fromIndex: tag!)){
+                return
+            }
+            self.tableView.reloadData()
+            let prospectDetails  = self.currentTableViewDataSourceArray[tag!]
+            self.view.addSubview(self.statusChangeView)
+            self.statusChangeView.alpha = 0.0
+            let attributedString = NSAttributedString(
+                string:"Change",
+                attributes:[
+                    NSAttributedString.Key.font :UIFont.init(name: "Montserrat-Medium", size: 14) as Any,
+                    NSAttributedString.Key.foregroundColor : UIColor.hexStringToUIColor(hex: "358ED7"),
+                    NSAttributedString.Key.underlineStyle:1.0
+                ])
+            
+            statusChangeView.statusChangeButton.setAttributedTitle(attributedString, for: .normal)
+            statusChangeView.salesPersonChangeButton.setAttributedTitle(attributedString, for: .normal)
+            
+            if(tabID != 2){
+                statusChangeView.HLineView.isHidden = true
+                statusChangeView.salesPersonView.isHidden = true
+                statusChangeView.salesPersonViewHeight.constant = 0
+                statusChangeView.frame = CGRect(x: 0, y: self.view.frame.height - 70, width: self.view.frame.size.width, height: 50)
+            }
+            else{
+                statusChangeView.frame = CGRect(x: 0, y: self.view.frame.height - 120, width: self.view.frame.size.width, height: 101)
+                
+                statusChangeView.salesPersonChangeButton.addTarget(self, action:#selector(showSalePersonChangeView), for: .touchUpInside)
+                statusChangeView.salesPersonChangeButton.tag = tag!
+                
+                if(prospectDetails.salesPerson?.userInfo?.name != nil){
+                    statusChangeView.salesPersonNameLabel.text = prospectDetails.salesPerson?.userInfo?.name
+                }
+                else{
+                    statusChangeView.salesPersonNameLabel.text = "Super Admin"
+                }
+            }
+            statusChangeView.subContentView.layer.cornerRadius = 8
+            
+            UIView.animate(withDuration: 1.0, animations: {
+                self.statusChangeView.alpha = 1.0
+            })
+            
+            if(prospectDetails.action != nil){
+                statusChangeView.currentStatusLabel.text = prospectDetails.action?.label
+            }
+            else{
+                statusChangeView.currentStatusLabel.text = "None"
+            }
+            
+            statusChangeView.statusChangeButton.addTarget(self, action:#selector(showStatusHandler), for: .touchUpInside)
+            statusChangeView.statusChangeButton.titleLabel!.font = UIFont(name: "Montserrat-Regular", size: 18)
+            statusChangeView.salesPersonChangeButton.titleLabel!.font = UIFont(name: "Montserrat-Regular", size: 18)
+            
+            let tapStatusGuesture = UITapGestureRecognizer.init(target: self, action: #selector(showStatusHandler))
+            let tapSalesGuesture = UITapGestureRecognizer.init(target: self, action: #selector(showSalePersonChangeView))
+            statusChangeView.statusChangeView.addGestureRecognizer(tapStatusGuesture)
+            statusChangeView.salesPersonView.addGestureRecognizer(tapSalesGuesture)
+            
+            statusChangeView.statusChangeButton.tag = tag!
+
+        }
+        
+    }
+    @objc func showSalePersonChangeView(){
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let salesPersonChangeController = storyboard.instantiateViewController(withIdentifier :"salesPersonChange") as! SalesPersonChangeViewController
+        
+        if(isLeads){
+            salesPersonChangeController.viewType = VIEW_TYPE.LEADS
+        }
+        else{
+            salesPersonChangeController.viewType = VIEW_TYPE.OPPORTUNITIES
+        }
+        
+        salesPersonChangeController.selectedProspect = self.currentTableViewDataSourceArray[selectedProspectRow]
+        
+        self.present(salesPersonChangeController, animated: true, completion: nil)
+        
+    }
+    @objc func showStatusHandler(){
+        
+        self.isLongPress = true
+        let prospectDetails  = self.currentTableViewDataSourceArray[selectedProspectRow]
+        
+        if(prospectDetails.action?.id != nil){  // launch new navigation controller?
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let statusController = storyboard.instantiateViewController(withIdentifier :"prospectStatusController") as! ProspectsStatusViewController
+//            statusController.tabID = self.tabID
+//            statusController.prospectDetails = prospectDetails
+//            statusController.isFromRegistrations = false
+//            statusController.statusID = self.statusID
+//            if(isLeads){
+//                statusController.viewType = VIEW_TYPE.LEADS
+//            }
+//            else{
+//                statusController.viewType = VIEW_TYPE.OPPORTUNITIES
+//            }
+
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let leadsPopUpController = storyboard.instantiateViewController(withIdentifier :"leadsPopUp") as! LeadsPopUpViewController
+//            print(selectedStatus)
+//            leadsPopUpController.prevSelectedStatus = selectedStatus
+            leadsPopUpController.prospectDetails = prospectDetails
+            leadsPopUpController.selectedReasonIndex = selectedProspectRow
+            leadsPopUpController.selctedScheduleCallOption = selectedProspectRow
+//            leadsPopUpController.isFromDiscountView = self.isFromDiscountView
+            leadsPopUpController.isFromRegistrations = false
+            leadsPopUpController.tabId = self.tabID
+            leadsPopUpController.statusID = self.statusID
+            if(isLeads){
+                leadsPopUpController.viewType = VIEW_TYPE.LEADS
+            }
+            else{
+                leadsPopUpController.viewType = VIEW_TYPE.OPPORTUNITIES
+            }
+            self.present(leadsPopUpController, animated: true, completion: nil)
+            return
+
+            
+            //        self.navigationController?.pushViewController(statusController, animated: true)
+//            self.present(statusController, animated: true, completion: nil)
+        }
+        else{
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let statusController = storyboard.instantiateViewController(withIdentifier :"prospectStatusController") as! ProspectsStatusViewController
+            statusController.tabID = self.tabID
+            statusController.prospectDetails = prospectDetails
+            statusController.isFromRegistrations = false
+            statusController.statusID = self.statusID
+            if(isLeads){
+                statusController.viewType = VIEW_TYPE.LEADS
+            }
+            else{
+                statusController.viewType = VIEW_TYPE.OPPORTUNITIES
+            }
+
+            self.present(statusController, animated: true, completion: nil)
+        }
+    }
+
+    @objc func openWhatsapp(_ sender : UIButton){
+        let prospect  = self.tableViewDataSourceArray[sender.tag]
+        var tempCode = ""
+        if let phoneCode = prospect.userPhoneCode{
+            if(phoneCode.count > 0){
+                tempCode = phoneCode
+            }
+            else
+            {
+                tempCode = "91"
+            }
+        }
+        else{
+            tempCode = "91"
+        }
+
+        let phone  = (prospect.userPhone!.count > 10) ? prospect.userPhone! : tempCode + prospect.userPhone!
+        guard let number = URL(string: String(format: "https://wa.me/%@?text=%@", phone,""))else{return}
+        UIApplication.shared.open(number)
+    }
+    @objc func openDialer(_ sender : UIButton){
+        let prospect  = self.tableViewDataSourceArray[sender.tag]
+        
+        guard let number = prospect.userPhone else { return } //URL(string: "tel://" + prospect.userPhone!)
+        //        UIApplication.shared.open(number)
+        
+        if(isLeads){
+            ServerAPIs.prospectCall(viewType:VIEW_TYPE.LEADS.rawValue , prospectId: prospect._id!, custNumber: number, exeNumber: prospect.salesPerson?.phone ?? "",completion: { result in
+                switch result {
+                case .success(let result):
+                    HUD.flash(.label(result.msg), delay: 2.0)
+                case .failure( _):
+                    guard let url = URL(string: "telprompt://" + number) else { return }
+                    UIApplication.shared.open(url)
+                }
+            })
+        }
+        else{
+            ServerAPIs.prospectCall(viewType:VIEW_TYPE.OPPORTUNITIES.rawValue , prospectId: prospect._id! , custNumber: number, exeNumber: prospect.salesPerson?.phone ?? "",completion: { result in
+                switch result {
+                case .success(let result):
+                    HUD.flash(.label(result.msg), delay: 2.0)
+                case .failure( _):
+                    guard let url = URL(string: "telprompt://" + number) else { return }
+                    UIApplication.shared.open(url)
+                }
+            })
+        }
     }
 
     //MARK: - SearchDelegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-        currentTableViewDataSourceArray = tableViewDataSourceArray.filter({REGISTRATIONS_RESULT -> Bool in
-            switch searchBar.selectedScopeButtonIndex {
-            case 0 :
-                if(searchText.isEmpty) {return true}
-                return REGISTRATIONS_RESULT.userName!.lowercased().contains(searchText.lowercased())
-            default:
-                return false
-            }
-        })
-        
+        if(searchText.count == 0)
+        {
+            currentTableViewDataSourceArray = tableViewDataSourceArray
+        }
+        else{
+            currentTableViewDataSourceArray = tableViewDataSourceArray.filter({ (($0.userName?.localizedCaseInsensitiveContains(searchText))!) })
+        }
         self.tableView.reloadData()
     }
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
@@ -224,6 +539,10 @@ class NotInterestedViewController: UIViewController,UITableViewDataSource,UITabl
     func hideKeyBoard()
     {
         self.view.endEditing(true)
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "hideKeyBoard"), object: nil, userInfo: nil)
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.hideKeyBoard()
     }
 
     /*

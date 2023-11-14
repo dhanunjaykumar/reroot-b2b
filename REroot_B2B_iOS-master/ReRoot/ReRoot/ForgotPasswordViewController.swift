@@ -14,6 +14,7 @@ struct otpResult : Codable {
     let status : Int
     let msg : String?
     let token : String?
+    let err : String?
 }
 
 class ForgotPasswordViewController: UIViewController ,UITextFieldDelegate {
@@ -64,39 +65,44 @@ class ForgotPasswordViewController: UIViewController ,UITextFieldDelegate {
         
         mEmailAddressField.isEnabled = false
         
-        let parameters : [String : String] = ["email" : email]
+        var parameters : [String : String] = ["email" : email]
+        parameters["src"] = "3"
         
-        Alamofire.request(RRAPI.CREATE_OTP_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: RRAPI.DEFAULT_HEADER).responseJSON{
+        AF.request(RRAPI.CREATE_OTP_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: HTTPHeaders.init(RRAPI.DEFAULT_HEADER)).responseJSON{
             response in
             switch response.result {
             case .success :
                 
-                print(response)
-                
+//                print(response)
+                HUD.hide()
                 guard let responseData = response.data else {
                     print("Error: did not receive data")
                     self.mEmailAddressField.isEnabled = true
                     return
                 }
                 
-                let urlResult = try! JSONDecoder().decode(otpResult.self, from: responseData)
-                
-                print(urlResult)
-                
-                if(urlResult.status == 0){
-                    HUD.flash(.label("Invalid Email ID"), delay: 1.0)
-                    self.mEmailAddressField.isEnabled = true
-                    return
+                do{
+                    let urlResult = try JSONDecoder().decode(otpResult.self, from: responseData)
+                    
+                    //                print(urlResult)
+                    
+                    if(urlResult.status == 0){
+                        HUD.flash(.label("Invalid Email ID"), delay: 1.0)
+                        self.mEmailAddressField.isEnabled = true
+                        return
+                    }
+                    else{
+                        HUD.flash(.label("OTP Sent Successfully"), delay: 1.0)
+                    }
+                    
+                    self.heightOfOtpView.constant = 116
+                    self.otpFieldView.isHidden = false
+                    self.sendOTPButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#9b9b9b")
+                    self.sendOTPButton.setTitle("Re-send OTP", for: .normal)
                 }
-                else{
-                    HUD.flash(.label("OTP Sent Successfully"), delay: 1.0)
+                catch let error{
+                    HUD.flash(.label(error.localizedDescription))
                 }
-                
-                self.heightOfOtpView.constant = 116
-                self.otpFieldView.isHidden = false
-                self.sendOTPButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#9b9b9b")
-                self.sendOTPButton.setTitle("Re-send OTP", for: .normal)
-                
                 break;
             case .failure(let error):
                 HUD.hide()
@@ -111,14 +117,15 @@ class ForgotPasswordViewController: UIViewController ,UITextFieldDelegate {
             return
         }
         
-        let parameters: [String : String] = ["email" : mEmailAddressField.text!,"otp" : otpTextField.text!]
+        var parameters: [String : String] = ["email" : mEmailAddressField.text!,"otp" : otpTextField.text!]
+        parameters["src"] = "3"
         
-        Alamofire.request(RRAPI.VERIFY_OTP_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: RRAPI.DEFAULT_HEADER).responseJSON{
+        AF.request(RRAPI.VERIFY_OTP_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: HTTPHeaders.init(RRAPI.DEFAULT_HEADER)).responseJSON{
             response in
             switch response.result {
             case .success :
                 
-                print(response)
+//                print(response)
                 
                     guard let responseData = response.data else {
                         print("Error: did not receive data")
@@ -129,27 +136,32 @@ class ForgotPasswordViewController: UIViewController ,UITextFieldDelegate {
                 let cookieArray = httpResponse["Set-Cookie"]?.split(separator: ";")
                 print(cookieArray as Any)
 
-                    let urlResult = try! JSONDecoder().decode(otpResult.self, from: responseData)
-                    
-                    print(urlResult)
-                    
-                    if(urlResult.status == 0){
-                        HUD.flash(.label(urlResult.msg), delay: 1.0)
-                        self.otpTextField.isEnabled = true
+                    do{
+                        let urlResult = try JSONDecoder().decode(otpResult.self, from: responseData)
                         
-                        return
+                        //                    print(urlResult)
+                        
+                        if(urlResult.status == 0){
+                            HUD.flash(.label(urlResult.msg), delay: 1.0)
+                            self.otpTextField.isEnabled = true
+                            
+                            return
+                        }
+                        else{
+                            HUD.flash(.label("OTP Verified !"), delay: 1.0)
+                            self.otpSuccessImage.isHidden = false
+                            self.sendOTPButton.isEnabled = false
+                            self.otpToken = urlResult.token
+                        }
+                        
+                        //                    print(urlResult)
+                        self.heightOfPwdFieldsView.constant = 353
+                        self.passwordView.isHidden = false
+                        
                     }
-                    else{
-                        HUD.flash(.label("OTP Verified !"), delay: 1.0)
-                        self.otpSuccessImage.isHidden = false
-                        self.sendOTPButton.isEnabled = false
-                        self.otpToken = urlResult.token
+                    catch let error{
+                        HUD.flash(.label(error.localizedDescription))
                     }
-                    
-                    print(urlResult)
-                    self.heightOfPwdFieldsView.constant = 353
-                    self.passwordView.isHidden = false
-            
                 break;
             case .failure(let error):
                 HUD.hide()
@@ -163,37 +175,42 @@ class ForgotPasswordViewController: UIViewController ,UITextFieldDelegate {
             HUD.flash(.label("Enter Valid Email ID"), delay: 1.0)
             return
         }
-        let parameters : [String : String] = ["email" : email]
+        var parameters : [String : String] = ["email" : email]
+        parameters["src"] = "3"
         
-        Alamofire.request(RRAPI.RESEND_OTP_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: RRAPI.DEFAULT_HEADER).responseJSON{
+        AF.request(RRAPI.RESEND_OTP_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: HTTPHeaders.init(RRAPI.DEFAULT_HEADER)).responseJSON{
             response in
             switch response.result {
             case .success :
                 
-                print(response)
+//                print(response)
                 
                 guard let responseData = response.data else {
                     print("Error: did not receive data")
                     return
                 }
-                
-                let urlResult = try! JSONDecoder().decode(otpResult.self, from: responseData)
-                
-                print(urlResult)
-                
-                if(urlResult.status == 0){
-                    HUD.flash(.label("Invalid Email ID"), delay: 1.0)
-                    return
+                HUD.hide()
+                do{
+                    let urlResult = try JSONDecoder().decode(otpResult.self, from: responseData)
+                    
+                    //                print(urlResult)
+                    
+                    if(urlResult.status == 0){
+                        HUD.flash(.label("Invalid Email ID"), delay: 1.0)
+                        return
+                    }
+                    else{
+                        HUD.flash(.label("OTP Sent Successfully"), delay: 1.0)
+                    }
+                    
+                    self.heightOfOtpView.constant = 116
+                    self.otpFieldView.isHidden = false
+                    self.sendOTPButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#9b9b9b")
+                    self.sendOTPButton.setTitle("Re-send OTP", for: .normal)
                 }
-                else{
-                    HUD.flash(.label("OTP Sent Successfully"), delay: 1.0)
+                catch let error{
+                    HUD.flash(.label(error.localizedDescription))
                 }
-                
-                self.heightOfOtpView.constant = 116
-                self.otpFieldView.isHidden = false
-                self.sendOTPButton.backgroundColor = UIColor.hexStringToUIColor(hex: "#9b9b9b")
-                self.sendOTPButton.setTitle("Re-send OTP", for: .normal)
-                
                 break;
             case .failure(let error):
                 HUD.hide()
@@ -221,13 +238,14 @@ class ForgotPasswordViewController: UIViewController ,UITextFieldDelegate {
         newPwdField.isEnabled = false
         reEnterPwdField.isEnabled = false
         HUD.show(.progress)
-        let parameters: [String : String] = ["password" : newPwd,"token" : self.otpToken]
+        var parameters: [String : String] = ["password" : newPwd,"token" : self.otpToken]
+        parameters["src"] = "3"
         
-        Alamofire.request(RRAPI.CHNAGE_PASSWORD_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: RRAPI.DEFAULT_HEADER).responseJSON{
+        AF.request(RRAPI.CHNAGE_PASSWORD_URL, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: HTTPHeaders.init(RRAPI.DEFAULT_HEADER)).responseJSON{
             response in
             switch response.result {
             case .success :
-                print(response)
+//                print(response)
                     guard let responseData = response.data else {
                         print("Error: did not receive data")
                         return
@@ -238,21 +256,27 @@ class ForgotPasswordViewController: UIViewController ,UITextFieldDelegate {
 //                        return
 //                    }
                     
-                    let urlResult = try! JSONDecoder().decode(ForgotPasswordResult.self, from: responseData)
-
-                    print(urlResult)
-                if(urlResult.status == 0){
-                    HUD.flash(.label(urlResult.err), delay: 1.0)
-                    self.newPwdField.isEnabled = true
-                    self.reEnterPwdField.isEnabled = true
-                    return
-                }
-                else{
-                    HUD.hide()
-                    HUD.flash(.label(urlResult.msg))
-                    self.navigationController?.popViewController(animated: true)
-                }
-                
+                    do{
+                        let urlResult = try JSONDecoder().decode(ForgotPasswordResult.self, from: responseData)
+                        
+                        //                    print(urlResult)
+                        if(urlResult.status == 0){
+                            HUD.flash(.label(urlResult.err), delay: 2.0)
+                            self.newPwdField.isEnabled = true
+                            self.reEnterPwdField.isEnabled = true
+                            return
+                        }
+                        else{
+                            HUD.hide()
+                            HUD.flash(.label(urlResult.msg), delay: 2.0)
+//                            self.navigationController?.popViewController(animated: true)
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    }
+                    catch let error{
+                        HUD.hide()
+                        HUD.flash(.label(error.localizedDescription))
+                    }
                 break;
             case .failure(let error):
                 HUD.hide()

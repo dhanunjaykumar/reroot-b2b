@@ -10,22 +10,31 @@ import UIKit
 import Alamofire
 import PKHUD
 import SDWebImage
+import CoreData
+import FloatingPanel
 
-
-class ProjectsViewController: UIViewController , UITableViewDelegate , UITableViewDataSource , UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout,UIPopoverPresentationControllerDelegate,HidePopUp,UISearchBarDelegate{
+class ProjectsViewController: UIViewController , UITableViewDelegate , UITableViewDataSource , UICollectionViewDelegate, UICollectionViewDataSource , UICollectionViewDelegateFlowLayout,UIPopoverPresentationControllerDelegate,HidePopUp,UISearchBarDelegate,FloatingPanelControllerDelegate{
     
+    @IBOutlet weak var widthOfNotificationsView: NSLayoutConstraint!
+    @IBOutlet weak var notificationsView: UIView!
+    @IBOutlet weak var widthOfReportsButton: NSLayoutConstraint!
+    let fpc = FloatingPanelController()
+    var selectedProjectID : String!
+    var fetchedResultsControllerProjects:NSFetchedResultsController<Project>?
     var refreshControl: UIRefreshControl?
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var searchButton: UIButton!
-    @IBOutlet var searchBar: UISearchBar!
-    @IBOutlet var titleView: UIView!
-    @IBOutlet var mTableView: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var notificationsCountLabel: UILabel!
+    @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var mTableView: UITableView!
     var projectsArray : Array<Project> = []
     var currentProjectsArray : Array<Project> = []
     
+    @IBOutlet var reportsButton: UIButton!
     var mCollectionViewDataSource : Array<STAT> = []
     var projectsButton : ButtonView!
-    var selectedIndexPath : NSIndexPath!
+    var selectedIndexPath : IndexPath!
     
     override func viewWillLayoutSubviews() {
         
@@ -55,13 +64,37 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
         searchBar.isHidden = true
         titleLabel.isHidden = false
         searchButton.isHidden = false
+        reportsButton.isHidden = false
+    }
+    func fetchAllProjects(){
+        
+        let request: NSFetchRequest<Project> = Project.fetchRequest()
+        let sort = NSSortDescriptor(key: #keyPath(Project.name), ascending: true)
+        request.sortDescriptors = [sort]
 
+        fetchedResultsControllerProjects = NSFetchedResultsController(fetchRequest: request, managedObjectContext: RRUtilities.sharedInstance.model.managedObjectContext, sectionNameKeyPath: nil, cacheName:nil)
+//        fetchedResultsControllerProjects?.delegate = self
+    
+
+        do {
+            try fetchedResultsControllerProjects?.performFetch()
+            _ = fetchedResultsControllerProjects?.fetchedObjects
+        }
+        catch {
+            fatalError("Error in fetching records")
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         self.automaticallyAdjustsScrollViewInsets = false
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = UIColor.black
+
+        self.updateNotificationCountLabel()
+        self.notificationsCountLabel.layer.masksToBounds = true
+        self.notificationsCountLabel.layer.cornerRadius = 10
 
         let nib = UINib(nibName: "ProjectDetailsTableViewCell", bundle: nil)
         mTableView.register(nib, forCellReuseIdentifier: "projectCell")
@@ -73,7 +106,16 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
         
         projectsButton.mTitleLabel?.text = "PROJECTS"
         
-        self.getProjects(UIButton())
+        if(RRUtilities.sharedInstance.model.getAllProjects().count > 0){
+            self.fetchAllProjects()
+            self.mTableView.delegate = self
+            self.mTableView.dataSource = self
+            self.mTableView.reloadData()
+        }
+        else{
+            self.getProjects(UIButton())
+        }
+        
         projectsButton.center = self.view.center
         self.view.bringSubviewToFront(projectsButton)
         
@@ -99,8 +141,13 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
         projectsButton.addGestureRecognizer(tapGuesture)
         
         NotificationCenter.default.addObserver(self, selector: #selector(fetchUpdatedProjects), name: Notification.Name("updateProjects"), object: nil)
-
+        
         self.addRefreshControl()
+        if(!PermissionsManager.shared.dashBoardPermitted()){
+            self.reportsButton.isHidden = true
+            self.widthOfReportsButton.constant = 0
+        }
+        self.getEmployess()
     }
     func addRefreshControl() {
         
@@ -125,9 +172,17 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
         tableView.estimatedRowHeight = 400 // standard tableViewCell height
         tableView.rowHeight = UITableView.automaticDimension
         
-        let numOfRows: Int = self.currentProjectsArray.count
+//        let numOfRows: Int =  (self.fetchedResultsControllerProjects?.sections?.count)! //self.currentProjectsArray.count
+        
+        /*fetchResultController's .section method returns array of NSFetchedResultsSectionInfo objects. As we have not provided any section info, sections */
+        guard let sections = self.fetchedResultsControllerProjects!.sections else {
+            return 0
+        }
+        
+        /*get number of rows count for each section*/
+        let sectionInfo = sections[section]
 
-        if (numOfRows > 0)
+        if (sectionInfo.numberOfObjects > 0)
         {
             tableView.backgroundView = nil
         }
@@ -141,8 +196,10 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
             tableView.backgroundView  = noDataLabel
             tableView.separatorStyle  = .none
         }
-        
-        return numOfRows //self.currentProjectsArray.count //RRUtilities.sharedInstance.model.getProjectsCount()  //projectsArray.count
+//        print(sectionInfo.numberOfObjects)
+        return sectionInfo.numberOfObjects
+
+//        return numOfRows //self.currentProjectsArray.count //RRUtilities.sharedInstance.model.getProjectsCount()  //projectsArray.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -156,33 +213,34 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
         cell.mCollectinView.dataSource = self;
         cell.mCollectinView.mParentIndexPath = indexPath
         
+        cell.mCollectinView.backgroundColor = UIColor.hexStringToUIColor(hex: "fff5f4")
 //        cell.mCollectinView.layoutIfNeeded()
 //
 //        print(cell.mCollectinView)
         
-        let projecct = self.currentProjectsArray[indexPath.row]
+        let projecct = fetchedResultsControllerProjects!.object(at: indexPath) //self.currentProjectsArray[indexPath.row]
         
         cell.projectNameLabel.text = projecct.name?.uppercased()
         cell.cityNameLabel.text = projecct.city?.uppercased()
-//        cell.mParentIndexPath = indexPath as NSIndexPath
-                
-//        cell.mImageView.sd_setImage(with: projecct.imagesTemp?[0], placeholderImage: nil, options: .SDWebImageRetryFailed, completed: nil)
         
-        if((projecct.imagesTemp?.count)! > 0){
-//            print(indexPath.row)
-//            print("IMage URL \(String(describing: projecct.imagesTemp?[0]))")
-            let urlString : String = (projecct.imagesTemp?[0])!
-                //.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
-//            cell.mImageView.sd_setImage(with: URL(string:urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!), placeholderImage: UIImage(named: "project_image_default"))
+        if(projecct.imagesTemp != nil && (projecct.imagesTemp?.count)! > 0){
             
-//            cell.mImageView.sd_setImage(with: URL(string:urlString.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!), placeholderImage:UIImage(named: "placeholder.png"))
-
+            var urlString : String = (projecct.imagesTemp?[0])!
             
-//            cell.mImageView.af_setImage(withURL: urlString)
-//            print(URL(string: (projecct.imagesTemp?[0])!))
-//            cell.mImageView.sd_setImage(with: URL(string: (projecct.imagesTemp?[0])!), placeholderImage: UIImage(named: "placeholder.png"), options:SDWebImageOptions(rawValue: 5), completed: nil)
+            urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+//            print(urlString)
             
-            cell.mImageView.sd_setImage(with: URL(string: urlString), placeholderImage: UIImage(named: "project_image_default"), options:[.highPriority])
+            DispatchQueue.global().async {
+                let url = ServerAPIs.getSingleSingedUrl(url: urlString)
+                cell.mImageView.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: "App-Default"),options: SDWebImageOptions(rawValue: 0), completed: { image, error, cacheType, imageURL in
+                     // your rest code
+                    print(error)
+                })
+            }
+            
+//            cell.mImageView.sd_setImage(with: URL(string: "https://s3-ap-south-1.amazonaws.com/buildez/ABC+Developers/bookingform/12155_Screenshot20200929at11.34.18PM.png"), placeholderImage: UIImage(named: "project_image_default"), options:[.highPriority])
+            
+            
         }
         else{
             cell.mImageView.image = UIImage(named: "project_image_default")
@@ -191,9 +249,45 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
         cell.mImageView.layer.cornerRadius = 8.0
 //        cell.mImageView.layer.masksToBounds = true
         
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(showProjectInfo(_:)))
+        cell.mSubContentView.addGestureRecognizer(longGesture)
+        
+        cell.mSubContentView.layer.cornerRadius = 8
+        cell.mSubContentView.layer.borderWidth = 0.5
+        cell.mSubContentView.layer.borderColor = UIColor.hexStringToUIColor(hex: "f0f7ff").cgColor
+//        cell.mSubContentView.layer.shadowRadius = 0
+        cell.mSubContentView.layer.masksToBounds = false
+        cell.mSubContentView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        cell.mSubContentView.layer.shadowRadius = 0.5
+        cell.mSubContentView.layer.shadowOpacity = 0.1
+
+//        cell.mCollectinView.layer.cornerRadius = 8
+        
+        cell.mCollectinView.clipsToBounds = true
+        cell.mCollectinView.layer.cornerRadius = 10
+        if #available(iOS 11.0, *) {
+            cell.mCollectinView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
+
+        cell.collectionViewHolder.clipsToBounds = true
+        cell.collectionViewHolder.layer.cornerRadius = 10
+        if #available(iOS 11.0, *) {
+            cell.collectionViewHolder.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
+
+        
+//        cell.mCollectinView.layer.cornerRadius = 8
+//        cell.mCollectinView.layer.borderWidth = 1.0
+//        cell.mCollectinView.layer.borderColor = UIColor.hexStringToUIColor(hex: "f6f6f6").cgColor
+
+        
         cell.mSubContentView.bringSubviewToFront(cell.projectNameLabel)
         cell.mSubContentView.bringSubviewToFront(cell.cityNameLabel)
-        cell.mSubContentView.layer.cornerRadius = 8.0
+//        cell.mSubContentView.layer.cornerRadius = 8.0
         cell.mCollectinView.mParentIndexPath = indexPath
         cell.mCollectinView.reloadData()
         cell.mImageView.layer.masksToBounds = true
@@ -208,10 +302,11 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //PROJECT_DETAILS
         self.view.endEditing(true)
-        selectedIndexPath = indexPath as NSIndexPath
-        let projecct = self.currentProjectsArray[indexPath.row]
+        selectedIndexPath = indexPath
+        let projecct =  self.fetchedResultsControllerProjects!.object(at: indexPath) //self.currentProjectsArray[indexPath.row]
 
         let urlString = String(format:RRAPI.PROJECT_DETAILS, projecct.id!)
+        selectedProjectID = projecct.id
         self.hideKeyBoard()
        showDetailsOfSelectedProject(urlString: urlString)
         
@@ -225,11 +320,12 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5 //** Statuses
+        return 6 //** Statuses
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let tempCollectionView = collectionView as! CustomCollectionView
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "blockCell", for: indexPath) as! BlockInfoCollectionViewCell
         
 //        print("row is \(tempCollectionView.mParentIndexPath.row)")
@@ -239,23 +335,25 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
 //        let statssss : NSMutableOrderedSet = projecct.value(forKey: "proStat") as! NSMutableOrderedSet
 
         let statucColorDict  = RRUtilities.sharedInstance.getColorAccordingToStatusNumber(status: indexPath.row)
-        
+        cell.backgroundColor = UIColor.hexStringToUIColor(hex: "fff5f4")
+        cell.mSubContentView.backgroundColor = UIColor.hexStringToUIColor(hex: "fff5f4")
 //        cell.mSubContentView.backgroundColor = statucColorDict["color"] as? UIColor
         cell.mStatusTypeLabel.text = statucColorDict["statusString"] as? String
         cell.mStatusTypeLabel.textColor = UIColor.lightGray
-        let tempCountDict =  self.getStatusOfBlocks(indexPath: tempCollectionView.mParentIndexPath as NSIndexPath,collIndexPath: indexPath as NSIndexPath)
+        let tempCountDict =  self.getStatusOfBlocks(indexPath: tempCollectionView.mParentIndexPath,collIndexPath: indexPath)
 //        cell.mStatusTypeNumberLabel.text = String(tempCountDict["count"]! as! Int)
         
         cell.mStatusTypeNumberLabel.text =  String(format:"%d", tempCountDict["count"]!)
         cell.mStatusTypeNumberLabel.textColor = statucColorDict["color"] as? UIColor
-        cell.mStatusTypeLabel.preferredMaxLayoutWidth = 50;
+//        cell.mStatusTypeLabel.preferredMaxLayoutWidth = 50;
 
         return cell
         
     }
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
-//        return CGSize.init(width: 20, height: 70)
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        let itemWidth = (self.mTableView.frame.size.width - 50)/6
+        return CGSize.init(width: itemWidth, height: 70)
+    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        print("COLL CELL SELECTED")
@@ -266,28 +364,65 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
     }
     
     //MARK: - Methods
+    @objc func showProjectInfo(_ sender: UIGestureRecognizer){
+//        print("Long tap")
+        if sender.state == .began {
+//            print("UIGestureRecognizerStateEnded")
+            //Do Whatever You want on End of Gesture
+            //            print(sender.view)
+            
+            let tapLocation = sender.location(in: mTableView)
+            let indexPath : IndexPath = mTableView.indexPathForRow(at: tapLocation)!
+//            print(indexPath.section)
+//            print(indexPath.row)
+            
+            let project = self.fetchedResultsControllerProjects?.object(at: indexPath)
+            
+            let infoController = ProjectInfoViewController(nibName: "ProjectInfoViewController", bundle: nil)
+            infoController.selectedProject = project
+            
+            fpc.surfaceView.cornerRadius = 6.0
+            fpc.surfaceView.shadowHidden = false
+            
+            fpc.delegate = self
+            
+            fpc.set(contentViewController: infoController)
+            
+            fpc.isRemovalInteractionEnabled = true // Optional: Let it removable by a swipe-down
+            
+            fpc.track(scrollView: infoController.scrollView)
+            
+            self.present(fpc, animated: true, completion: nil)
+            
+        }
+    }
+    //MARK: - FLOAT PANEL DELEGATE BEGIN
+    func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
+        return  CustomPanelLayout(parent: self)
+    }
+    //MARK: - FLOAT PANEL DELEGATE END
     @objc func fetchUpdatedProjects(){
-        
-        self.projectsArray = RRUtilities.sharedInstance.model.getAllProjects()
-        self.currentProjectsArray = self.projectsArray
-        
+        self.fetchAllProjects()
         self.mTableView.reloadData()
     }
     @objc func showProjects(){
         
 //        print("seleted")
-        if(self.projectsArray.count > 0){
+        
+        if(self.fetchedResultsControllerProjects!.fetchedObjects!.count > 0){
             //show popup
             
             let vc = storyboard?.instantiateViewController(withIdentifier: "popOverController") as! PopOverViewController
             vc.dataSourceType = .PROJECTS
-            vc.preferredContentSize = CGSize(width: 250, height: self.projectsArray.count * 44)
+            vc.preferredContentSize = CGSize(width: 250, height: (self.fetchedResultsControllerProjects!.fetchedObjects!.count - 1) * 44)
             
-            if(CGFloat((self.projectsArray.count * 44)) > (self.view.frame.size.height - 150)){
+            if(CGFloat((self.fetchedResultsControllerProjects!.fetchedObjects!.count * 44)) > (self.view.frame.size.height - 150)){
                 
                 vc.preferredContentSize = CGSize(width: 250, height: (self.view.frame.size.height - 150))
             }
-
+            if(self.fetchedResultsControllerProjects!.fetchedObjects!.count == 1){
+                vc.preferredContentSize = CGSize(width: 250, height: 1)
+            }
             
             let navigationContoller = UINavigationController(rootViewController: vc)
             navigationContoller.navigationBar.isHidden = true
@@ -296,15 +431,11 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
             let popOver =  navigationContoller.popoverPresentationController
             popOver?.delegate = self
             popOver?.permittedArrowDirections = UIPopoverArrowDirection.down
-            vc.tableViewDataSource = self.projectsArray
-            //        popOver?.barButtonItem = sender as? UIBarButtonItem
+            vc.tableViewDataSource = self.fetchedResultsControllerProjects!.fetchedObjects!
             
             popOver?.sourceView = projectsButton.mCenterLabelForPopUp
             
-//            popOver?.sourceRect = CGRect(x: self.view.center.x, y: projectsButton.frame.origin.y - 80, width: projectsButton.frame.size.width, height: projectsButton.frame.size.height)
-//            popOver?.sourceView?.frame.origin.x = self.view.center.x
             vc.delegate = self
-            //        popOver?.sourceRect = optionsButton.frame
             
             self.present(navigationContoller, animated: true, completion: nil)
         }
@@ -312,18 +443,18 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
     func shouldShowUnitsWithSelectedStatus(selectedStatus: Int) {
         
     }
-    func showSelectedTowerFromFloatButton(selectedTower: TOWERDETAILS, selectedBlock: String) {
+    func showSelectedTowerFromFloatButton(selectedTower: Towers, selectedBlock: String) {
         
     }
     func didSelectProject(optionType : String,optionIndex: Int){
         
-        self.selectedIndexPath = NSIndexPath.init(row: optionIndex, section: 0)
-        let projecct = self.projectsArray[optionIndex]
+        self.selectedIndexPath = IndexPath.init(row: optionIndex, section: 0) as IndexPath
+        let projecct =  self.fetchedResultsControllerProjects!.fetchedObjects![optionIndex] //self.projectsArray[optionIndex]
         
         let urlString = String(format:RRAPI.PROJECT_DETAILS, projecct.id!)
         
         //        let urlString = String(format:RRAPI.PROJECT_DETAILS, optionType)
-        
+        selectedProjectID = projecct.id
         showDetailsOfSelectedProject(urlString: urlString)
         
         let tmpController :UIViewController! = self.presentedViewController;
@@ -333,13 +464,13 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
     }
     func didFinishTask(optionType: String, optionIndex: Int) {
         
-        self.selectedIndexPath = NSIndexPath.init(row: optionIndex, section: 0)
-        let projecct = self.projectsArray[optionIndex]
+        self.selectedIndexPath = IndexPath.init(row: optionIndex, section: 0)
+        let projecct = self.fetchedResultsControllerProjects!.fetchedObjects![optionIndex] //self.projectsArray[optionIndex]
         
         let urlString = String(format:RRAPI.PROJECT_DETAILS, projecct.id!)
 
 //        let urlString = String(format:RRAPI.PROJECT_DETAILS, optionType)
-        
+        selectedProjectID = projecct.id
         showDetailsOfSelectedProject(urlString: urlString)
         
         let tmpController :UIViewController! = self.presentedViewController;
@@ -351,9 +482,9 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
         
     }
 
-    func getStatusOfBlocks(indexPath : NSIndexPath, collIndexPath : NSIndexPath) -> Dictionary<String, Int>{
+    func getStatusOfBlocks(indexPath : IndexPath, collIndexPath : IndexPath) -> Dictionary<String, Int>{
         
-        let projecct = self.projectsArray[indexPath.row]
+        let projecct = fetchedResultsControllerProjects!.object(at: indexPath) //self.projectsArray[indexPath.row]
         
             var collectionCellDict : Dictionary<String , Int> = [:]
             
@@ -401,6 +532,10 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
     
     func getProjectDetails(urlString : String, completionHandler: @escaping (ProjectDetails?, Error?) -> ()) -> () {
         
+        if(RRUtilities.sharedInstance.keychain["Cookie"] == nil){
+            RRUtilities.sharedInstance.showLoginScreenOnAuthFailure(navigationController: self.navigationController)
+            return
+        }
         if !RRUtilities.sharedInstance.getNetworkStatus()
         {
             HUD.flash(.label("Couldn't connect to internet"), delay: 1.0)
@@ -412,22 +547,39 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
         ]
         HUD.show(.labeledProgress(title: "", subtitle: nil))
 
-        Alamofire.request(urlString, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON{
+        AF.request(urlString, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON{
             response in
             switch response.result {
             case .success( _):
-//                print(response)
+                print("response")
                 guard let responseData = response.data else {
                     print("Error: did not receive data")
                     completionHandler(nil, nil)
                     return
                 }
-                let urlResult = try! JSONDecoder().decode(ProjectDetails.self, from: responseData)
+//                let urlResult = try! JSONDecoder().decode(ProjectDetails11.self, from: responseData)
                 
-//                print(urlResult)
-
-                completionHandler(urlResult, nil)
 //                 completionHandler(result, nil)
+                do{
+                    let urlResult = try JSONDecoder().decode(ProjectDetails.self, from: responseData)
+                    
+                    
+                    if(urlResult.blocks != nil && urlResult.towers != nil && urlResult.towers != nil){
+                        
+                        RRUtilities.sharedInstance.model.writeBlocksToDB(projectDetails: urlResult, projectID: self.selectedProjectID)
+                        RRUtilities.sharedInstance.model.writeTowersToDB(projectDetails: urlResult, projectID: self.selectedProjectID)
+                        RRUtilities.sharedInstance.model.writeUnitsToDB(projectDetails: urlResult, projectID: self.selectedProjectID)
+                        
+                    }
+                    
+                    //                print(urlResult)
+                    
+                    completionHandler(urlResult, nil)
+                }
+                catch let error{
+                    HUD.flash(.label(error.localizedDescription))
+                    completionHandler(nil,error)
+                }
                 break
             case .failure(let error):
                 print(error)
@@ -437,6 +589,24 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
 //                return result
                 break
             }
+        }
+    }
+    @IBAction func showNotifications(_ sender: Any) {
+        if(RRUtilities.sharedInstance.model.notificationsCount() == 0){
+            HUD.flash(.label("There are no notificatins to show"), delay: 1.0)
+            self.updateNotificationCountLabel()
+            return
+        }
+        let notificationsController = NotificationsViewController(nibName: "NotificationsViewController", bundle: nil)
+        self.navigationController?.pushViewController(notificationsController, animated: true)
+    }
+    @objc func updateNotificationCountLabel(){
+        let count = RRUtilities.sharedInstance.model.notificationsCount()
+        self.notificationsCountLabel.text = String(format: "%d",count)
+        if(count > 0){
+            self.notificationsCountLabel.isHidden = false
+        }else{
+            self.notificationsCountLabel.isHidden = true
         }
     }
     @IBAction func getProjects(_ sender: Any) {
@@ -455,34 +625,28 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
             "Cookie" : RRUtilities.sharedInstance.keychain["Cookie"]!
         ]
         HUD.show(.labeledProgress(title: "", subtitle: nil))
-        Alamofire.request(RRAPI.PROJECTS_URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers:headers).responseJSON{
+        AF.request(RRAPI.PROJECTS_URL, method: .get, parameters: nil, encoding: JSONEncoding.default, headers:headers).responseJSON{
             response in
             switch response.result {
             case .success :
 //                print(response)
 
                 do{
-                    print(response)
+//                    print(response)
                     guard let responseData = response.data else {
                         print("Error: did not receive data")
                         return
                     }
                     
-                    let urlResult = try! JSONDecoder().decode(projectsResult.self, from: responseData)
+                    let urlResult = try JSONDecoder().decode(projectsResult.self, from: responseData)
                     
 //                    print(urlResult)
                     
                     if(urlResult.status == 1){
                         let isWritten = RRUtilities.sharedInstance.model.writeAllProjectsToDB(projectsArray: urlResult.projects!)
+                        self.fetchAllProjects()
                         
                         if(isWritten){
-                            
-                            self.projectsArray.removeAll()
-                            self.currentProjectsArray.removeAll()
-                            
-                            self.projectsArray = RRUtilities.sharedInstance.model.getAllProjects()
-                            self.currentProjectsArray = self.projectsArray
-//                            print(self.projectsArray)
                             
                             self.refreshControl?.endRefreshing()
                             
@@ -504,7 +668,6 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
                         return
                     }
                     
-                    //                    print(projectsResult)
                     let status = projectsResult["status"] as! Int
                     
                     if(status == -1){ //Authentication Issue
@@ -515,15 +678,6 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
                     }
                     else{
                         
-                        //                        self.projectsArray = projectsResult["projects"] as! Array<Any>
-                        //
-                        //                        print(self.projectsArray)
-                        //
-                        //                        for projectDict in self.projectsArray{
-                        //                            let tempDict : Dictionary<String,Any> = projectDict as! Dictionary<String,Any>
-                        //                            print("name \(tempDict["name"])")
-                        //                        }
-                        
                         self.mTableView.delegate = self
                         self.mTableView.dataSource = self
                         self.mTableView.reloadData()
@@ -533,19 +687,6 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
                 catch let parseError as NSError {
                                         print("JSON Error \(parseError.localizedDescription)")
                 }
-                
-                //                let urlResult = try! JSONDecoder().decode(otpResult.self, from: responseData)
-                //
-                //                print(urlResult)
-                //
-                //                if(urlResult.status == 0){
-                //                    HUD.flash(.label("Invalid Email ID"), delay: 1.0)
-                //                    return
-                //                }
-                //                else{
-                //                    HUD.flash(.label("OTP Sent Successfully"), delay: 1.0)
-                //                }
-                
                 break;
             case .failure(let error):
                 HUD.hide()
@@ -556,6 +697,21 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
         }
     }
     func showDetailsOfSelectedProject(urlString : String){
+        
+        if(self.projectExist()){
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let detailsController = storyboard.instantiateViewController(withIdentifier :"ProjectDetails") as! ProjectDetailsViewController
+            
+            let projecct = fetchedResultsControllerProjects!.object(at: selectedIndexPath)
+
+            detailsController.selectedProject =  projecct
+            
+            detailsController.projectsArray = self.projectsArray
+            self.navigationController?.pushViewController(detailsController, animated: true)
+
+            return
+        }
         
         self.getProjectDetails(urlString: urlString,completionHandler: { responseObject, error in
             
@@ -568,10 +724,16 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     let detailsController = storyboard.instantiateViewController(withIdentifier :"ProjectDetails") as! ProjectDetailsViewController
                     detailsController.projectDetails = responseObject
-                    detailsController.selectedProject = self.projectsArray[self.selectedIndexPath.row]
+                    detailsController.selectedProject =  self.fetchedResultsControllerProjects!.object(at: self.selectedIndexPath)
+                    //self.projectsArray[self.selectedIndexPath.row]
                     detailsController.projectsArray = self.projectsArray
-                    self.navigationController?.pushViewController(detailsController, animated: true)
                     
+//                    RRUtilities.sharedInstance.model.writeBlocksToDB(projectDetails: responseObject!)
+//                    RRUtilities.sharedInstance.model.writeTowersToDB(projectDetails: responseObject!)
+//                    RRUtilities.sharedInstance.model.writeUnitsToDB(projectDetails: responseObject!)
+
+                    self.navigationController?.pushViewController(detailsController, animated: true)
+
                 }
                 else if(responseObject?.status == 0){
                     DispatchQueue.main.async {
@@ -599,6 +761,30 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
             return
         });
     }
+    func projectExist()->Bool{
+        
+        let request: NSFetchRequest<Units> = Units.fetchRequest()
+        request.resultType = NSFetchRequestResultType.countResultType
+        
+        let projecct = fetchedResultsControllerProjects!.object(at: selectedIndexPath)
+        let predicate = NSPredicate(format: "project CONTAINS[c] %@", projecct.id!)
+        request.predicate = predicate
+        
+        do {
+            let count = try! RRUtilities.sharedInstance.model.managedObjectContext.count(for: request)
+            
+            if(count > 0){
+//                print(count)
+                return true
+            }
+            else{
+                return false
+            }
+        }
+        catch {
+            fatalError("Error in fetching records")
+        }
+    }
     func showLoginScreenOnAuthFailure(){
         HUD.flash(.label("Session Expires. Please login again"), delay: 1.0)
         //perform logout
@@ -609,11 +795,24 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
 
     }
     
+    @IBAction func showReports(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if #available(iOS 11.0, *) {
+            let preSalesController = storyboard.instantiateViewController(withIdentifier :"webView") as! WebViewController
+            preSalesController.isFromReports = true
+            self.navigationController?.pushViewController(preSalesController, animated: true)
+            return
+        } else {
+            // Fallback on earlier versions
+        }
+    }
     @IBAction func showSeachBar(_ sender: Any) {
         searchBar.isHidden = false
         searchBar.delegate = self
         searchButton.isHidden = true
         titleLabel.isHidden = true
+        reportsButton.isHidden = true
+        notificationsView.isHidden = true
         searchBar.becomeFirstResponder()
     }
     @IBAction func backToHome(_ sender: Any) {
@@ -621,26 +820,26 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
     }
     //MARK: - SearchDelegate
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-        currentProjectsArray = projectsArray.filter({ Project -> Bool in
-            switch searchBar.selectedScopeButtonIndex {
-            case 0:
-                if searchText.isEmpty { return true }
-                return Project.name!.lowercased().contains(searchText.lowercased())
-            default:
-                return false
-            }
-        })
-        self.mTableView.reloadData()
+//        print(searchText)
+        var predicate: NSPredicate?
+        if searchText.count > 0 {
+            predicate = NSPredicate(format: "(name contains[cd] %@)", searchText)
+        } else {
+            predicate = nil
+        }
+        
+        fetchedResultsControllerProjects!.fetchRequest.predicate = predicate
+
+        do {
+            try fetchedResultsControllerProjects!.performFetch()
+            mTableView.reloadData()
+        } catch let err {
+            print(err)
+        }
     }
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        print(selectedScope)
-        switch selectedScope {
-        case 0:
-            currentProjectsArray = projectsArray
-        default:
-            break
-        }
+//        print(selectedScope)
+        self.fetchAllProjects()
         mTableView.reloadData()
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -653,8 +852,10 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
         searchBar.isHidden = true
         titleLabel.isHidden = false
         searchButton.isHidden = false
+        reportsButton.isHidden = false
+        notificationsView.isHidden = false
         self.hideKeyBoard()
-        self.currentProjectsArray = self.projectsArray
+        self.fetchAllProjects()
         mTableView.reloadData()
     }
     func hideKeyBoard()
@@ -672,7 +873,67 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
         // Dispose of any resources that can be recreated.
     }
     
+    func getEmployess(){
+            
+            if !RRUtilities.sharedInstance.getNetworkStatus()
+            {
+                //** if fetched data is there show that **
+                HUD.flash(.label("Couldn't connect to internet"), delay: 1.0)
+                return
+            }
+            let headers: HTTPHeaders = [
+                "User-Agent" : "RErootMobile",
+                "Cookie" : RRUtilities.sharedInstance.keychain["Cookie"]!
+            ]
+//            HUD.show(.progress)
 
+    //        print(RRAPI.GET_EMPLOYEES)
+            
+            AF.request(RRAPI.GET_EMPLOYEES, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON{
+                response in
+                switch response.result {
+                case .success( _):
+    //                print(response)
+                    guard let responseData = response.data else {
+                        print("Error: did not receive data")
+                        return
+                    }
+                    
+                    
+                    do{
+                        let urlResult = try JSONDecoder().decode(EMPLOYEES.self, from: responseData)
+                        
+                        if(urlResult.status == -1 ){
+                            RRUtilities.sharedInstance.showLoginScreenOnAuthFailure(navigationController: self.navigationController)
+                            HUD.hide()
+                            return
+                        }
+                        else{
+                        
+                            let isWritten = RRUtilities.sharedInstance.model.writeEmployeeDataToDB(employees: urlResult.users!)
+                            if(isWritten){
+                                print("Saved VEHICLES TO DB")
+                            }
+                            else{
+                                print("FAILED TO WRITE VEHICLES To DB")
+                            }
+                        }
+//                        HUD.hide()
+                    }
+                    catch let error{
+//                        HUD.hide()
+//                        HUD.flash(.label(error.localizedDescription))
+                    }
+                    // make tableview data
+                    break
+                case .failure(let error):
+//                    print(error)
+//                    HUD.hide()
+//                    HUD.flash(.label(error.localizedDescription))
+                    break
+                }
+            }
+        }
     /*
     // MARK: - Navigation
 
@@ -684,4 +945,40 @@ class ProjectsViewController: UIViewController , UITableViewDelegate , UITableVi
     */
 }
 
+extension ProjectsViewController  : NSFetchedResultsControllerDelegate{
 
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        /*This delegate method will be called first.As the name of this method "controllerWillChangeContent" suggets write some logic for table view to initiate insert row or delete row or update row process. After beginUpdates method the next call will be for :
+
+         - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(nullable NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(nullable NSIndexPath *)newIndexPath
+
+         */
+        print("A. NSFetchResultController controllerWillChangeContent :)")
+        self.mTableView.beginUpdates()
+    }
+
+    /*This delegate method will be called second. This method will give information about what operation exactly started taking place a insert, a update, a delete or a move. The enum NSFetchedResultsChangeType will provide the change types.
+
+
+     public enum NSFetchedResultsChangeType : UInt {
+
+     case insert
+
+     case delete
+
+     case move
+
+     case update
+     }
+
+     */
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+
+        print("B. NSFetchResultController didChange NSFetchedResultsChangeType \(type.rawValue):)")
+    }
+
+    /*The last delegate call*/
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.mTableView.endUpdates()
+    }
+}

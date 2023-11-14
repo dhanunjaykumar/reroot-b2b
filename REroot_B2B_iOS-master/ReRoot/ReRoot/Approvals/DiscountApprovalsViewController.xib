@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DiscountApprovalsViewController" customModule="REroot" customModuleProvider="target">
+            <connections>
+                <outlet property="searchBar" destination="e0s-rw-o31" id="iON-cM-rfE"/>
+                <outlet property="searchButton" destination="xqm-AG-Wyb" id="ydo-tF-2tY"/>
+                <outlet property="titleLabel" destination="Y6o-hl-vYP" id="4Ly-R8-z1D"/>
+                <outlet property="titleView" destination="Kaq-I0-vWL" id="QWg-LB-qxK"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kaq-I0-vWL">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fs6-7L-GK0">
+                            <rect key="frame" x="8" y="0.0" width="50" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="mM6-Xm-3Tp"/>
+                            </constraints>
+                            <state key="normal" image="back"/>
+                            <connections>
+                                <action selector="back:" destination="-1" eventType="touchUpInside" id="31y-mA-UOz"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISCOUNT APPROVALS" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y6o-hl-vYP">
+                            <rect key="frame" x="83" y="19.5" width="209" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="209" id="us6-Nr-OrH"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="17"/>
+                            <color key="textColor" red="0.20392156859999999" green="0.28627450980000002" blue="0.36862745099999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search approvals" translatesAutoresizingMaskIntoConstraints="NO" id="e0s-rw-o31">
+                            <rect key="frame" x="58" y="8" width="269" height="44"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                        </searchBar>
+                        <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xqm-AG-Wyb">
+                            <rect key="frame" x="327" y="8" width="40" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="6LZ-bk-9PO"/>
+                                <constraint firstAttribute="width" constant="40" id="ve8-lP-835"/>
+                            </constraints>
+                            <state key="normal" image="search"/>
+                            <connections>
+                                <action selector="searchApprovals:" destination="-1" eventType="touchUpInside" id="uey-bW-BgU"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="e0s-rw-o31" firstAttribute="top" secondItem="xqm-AG-Wyb" secondAttribute="top" id="3bx-D9-Byx"/>
+                        <constraint firstAttribute="trailing" secondItem="xqm-AG-Wyb" secondAttribute="trailing" constant="8" id="6UN-Wn-tnM"/>
+                        <constraint firstItem="xqm-AG-Wyb" firstAttribute="centerY" secondItem="Kaq-I0-vWL" secondAttribute="centerY" id="Ayl-Ra-vPq"/>
+                        <constraint firstItem="fs6-7L-GK0" firstAttribute="leading" secondItem="Kaq-I0-vWL" secondAttribute="leading" constant="8" id="CJJ-Ml-7AK"/>
+                        <constraint firstAttribute="height" constant="60" id="G0V-sd-eSX"/>
+                        <constraint firstItem="Y6o-hl-vYP" firstAttribute="centerX" secondItem="Kaq-I0-vWL" secondAttribute="centerX" id="KVl-Xb-RIQ"/>
+                        <constraint firstItem="xqm-AG-Wyb" firstAttribute="leading" secondItem="e0s-rw-o31" secondAttribute="trailing" id="RB7-gM-xv9"/>
+                        <constraint firstAttribute="bottom" secondItem="fs6-7L-GK0" secondAttribute="bottom" id="TUm-rU-DIe"/>
+                        <constraint firstItem="e0s-rw-o31" firstAttribute="leading" secondItem="fs6-7L-GK0" secondAttribute="trailing" id="cGh-kB-Qss"/>
+                        <constraint firstItem="Y6o-hl-vYP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fs6-7L-GK0" secondAttribute="trailing" id="i36-Uw-1SJ"/>
+                        <constraint firstItem="e0s-rw-o31" firstAttribute="bottom" secondItem="xqm-AG-Wyb" secondAttribute="bottom" id="oKd-nf-HAV"/>
+                        <constraint firstItem="fs6-7L-GK0" firstAttribute="top" secondItem="Kaq-I0-vWL" secondAttribute="top" id="pij-0R-OT6"/>
+                        <constraint firstItem="Y6o-hl-vYP" firstAttribute="centerY" secondItem="Kaq-I0-vWL" secondAttribute="centerY" id="xe1-yi-wjY"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Kaq-I0-vWL" secondAttribute="trailing" id="IGi-GG-LsO"/>
+                <constraint firstItem="Kaq-I0-vWL" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="WF6-LJ-qUS"/>
+                <constraint firstItem="Kaq-I0-vWL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="WKr-bs-icB"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="130.40000000000001" y="152.47376311844079"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="back" width="24" height="24"/>
+        <image name="search" width="24" height="24"/>
+    </resources>
+</document>

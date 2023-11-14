@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,7 +17,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="colorCell" id="gTV-IL-0wX" customClass="ColorCollectionViewCell" customModule="ReRoot" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="colorCell" id="gTV-IL-0wX" customClass="ColorCollectionViewCell" customModule="REroot" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="70" height="60"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -27,8 +27,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQd-io-nZk">
                         <rect key="frame" x="0.0" y="0.0" width="70" height="60"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3ch-5U-2Ay">
-                                <rect key="frame" x="10" y="21" width="50" height="17.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ch-5U-2Ay">
+                                <rect key="frame" x="4" y="21" width="62" height="17.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="TKQ-jy-UKD"/>
                                 </constraints>
@@ -47,13 +47,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="3IJ-S9-U1T"/>
-                            <constraint firstAttribute="trailing" secondItem="3ch-5U-2Ay" secondAttribute="trailing" constant="10" id="5Dl-TI-eyq"/>
+                            <constraint firstAttribute="trailing" secondItem="3ch-5U-2Ay" secondAttribute="trailing" constant="4" id="5Dl-TI-eyq"/>
                             <constraint firstItem="3ch-5U-2Ay" firstAttribute="top" secondItem="bQd-io-nZk" secondAttribute="top" constant="21" id="PGE-KA-yEl"/>
-                            <constraint firstItem="3ch-5U-2Ay" firstAttribute="leading" secondItem="Xrq-di-MYB" secondAttribute="leading" id="TVh-N8-wUc"/>
-                            <constraint firstItem="3ch-5U-2Ay" firstAttribute="trailing" secondItem="Xrq-di-MYB" secondAttribute="trailing" id="ULo-9K-TWN"/>
+                            <constraint firstItem="3ch-5U-2Ay" firstAttribute="leading" secondItem="Xrq-di-MYB" secondAttribute="leading" constant="-6" id="TVh-N8-wUc"/>
+                            <constraint firstItem="3ch-5U-2Ay" firstAttribute="trailing" secondItem="Xrq-di-MYB" secondAttribute="trailing" constant="6" id="ULo-9K-TWN"/>
                             <constraint firstAttribute="height" constant="60" id="Vfa-dl-HmH"/>
                             <constraint firstItem="Xrq-di-MYB" firstAttribute="top" secondItem="3ch-5U-2Ay" secondAttribute="bottom" constant="3" id="Wnw-0l-neE"/>
-                            <constraint firstItem="3ch-5U-2Ay" firstAttribute="leading" secondItem="bQd-io-nZk" secondAttribute="leading" constant="10" id="jxe-HU-SgZ"/>
+                            <constraint firstItem="3ch-5U-2Ay" firstAttribute="leading" secondItem="bQd-io-nZk" secondAttribute="leading" constant="4" id="jxe-HU-SgZ"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -66,9 +66,12 @@
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
+                <outlet property="heightOfContentView" destination="Vfa-dl-HmH" id="MEs-do-5f2"/>
+                <outlet property="leadingOfColorLabel" destination="TVh-N8-wUc" id="azN-Dd-vOT"/>
                 <outlet property="statusColorIndicatorView" destination="Xrq-di-MYB" id="fnI-Y0-PfO"/>
                 <outlet property="statusTitleLabel" destination="3ch-5U-2Ay" id="bep-h9-bRM"/>
                 <outlet property="subContentView" destination="bQd-io-nZk" id="Ms0-fe-ZS3"/>
+                <outlet property="trailingOfColorLabel" destination="ULo-9K-TWN" id="qjb-uW-lbq"/>
             </connections>
         </collectionViewCell>
     </objects>

@@ -13,6 +13,9 @@ class DiscountRequestTableViewCell: UITableViewCell {
     @IBOutlet var deleteButton: UIButton!
     @IBOutlet var discountAmountLabel: UILabel!
     @IBOutlet var discountTypeLabel: UILabel!
+    var sectionIndex : Int!
+    var rowIndex : Int!
+
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OTPViewController" customModule="REroot" customModuleProvider="target">
+            <connections>
+                <outlet property="counterLabel" destination="OzE-aB-gD3" id="Xg0-2x-YU6"/>
+                <outlet property="otpTextField" destination="b2n-ab-h9n" id="140-6z-SF8"/>
+                <outlet property="resendView" destination="FrA-5L-NH3" id="hxg-Gm-pir"/>
+                <outlet property="veifyOtpButton" destination="dLH-lF-rSN" id="CfY-Pq-Vca"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="170"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9RY-3R-93w">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="170"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter OTP" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b2n-ab-h9n">
+                            <rect key="frame" x="25" y="23" width="250" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="SLn-Di-4r1"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="one-time-code"/>
+                        </textField>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="KpH-hY-5Ml">
+                            <rect key="frame" x="12" y="98" width="276" height="45"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FrA-5L-NH3">
+                                    <rect key="frame" x="0.0" y="0.0" width="134" height="45"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="ifK-dm-NLn">
+                                            <rect key="frame" x="0.0" y="0.0" width="134" height="45"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resend OTP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFm-sr-Jft">
+                                                    <rect key="frame" x="0.0" y="0.0" width="96" height="45"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(60s)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OzE-aB-gD3">
+                                                    <rect key="frame" x="96" y="0.0" width="38" height="45"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="ifK-dm-NLn" secondAttribute="bottom" id="Xeo-mb-APB"/>
+                                        <constraint firstItem="ifK-dm-NLn" firstAttribute="leading" secondItem="FrA-5L-NH3" secondAttribute="leading" id="jH4-aM-r5E"/>
+                                        <constraint firstItem="ifK-dm-NLn" firstAttribute="top" secondItem="FrA-5L-NH3" secondAttribute="top" id="tG0-7O-TFi"/>
+                                        <constraint firstAttribute="trailing" secondItem="ifK-dm-NLn" secondAttribute="trailing" id="zgE-jr-mJw"/>
+                                    </constraints>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="5SP-b3-feD" appends="YES" id="Ity-Lk-yFm"/>
+                                    </connections>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dLH-lF-rSN">
+                                    <rect key="frame" x="142" y="0.0" width="134" height="45"/>
+                                    <color key="backgroundColor" red="0.2196078431372549" green="0.28627450980392155" blue="0.36078431372549019" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="14"/>
+                                    <state key="normal" title="Verify OTP">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="verify:" destination="-1" eventType="touchUpInside" id="AfW-uo-HRg"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="MJY-Wm-J3M"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="KpH-hY-5Ml" secondAttribute="trailing" constant="12" id="4me-4z-zOU"/>
+                        <constraint firstAttribute="bottom" secondItem="KpH-hY-5Ml" secondAttribute="bottom" constant="27" id="5J8-fv-iFH"/>
+                        <constraint firstItem="KpH-hY-5Ml" firstAttribute="leading" secondItem="9RY-3R-93w" secondAttribute="leading" constant="12" id="5vs-da-RkA"/>
+                        <constraint firstAttribute="trailing" secondItem="b2n-ab-h9n" secondAttribute="trailing" constant="25" id="BCS-Gw-V8T"/>
+                        <constraint firstItem="b2n-ab-h9n" firstAttribute="centerX" secondItem="9RY-3R-93w" secondAttribute="centerX" id="G85-zU-Fhs"/>
+                        <constraint firstItem="b2n-ab-h9n" firstAttribute="leading" secondItem="9RY-3R-93w" secondAttribute="leading" constant="25" id="Src-kx-6xs"/>
+                        <constraint firstAttribute="height" constant="170" id="atj-p0-22j"/>
+                        <constraint firstItem="b2n-ab-h9n" firstAttribute="top" secondItem="9RY-3R-93w" secondAttribute="top" constant="23" id="bac-Hr-vEg"/>
+                        <constraint firstItem="KpH-hY-5Ml" firstAttribute="top" secondItem="b2n-ab-h9n" secondAttribute="bottom" constant="25" id="i7h-Re-fXl"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="9RY-3R-93w" secondAttribute="trailing" id="5c6-uH-1a6"/>
+                <constraint firstItem="9RY-3R-93w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="EKG-6t-VUV"/>
+                <constraint firstItem="9RY-3R-93w" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="TQw-yI-BdZ"/>
+                <constraint firstAttribute="bottom" secondItem="9RY-3R-93w" secondAttribute="bottom" id="fZc-Cy-NLj"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="137.68115942028987" y="94.419642857142847"/>
+        </view>
+        <tapGestureRecognizer id="5SP-b3-feD">
+            <connections>
+                <action selector="resend:" destination="-1" id="11H-P7-hBG"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -10,28 +10,53 @@ import UIKit
 protocol DateSelectedFromPicker: class {
     func didSelectDate(optionType : Date,optionIndex: Int)
 }
+extension DateSelectedFromPicker{
+    func didSelectDate(optionType : Date,optionIndex: Int){
+    }
+}
 
 class DatePickerViewController: UIViewController {
 
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var buttonsView: UIView!
+    @IBOutlet weak var datePickerInfoView: UIView!
+    @IBOutlet weak var datePickerInfoLabel: UILabel!
     var selectedFieldTag : Int!
-    @IBOutlet var datePicker: UIDatePicker!
+    @IBOutlet weak var datePicker: UIDatePicker!
     weak var delegate:DateSelectedFromPicker?
+    var shouldSetDateLimit : Bool = false
+    var shouldShowTime : Bool = false
+    var selectedDate : Date!
 
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        
-        datePicker.minimumDate = Date()
+        if(shouldSetDateLimit){
+            datePicker.maximumDate = Date()
+        }
     }
 
     @IBAction func cancel(_ sender: Any) {
-        self.delegate?.didSelectDate(optionType: datePicker.date, optionIndex: selectedFieldTag)
-
+        self.delegate?.didSelectDate(optionType: datePicker.date, optionIndex: -1)
     }
     @IBAction func dateSelected(_ sender: Any) {
-        print(datePicker.date)
+        if(shouldShowTime && datePicker.datePickerMode == .date){
+            selectedDate = self.datePicker.date
+            self.datePicker.datePickerMode = .time
+            return
+        }
+        if(shouldShowTime){
+            var dayComponents = Calendar.current.dateComponents([.year, .month, .day], from: selectedDate)
+            let timeComponents = Calendar.current.dateComponents([.hour, .minute], from: datePicker.date)
+            dayComponents.hour = timeComponents.hour
+            dayComponents.minute = timeComponents.minute
+            guard let date = Calendar.current.date(from: dayComponents) else { return  }
+            self.delegate?.didSelectDate(optionType: date, optionIndex: selectedFieldTag)
+            return
+        }
         self.delegate?.didSelectDate(optionType: datePicker.date, optionIndex: selectedFieldTag)
         
     }

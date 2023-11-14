@@ -9,7 +9,7 @@
 import UIKit
 
 class UnitCollectionViewCell: UICollectionViewCell {
-    
+    @IBOutlet var unitCellWidthConstraint: NSLayoutConstraint!
     @IBOutlet var unitImageView: UIImageView!
     @IBOutlet var unitNumberLabel: UILabel!
     @IBOutlet var subView: UIView!

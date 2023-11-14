@@ -81,12 +81,13 @@ class ChangePassWordViewController: UIViewController {
         parameters["username"] = UserDefaults.standard.value(forKey: "userName") as? String
         parameters["password"] = oldPasswordField.text
         parameters["newPassword"] = reTypePasswordField.text
+        parameters["src"] = "3"
         
-        Alamofire.request(RRAPI.API_UPDATE_PASSWORD, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON{
+        AF.request(RRAPI.API_UPDATE_PASSWORD, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON{
             response in
             switch response.result {
             case .success( _):
-                print(response)
+//                print(response)
                 HUD.hide()
                 guard let responseData = response.data else {
                     print("Error: did not receive data")
@@ -94,7 +95,7 @@ class ChangePassWordViewController: UIViewController {
                 }
                 
                 let urlResult = try! JSONDecoder().decode(COMMON_OUTPUT.self, from: responseData)
-                print(urlResult)
+//                print(urlResult)
                 
                 if(urlResult.status == 0){
                     HUD.flash(.label(urlResult.err), delay: 0.8)

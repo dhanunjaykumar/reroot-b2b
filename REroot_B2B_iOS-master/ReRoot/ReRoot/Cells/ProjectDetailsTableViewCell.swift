@@ -11,12 +11,13 @@ import UIKit
 class ProjectDetailsTableViewCell: UITableViewCell {
 
     
-    @IBOutlet var overLayImageView: UIImageView!
-    @IBOutlet var mSubContentView: UIView!
-    @IBOutlet var cityNameLabel: UILabel!
-    @IBOutlet var projectNameLabel: UILabel!
-    @IBOutlet var mImageView: UIImageView!
-    @IBOutlet var mCollectinView: CustomCollectionView!
+    @IBOutlet weak var collectionViewHolder: UIView!
+    @IBOutlet weak var overLayImageView: UIImageView!
+    @IBOutlet weak var mSubContentView: UIView!
+    @IBOutlet weak var cityNameLabel: UILabel!
+    @IBOutlet weak var projectNameLabel: UILabel!
+    @IBOutlet weak var mImageView: UIImageView!
+    @IBOutlet weak var mCollectinView: CustomCollectionView!
     var mStatusDictArray : Array<STAT> = []
     
     override func awakeFromNib() {
@@ -37,6 +38,8 @@ class ProjectDetailsTableViewCell: UITableViewCell {
         mCollectinView.collectionViewLayout = tempLayout
         
         overLayImageView.layer.cornerRadius = 8.0
+        
+        collectionViewHolder.layer.cornerRadius = 8
 
     }
 

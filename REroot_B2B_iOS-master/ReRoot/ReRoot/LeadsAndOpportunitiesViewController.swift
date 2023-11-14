@@ -10,12 +10,16 @@ import UIKit
 
 class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,CAPSPageMenuDelegate {
     
-    @IBOutlet var searchButton: UIButton!
+    @IBOutlet weak var toDateButton: UIButton!
+    @IBOutlet weak var fromDateButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
     
-    @IBOutlet var searchBar: UISearchBar!
-    @IBOutlet var titleView: UIView!
-    @IBOutlet var projectNameLabel: UILabel!
-    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var projectNameLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    var pageMenu: CAPSPageMenu!
     
     var selectedPageMenuIndex : Int = 0
     
@@ -56,7 +60,6 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
         titleView.layer.shouldRasterize = true
         titleView.layer.rasterizationScale = UIScreen.main.scale
         self.view.bringSubviewToFront(titleView)
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,18 +67,26 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
         // Do any additional setup after loading the view.
         
         projectNameLabel.text = projectName
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(changeCounter), name: NSNotification.Name(rawValue: NOTIFICATIONS.FETCH_ON_ACTION), object: nil)
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.textColor = UIColor.black
 
+//        NotificationCenter.default.addObserver(self, selector: #selector(getProspectsAsPerStatus(_:)), name: NSNotification.Name(rawValue: NOTIFICATIONS.FETCH_ON_ACTION), object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(getProspectsAsPerStatus), name: NSNotification.Name(rawValue: NOTIFICATIONS.UPDATE_PROSPECT_COUNT), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getProspectsAsPerStatus), name: NSNotification.Name(rawValue: NOTIFICATIONS.FETCH_ON_ACTION), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(hideKeyBoard), name: NSNotification.Name(rawValue: "hideKeyBoard"), object: nil)
+
+//        NotificationCenter.default.addObserver(self, selector: #selector(changeCounter), name: NSNotification.Name(rawValue: NOTIFICATIONS.FETCH_ON_ACTION), object: nil)
         
+        var tempCountDict : Dictionary<Int,Int> = [:]
         
         if(isLeads)
         {
-            titleLabel.text = String(format: "Leads")
+            titleLabel.text = String(format: "LEADS")
         }
         else
         {
-            titleLabel.text = String(format: "Opportunities")
+            titleLabel.text = String(format: "OPPORTUNITIES")
         }
         
         
@@ -92,15 +103,15 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
         callsController = storyboard.instantiateViewController(withIdentifier :"callsController") as? CallsViewController
         callsController.isLeads = isLeads
         
-        
-        if(tempLeads.callCount! > 0)
-        {
-            callsController.title = String(format: "Calls(%d)", tempLeads.callCount!)
-        }
-        else
-        {
-            callsController.title = "Calls"
-        }
+//        if(tempLeads.callCount! > 0)
+//        {
+            callsController.title = String(format: " Calls( %d ) ", tempLeads.callCount!)
+            tempCountDict[0] = tempLeads.callCount!
+//        }
+//        else
+//        {
+//            callsController.title = "Calls"
+//        }
         
         callsController.statusID = 1
         callsController.tabID = self.tabID
@@ -110,14 +121,15 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
         offersController = storyboard.instantiateViewController(withIdentifier :"offersController") as? OffersViewController
         offersController.isLeads = isLeads
         
-        if(tempLeads.offerCount! > 0)
-        {
-            offersController.title = String(format: "Offers(%d)", tempLeads.offerCount!)
-        }
-        else
-        {
-            offersController.title = "Offers"
-        }
+//        if(tempLeads.offerCount! > 0)
+//        {
+            offersController.title = String(format: "Offers( %d )", tempLeads.offerCount!)
+            tempCountDict[1] = tempLeads.offerCount!
+//        }
+//        else
+//        {
+//            offersController.title = "Offers"
+//        }
 
 //        offersController.title = "Offers"
         offersController.statusID = 2
@@ -139,14 +151,15 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
         else
         {
 
-            if(tempLeads.siteVisitCount! > 0)
-            {
-                siteVisitsController.title = String(format: "Site Vists(%d)", tempLeads.siteVisitCount!)
-            }
-            else
-            {
-                siteVisitsController.title = "Site Vists"
-            }
+//            if(tempLeads.siteVisitCount! > 0)
+//            {
+                siteVisitsController.title = String(format: "Site Vists( %d )", tempLeads.siteVisitCount!)
+                tempCountDict[2] = tempLeads.siteVisitCount!
+//            }
+//            else
+//            {
+//                siteVisitsController.title = "Site Vists"
+//            }
 
             siteVisitsController.siteVisitsCount = tempLeads.siteVisitCount
         }
@@ -154,14 +167,15 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
 
         discountsController = storyboard.instantiateViewController(withIdentifier :"discountController") as? DiscountRequestsViewController
         
-        if(tempLeads.discountRequestCount! > 0)
-        {
-            discountsController.title = String(format: "Discount Requests(%d)", tempLeads.discountRequestCount!)
-        }
-        else
-        {
-            discountsController.title = "Discount Requests"
-        }
+//        if(tempLeads.discountRequestCount! > 0)
+//        {
+            discountsController.title = String(format: "Discount Requests( %d )", tempLeads.discountRequestCount!)
+            tempCountDict[3] = tempLeads.discountRequestCount!
+//        }
+//        else
+//        {
+//            discountsController.title = "Discount Requests"
+//        }
 
         discountsController.isLeads = isLeads
         discountsController.statusID = 4
@@ -171,14 +185,15 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
 
         otherTasksController = storyboard.instantiateViewController(withIdentifier :"otherTasksController") as? OtherTasksViewController
         
-        if(tempLeads.otherCount! > 0)
-        {
-            otherTasksController.title = String(format: "Other Tasks(%d)", tempLeads.otherCount!)
-        }
-        else
-        {
-            otherTasksController.title = "Other Tasks"
-        }
+//        if(tempLeads.otherCount! > 0)
+//        {
+            otherTasksController.title = String(format: "Other Tasks( %d )", tempLeads.otherCount!)
+            tempCountDict[4] = tempLeads.otherCount!
+//        }
+//        else
+//        {
+//            otherTasksController.title = "Other Tasks"
+//        }
 
         otherTasksController.isLeads = isLeads
         otherTasksController.statusID = 5
@@ -190,14 +205,15 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
         notInterestedController = storyboard.instantiateViewController(withIdentifier :"notInterestedController") as? NotInterestedViewController
         notInterestedController.title = "Not Interested"
         
-        if(tempLeads.notInterestedCount! > 0)
-        {
-            notInterestedController.title = String(format: "Not Interested(%d)", tempLeads.notInterestedCount!)
-        }
-        else
-        {
-            notInterestedController.title = "Not Interested"
-        }
+//        if(tempLeads.notInterestedCount! > 0)
+//        {
+            notInterestedController.title = String(format: "Not Interested( %d )", tempLeads.notInterestedCount!)
+            tempCountDict[5] = tempLeads.notInterestedCount!
+//        }
+//        else
+//        {
+//            notInterestedController.title = "Not Interested"
+//        }
         notInterestedController.statusID = 6
         notInterestedController.tabID = self.tabID
         notInterestedController.projectID = self.projectID
@@ -213,6 +229,13 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
         controllerArray.append(otherTasksController)
         controllerArray.append(notInterestedController)
         
+        callsController.addObservers()
+        offersController.addObservers()
+        siteVisitsController.addObservers()
+        discountsController.addObservers()
+        otherTasksController.addObservers()
+        notInterestedController.addObservers()
+
 //        let pagingViewController = FixedPagingViewController(viewControllers: controllerArray)
 //
 //        pagingViewController.menuItemSpacing = 0
@@ -242,14 +265,15 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
             .centerMenuItems(true),
             .menuItemWidthBasedOnTitleTextWidth(true),
         ]
-        var yValue = (titleView.frame.size.height + titleView.frame.origin.y + 0)
+        var yValue = (titleView.frame.size.height + titleView.frame.origin.y + 64)
         
-        if(PreSalesViewController.hasTopNotch){
-            yValue = (titleView.frame.size.height + titleView.frame.origin.y + 24)
+        if(RRUtilities.hasTopNotch){
+            yValue = (titleView.frame.size.height + titleView.frame.origin.y + 88)
         }
         // Initialize page menu with controller array, frame, and optional parameters
-        let pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: yValue, width: self.view.frame.size.width, height: self.view.frame.size.height - yValue), pageMenuOptions: parameters)
+        pageMenu = CAPSPageMenu(viewControllers: controllerArray, frame: CGRect(x: 0.0, y: yValue, width: self.view.frame.size.width, height: self.view.frame.size.height - yValue), pageMenuOptions: parameters)
         pageMenu.delegate = self
+        
         //(0.0, 0.0, self.view.frame.width, self.view.frame.height)
         // Lastly add page menu as subview of base view controller view
         // or use pageMenu controller in you view hierachy as desired
@@ -262,8 +286,137 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
         self.selectedPageMenuIndex = 0
         searchBar.delegate = self
         self.shouldHideSearchBar(shouldHide: false)
-    }
+        
+        for i in 0...5{
+//            print(i)
+            var parametersDict : Dictionary<String,Int> = [:]
+            parametersDict["pType"] = i
+            parametersDict["count"] = tempCountDict[i]
+            self.setCountOfControllers(dict: parametersDict)
+        }
+        self.updateDates()
+        
+        let image: UIImage? = UIImage.init(named: "calendar")?.withRenderingMode(.alwaysTemplate)
+        fromDateButton.setImage(image, for: .normal)
+        fromDateButton.imageView?.tintColor = UIColor.white
+        
+        let image1: UIImage? = UIImage.init(named: "calendar")?.withRenderingMode(.alwaysTemplate)
+        toDateButton.setImage(image1, for: .normal)
+        toDateButton.imageView?.tintColor = UIColor.white
 
+    }
+    func updateDates(){
+        
+        let date = RRUtilities.sharedInstance.getProspectDateStringFromSelectedDate(selectedDate: RRUtilities.sharedInstance.prospectsSDate)
+            
+            //RRUtilities.sharedInstance.getProspectDateStringFromServerDate(dateStr: RRUtilities.sharedInstance.prospectsStartDate)
+        if(RRUtilities.sharedInstance.isProspectToday(date: RRUtilities.sharedInstance.prospectsSDate)){
+            self.fromDateButton.setTitle("Today", for: .normal)
+        }
+        else{
+            self.fromDateButton.setTitle(date, for: .normal)
+        }
+        let toDate = RRUtilities.sharedInstance.getProspectDateStringFromSelectedDate(selectedDate: RRUtilities.sharedInstance.prospectsEDate)
+            //RRUtilities.sharedInstance.getProspectDateStringFromServerDate(dateStr: RRUtilities.sharedInstance.prospectsEndDate)
+
+        if(RRUtilities.sharedInstance.isProspectToday(date:  RRUtilities.sharedInstance.prospectsEDate)){
+            self.toDateButton.setTitle("Today", for: .normal)
+        }
+        else{
+            self.toDateButton.setTitle(toDate, for: .normal)
+        }
+    }
+    @objc func hideKeyBoard(){
+        self.searchBarCancelButtonClicked(searchBar)
+        self.view.endEditing(true)
+    }
+    func setCountOfControllers(dict : Dictionary<String, Int>){
+    
+        //            pageMenu.menuItemWidths[pType] = pageMenu.menuItemWidths[pType] + 30
+        
+        DispatchQueue.main.async {
+            sleep(UInt32(0.22))
+            let pType : Int = dict["pType"]!
+            
+            let count : Int = dict["count"]!
+
+            switch pType {
+            case 0:
+                if(count > 0){
+                    self.pageMenu.menuItems[pType].titleLabel!.text = String(format: "Calls(%d)", count)
+                }
+                else{
+                    self.pageMenu.menuItems[pType].titleLabel!.text = "Calls"
+                }
+                break
+            case 1:
+                if(count > 0){
+                    self.pageMenu.menuItems[pType].titleLabel!.text = String(format: "Offers(%d)", count)
+                }
+                else{
+                    self.pageMenu.menuItems[pType].titleLabel!.text = "Offers"
+                }
+                break
+            case 2:
+                if(count > 0){
+                    self.pageMenu.menuItems[pType].titleLabel!.text = String(format: "Site Visits(%d)", count)
+                }
+                else{
+                    self.pageMenu.menuItems[pType].titleLabel!.text = "Site Visits"
+                }
+                break
+            case 3:
+                if(count > 0){
+                    self.pageMenu.menuItems[pType].titleLabel!.text = String(format: "Discount Requests(%d)", count)
+                }
+                else{
+                    self.pageMenu.menuItems[pType].titleLabel!.text = "Discount Requests"
+                }
+                break
+            case 4:
+                if(count > 0){
+                    self.pageMenu.menuItems[pType].titleLabel!.text = String(format: "Other Tasks(%d)", count)
+                }
+                else{
+                    self.pageMenu.menuItems[pType].titleLabel!.text = "Other Tasks"
+                }
+                break
+            case 5:
+                if(count > 0){
+                    self.pageMenu.menuItems[pType].titleLabel!.text = String(format: "Not Interested(%d)", count)
+                }
+                else{
+                    self.pageMenu.menuItems[pType].titleLabel!.text = "Not Interested"
+                }
+                break
+            default:
+                break
+            }
+        }
+        
+        
+
+    }
+    
+    @objc func getProspectsAsPerStatus(_ notification: NSNotification){
+        
+        //        return
+        //        pageMenu.configureUserInterface()
+        //        return
+        //        pageMenu.menuItems[0].titleLabel!.text = "testser"
+        //        var controller = pageMenu.controllerArray[0] as! CallsViewController
+        //        controller.title = "tester"
+        //        pageMenu.controllerArray.insert(controller, at: 0)
+        //        pageMenu.resetTitleForControllerWithIndex()
+        
+        if let dict = notification.userInfo as Dictionary? {
+            //            pageMenu.setUpUserInterface()
+            //            pageMenu.menuScrollView.reloadInputViews()
+            
+            self.setCountOfControllers(dict: dict as! Dictionary<String, Int>)
+        }
+        
+    }
     @IBAction func showSearch(_ sender: Any) {
         self.shouldHideSearchBar(shouldHide: true)
     }
@@ -273,12 +426,58 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
         projectNameLabel.isHidden = shouldHide
         searchButton.isHidden = shouldHide
         searchBar.isHidden = !shouldHide
+        searchBar.placeholder = "Search By Name"
         searchBar.showsCancelButton = shouldHide
+        if(searchBar.isHidden){
+            searchBar.resignFirstResponder()
+        }
+        else{
+            searchBar.becomeFirstResponder()
+        }
     }
     @IBAction func close(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func back(_ sender: Any) {
+        
+        if(selectedPageMenuIndex == 0){
+            
+           let shouldGoBack = callsController.hideCheckBox()
+            if(shouldGoBack){
+                return
+            }
+        }
+        else if(selectedPageMenuIndex == 1){
+            let shouldGoBack = offersController.hideCheckBox()
+            if(shouldGoBack){
+                return
+            }
+        }
+        else if(selectedPageMenuIndex == 2){
+            let shouldGoBack = siteVisitsController.hideCheckBox()
+            if(shouldGoBack){
+                return
+            }
+        }
+        else if(selectedPageMenuIndex == 3){
+            let shouldGoBack = discountsController.hideCheckBox()
+            if(shouldGoBack){
+                return
+            }
+        }
+        else if(selectedPageMenuIndex == 4){
+            let shouldGoBack = otherTasksController.hideCheckBox()
+            if(shouldGoBack){
+                return
+            }
+        }
+        else if(selectedPageMenuIndex == 5){
+            let shouldGoBack = notInterestedController.hideCheckBox()
+            if(shouldGoBack){
+                return
+            }
+        }
+
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -360,7 +559,8 @@ class LeadsAndOpportunitiesViewController: UIViewController,UISearchBarDelegate,
         }
         
         self.shouldHideSearchBar(shouldHide: false)
-        
+        self.view.endEditing(true)
+        self.searchBar.resignFirstResponder()
     }
 
     

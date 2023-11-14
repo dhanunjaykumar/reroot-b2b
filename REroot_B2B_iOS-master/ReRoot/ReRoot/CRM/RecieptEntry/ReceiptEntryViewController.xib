@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Light.otf">
+            <string>Montserrat-Light</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReceiptEntryViewController" customModule="REroot" customModuleProvider="target">
+            <connections>
+                <outlet property="titleView" destination="5QV-Kl-dmm" id="d2S-O8-JMo"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5QV-Kl-dmm">
+                    <rect key="frame" x="0.0" y="27" width="375" height="60"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RECEIPT ENTRY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aI6-d2-LU5">
+                            <rect key="frame" x="120" y="19.5" width="135.5" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="135.5" id="I2u-vB-00o"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="11e-Ur-nUL">
+                            <rect key="frame" x="15" y="10" width="50" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="zhE-ec-QCt"/>
+                            </constraints>
+                            <state key="normal" image="back"/>
+                            <connections>
+                                <action selector="back:" destination="-1" eventType="touchUpInside" id="1zl-lv-Ljq"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GUq-Gx-ss1">
+                            <rect key="frame" x="300" y="10" width="50" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="aG0-0P-mvd"/>
+                            </constraints>
+                            <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" image="search"/>
+                            <connections>
+                                <action selector="search:" destination="-1" eventType="touchUpInside" id="WD8-Dt-tCl"/>
+                            </connections>
+                        </button>
+                        <searchBar contentMode="redraw" barStyle="black" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="Jza-fb-kGl">
+                            <rect key="frame" x="65" y="2" width="302" height="56"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="11e-Ur-nUL" firstAttribute="top" secondItem="5QV-Kl-dmm" secondAttribute="top" constant="10" id="2kn-8G-sxM"/>
+                        <constraint firstItem="Jza-fb-kGl" firstAttribute="leading" secondItem="11e-Ur-nUL" secondAttribute="trailing" id="E4o-oj-xXQ"/>
+                        <constraint firstItem="11e-Ur-nUL" firstAttribute="centerY" secondItem="5QV-Kl-dmm" secondAttribute="centerY" id="F6U-rW-Aoy"/>
+                        <constraint firstItem="Jza-fb-kGl" firstAttribute="trailing" secondItem="5QV-Kl-dmm" secondAttribute="trailingMargin" id="GFR-v4-48m"/>
+                        <constraint firstItem="11e-Ur-nUL" firstAttribute="top" secondItem="GUq-Gx-ss1" secondAttribute="top" id="Jll-ue-9Zn"/>
+                        <constraint firstAttribute="height" constant="60" id="Nle-Jm-wOf"/>
+                        <constraint firstItem="aI6-d2-LU5" firstAttribute="centerY" secondItem="5QV-Kl-dmm" secondAttribute="centerY" id="SvP-VR-Wq7"/>
+                        <constraint firstItem="Jza-fb-kGl" firstAttribute="centerY" secondItem="aI6-d2-LU5" secondAttribute="centerY" id="bKR-gP-052"/>
+                        <constraint firstAttribute="trailing" secondItem="GUq-Gx-ss1" secondAttribute="trailing" constant="25" id="gX2-BD-arP"/>
+                        <constraint firstItem="11e-Ur-nUL" firstAttribute="baseline" secondItem="GUq-Gx-ss1" secondAttribute="baseline" id="oqy-uh-C1j"/>
+                        <constraint firstItem="aI6-d2-LU5" firstAttribute="centerX" secondItem="5QV-Kl-dmm" secondAttribute="centerX" id="uEt-m6-w0O"/>
+                        <constraint firstItem="11e-Ur-nUL" firstAttribute="leading" secondItem="5QV-Kl-dmm" secondAttribute="leading" constant="15" id="wdY-qc-Uyn"/>
+                        <constraint firstItem="11e-Ur-nUL" firstAttribute="firstBaseline" secondItem="GUq-Gx-ss1" secondAttribute="firstBaseline" id="wvR-fb-GAQ"/>
+                        <constraint firstItem="aI6-d2-LU5" firstAttribute="centerY" secondItem="GUq-Gx-ss1" secondAttribute="centerY" id="y3r-Fe-Dn0"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5QV-Kl-dmm" secondAttribute="trailing" id="6sD-GB-nG3"/>
+                <constraint firstItem="5QV-Kl-dmm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="HOJ-35-oax"/>
+                <constraint firstItem="5QV-Kl-dmm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="7" id="rO8-Nt-3E0"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="130.40000000000001" y="152.47376311844079"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="back" width="24" height="24"/>
+        <image name="search" width="24" height="24"/>
+    </resources>
+</document>

@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_ReRootVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_ReRootVersionString[];
+FOUNDATION_EXPORT double Pods_RErootVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_RErootVersionString[];
 

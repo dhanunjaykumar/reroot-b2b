@@ -1,54 +1,795 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Driver" representedClassName="Driver" syncable="YES" codeGenerationType="class"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ApprovalHistory" representedClassName="ApprovalHistory" syncable="YES" codeGenerationType="class">
+        <attribute name="approval_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="approval_type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="approver_email" optional="YES" attributeType="String"/>
+        <attribute name="approver_id" optional="YES" attributeType="String"/>
+        <attribute name="approver_userinfo_email" optional="YES" attributeType="String"/>
+        <attribute name="approver_userinfo_id" optional="YES" attributeType="String"/>
+        <attribute name="approver_userinfo_name" optional="YES" attributeType="String"/>
+        <attribute name="approver_userinfo_phone" optional="YES" attributeType="String"/>
+        <attribute name="created" optional="YES" attributeType="String"/>
+        <attribute name="lastModified" optional="YES" attributeType="String"/>
+        <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="orderID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rejectReason" optional="YES" attributeType="String"/>
+        <attribute name="remarks" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ApprovalPricingInfo" representedClassName="ApprovalPricingInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="amountDue" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="amountPayable" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="amountReceived" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="approval_id" optional="YES" attributeType="String"/>
+        <attribute name="approval_type" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="assignmentCharge" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="assignmentChargeDebitNoteReference" optional="YES" attributeType="String"/>
+        <attribute name="assignmentChargeReceiptReference" optional="YES" attributeType="String"/>
+        <attribute name="assignmentChargeTax" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="cancellationCharge" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="cancellationChargeTax" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="demandLetterAmount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="isIncoming" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isTaxAmountRefund" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="taxAmountRefund" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="taxPaid" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="taxReceived" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="transferChargePayableBy" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="waiveOffCharges" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Approvals" representedClassName="Approvals" syncable="YES" codeGenerationType="class">
+        <attribute name="agreement_collected_date" optional="YES" attributeType="String"/>
+        <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="approval_item_status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="approval_type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="approver_email" optional="YES" attributeType="String"/>
+        <attribute name="approver_id" optional="YES" attributeType="String"/>
+        <attribute name="approver_userinfo_email" optional="YES" attributeType="String"/>
+        <attribute name="approver_userinfo_id" optional="YES" attributeType="String"/>
+        <attribute name="approver_userinfo_name" optional="YES" attributeType="String"/>
+        <attribute name="approver_userinfo_phone" optional="YES" attributeType="String"/>
+        <attribute name="blockId" optional="YES" attributeType="String"/>
+        <attribute name="blockName" optional="YES" attributeType="String"/>
+        <attribute name="bookingId" optional="YES" attributeType="String"/>
+        <attribute name="cancel_reason" optional="YES" attributeType="String"/>
+        <attribute name="cancellation_date" optional="YES" attributeType="String"/>
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="created_on" optional="YES" attributeType="String"/>
+        <attribute name="creditOrDebitTax" optional="YES" attributeType="String"/>
+        <attribute name="customer_email" optional="YES" attributeType="String"/>
+        <attribute name="customer_id" optional="YES" attributeType="String"/>
+        <attribute name="customer_name" optional="YES" attributeType="String"/>
+        <attribute name="customer_phone" optional="YES" attributeType="String"/>
+        <attribute name="descp" optional="YES" attributeType="String"/>
+        <attribute name="dueDate" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="is_transfer_unit" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isIncoming" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="kind" optional="YES" attributeType="String"/>
+        <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="narration" optional="YES" attributeType="String"/>
+        <attribute name="new_customer_id" optional="YES" attributeType="String"/>
+        <attribute name="new_customer_name" optional="YES" attributeType="String"/>
+        <attribute name="pdc_return_date" optional="YES" attributeType="String"/>
+        <attribute name="projectId" optional="YES" attributeType="String"/>
+        <attribute name="projectName" optional="YES" attributeType="String"/>
+        <attribute name="reference_item_id" optional="YES" attributeType="String"/>
+        <attribute name="regInfo_id" optional="YES" attributeType="String"/>
+        <attribute name="regInfo_userEmail" optional="YES" attributeType="String"/>
+        <attribute name="regInfo_userName" optional="YES" attributeType="String"/>
+        <attribute name="regInfo_userPhone" optional="YES" attributeType="String"/>
+        <attribute name="requester_email" optional="YES" attributeType="String"/>
+        <attribute name="requester_id" optional="YES" attributeType="String"/>
+        <attribute name="requester_userinfo_email" optional="YES" attributeType="String"/>
+        <attribute name="requester_userinfo_id" optional="YES" attributeType="String"/>
+        <attribute name="requester_userinfo_name" optional="YES" attributeType="String"/>
+        <attribute name="requester_userinfo_phone" optional="YES" attributeType="String"/>
+        <attribute name="scheme" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="towerId" optional="YES" attributeType="String"/>
+        <attribute name="towerName" optional="YES" attributeType="String"/>
+        <attribute name="transfer_date" optional="YES" attributeType="String"/>
+        <attribute name="trasnsfer_unit_description" optional="YES" attributeType="String"/>
+        <attribute name="trasnsfer_unit_id" optional="YES" attributeType="String"/>
+        <attribute name="trasnsfer_unit_unitDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="trasnsfer_unit_unitIndex" optional="YES" attributeType="String"/>
+        <attribute name="unit" optional="YES" attributeType="String"/>
+        <attribute name="unit_type_id" optional="YES" attributeType="String"/>
+        <attribute name="unit_type_name" optional="YES" attributeType="String"/>
+        <attribute name="unitDescription" optional="YES" attributeType="String"/>
+        <attribute name="unitDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="unitIndex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updateByDate" optional="YES" attributeType="String"/>
+        <relationship name="billingInfos" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="BillingInfo"/>
+        <relationship name="history" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ApprovalHistory"/>
+        <relationship name="pricingInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ApprovalPricingInfo"/>
+        <relationship name="updateBy" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="UpdateBy"/>
+    </entity>
+    <entity name="AWS_S3Config" representedClassName="AWS_S3Config" syncable="YES" codeGenerationType="class">
+        <attribute name="accessKeyId" optional="YES" attributeType="String"/>
+        <attribute name="bucket" optional="YES" attributeType="String"/>
+        <attribute name="region" optional="YES" attributeType="String"/>
+        <attribute name="secretAccessKey" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="BillingInfo" representedClassName="BillingInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="approval_id" optional="YES" attributeType="String"/>
+        <attribute name="approval_type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="billingElement_agreeValItem" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="billingElement_id" optional="YES" attributeType="String"/>
+        <attribute name="billingElement_name" optional="YES" attributeType="String"/>
+        <attribute name="billingElement_type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="counter" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="discountedAmt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="discountedPercent" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="discountedRate" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="discountOnRate" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isIncoming" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="nbilling_agreeValItem" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nbilling_element_type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="nbilling_id" optional="YES" attributeType="String"/>
+        <attribute name="nbilling_name" optional="YES" attributeType="String"/>
+        <attribute name="orderID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="qty" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rate" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="sub_BillingElement_name" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Blocks" representedClassName="Blocks" syncable="YES" codeGenerationType="class">
+        <attribute name="builtUpArea" optional="YES" attributeType="Transformable"/>
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="landArea" optional="YES" attributeType="Transformable"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="numberOfTowers" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberOfUnits" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="project" optional="YES" attributeType="String"/>
+        <attribute name="short_name" optional="YES" attributeType="String"/>
+        <attribute name="stage" optional="YES" attributeType="String"/>
+        <attribute name="stats" optional="YES" attributeType="Transformable"/>
+        <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="superBuiltUpArea" optional="YES" attributeType="Transformable"/>
+        <attribute name="towers" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="towersCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updatedBy" optional="YES" attributeType="Transformable"/>
+        <relationship name="blockStats" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TempObj" inverseName="blocks" inverseEntity="TempObj"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="BookingFormClients" representedClassName="BookingFormClients" syncable="YES" codeGenerationType="class">
+        <attribute name="client" optional="YES" attributeType="String"/>
+        <attribute name="customerId" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="share" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ChequeBank" representedClassName="ChequeBank" syncable="YES" codeGenerationType="class">
+        <attribute name="bankAddress" optional="YES" attributeType="String"/>
+        <attribute name="bankBranch" optional="YES" attributeType="String"/>
+        <attribute name="bankIfscCode" optional="YES" attributeType="String"/>
+        <attribute name="bankName" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Commissions" representedClassName="Commissions" syncable="YES" codeGenerationType="class">
+        <attribute name="commissionID" optional="YES" attributeType="String"/>
+        <attribute name="commissionName" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isAgent" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="kind" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CosReceipts" representedClassName="CosReceipts" syncable="YES" codeGenerationType="class">
+        <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="bankAddress" optional="YES" attributeType="String"/>
+        <attribute name="bankBranch" optional="YES" attributeType="String"/>
+        <attribute name="bankIfscCode" optional="YES" attributeType="String"/>
+        <attribute name="chequeBankName" optional="YES" attributeType="String"/>
+        <attribute name="chequeDate" optional="YES" attributeType="String"/>
+        <attribute name="depositDate" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="paymentDescp" optional="YES" attributeType="String"/>
+        <attribute name="paymentMode" optional="YES" attributeType="String"/>
+        <attribute name="paymentTowards" optional="YES" attributeType="String"/>
+        <attribute name="receiptNumber" optional="YES" attributeType="String"/>
+        <attribute name="receiptType" optional="YES" attributeType="String"/>
+        <attribute name="referenceNumber" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Currency" representedClassName="Currency" syncable="YES" codeGenerationType="class">
+        <attribute name="currencyName" optional="YES" attributeType="String"/>
+        <attribute name="currencySymbol" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="serverID" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CustomerBudgets" representedClassName="CustomerBudgets" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="CustomerOutstanding" representedClassName="CustomerOutstanding" syncable="YES" codeGenerationType="class">
+        <attribute name="blockId" optional="YES" attributeType="String"/>
+        <attribute name="blockName" optional="YES" attributeType="String"/>
+        <attribute name="bookingFormId" optional="YES" attributeType="String"/>
+        <attribute name="cosCustomerId" optional="YES" attributeType="String"/>
+        <attribute name="customerEmail" optional="YES" attributeType="String"/>
+        <attribute name="customerId" optional="YES" attributeType="String"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="customerPhoneCode" optional="YES" attributeType="String"/>
+        <attribute name="customerPhoneNumber" optional="YES" attributeType="String"/>
+        <attribute name="demandLetterAmount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="demandLetterTax" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="description1" optional="YES" attributeType="String"/>
+        <attribute name="floorDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="floorIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="greaterThanNinetyDaysAmt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lessThanThirtyDaysAmt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="outstandingsInRangs" optional="YES" attributeType="Transformable" customClassName="[Double]"/>
+        <attribute name="projectId" optional="YES" attributeType="String"/>
+        <attribute name="projectName" optional="YES" attributeType="String"/>
+        <attribute name="sixtyToNinetyDaysAmt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="thirtyToSixtyDaysAmt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="totalReceipt" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="towerId" optional="YES" attributeType="String"/>
+        <attribute name="towerName" optional="YES" attributeType="String"/>
+        <attribute name="unitDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="unitId" optional="YES" attributeType="String"/>
+        <attribute name="unitNoIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="cosReceipts" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CosReceipts"/>
+    </entity>
+    <entity name="Driver" representedClassName="Driver" syncable="YES" codeGenerationType="class">
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="vehicle" optional="YES" attributeType="String"/>
+        <relationship name="vehicles" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vehicle" inverseName="drivers" inverseEntity="Vehicle"/>
+    </entity>
+    <entity name="Employee" representedClassName="Employee" syncable="YES" codeGenerationType="class">
+        <attribute name="blocks" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="empId" optional="YES" attributeType="String"/>
+        <attribute name="empStatus" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="projects" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="roles" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="[String]"/>
+        <attribute name="towers" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+    </entity>
+    <entity name="EnquirySources" representedClassName="EnquirySources" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="FetchedProjects" representedClassName="FetchedProjects" syncable="YES" codeGenerationType="class">
+        <attribute name="projectId" optional="YES" attributeType="String"/>
+        <attribute name="reFetch" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="projectId"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="HOFailedImages" representedClassName="HOFailedImages" syncable="YES" codeGenerationType="class">
+        <attribute name="itemID" optional="YES" attributeType="String"/>
+        <attribute name="localPath" optional="YES" attributeType="String"/>
+        <attribute name="s3Url" optional="YES" attributeType="String"/>
+        <attribute name="syncDirty" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="LandOwner" representedClassName="LandOwner" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="contactPerson" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="parentId" optional="YES" attributeType="String"/>
+        <attribute name="phoneNo" optional="YES" attributeType="String"/>
+        <attribute name="project" optional="YES" attributeType="String"/>
+        <attribute name="shortName" optional="YES" attributeType="String"/>
+        <relationship name="unit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LandOwner" inverseName="unit" inverseEntity="LandOwner"/>
+    </entity>
+    <entity name="MissedImages" representedClassName="MissedImages" syncable="YES" codeGenerationType="class">
+        <attribute name="handOverItemId" optional="YES" attributeType="String"/>
+        <attribute name="imagePath" optional="YES" attributeType="String"/>
+        <attribute name="unitID" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="ModifiedHandOverItem" representedClassName="ModifiedHandOverItem" syncable="YES" codeGenerationType="class"/>
+    <entity name="ModulePermissions" representedClassName="ModulePermissions" syncable="YES" codeGenerationType="class">
+        <attribute name="bit" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="page" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="NewEnquirySources" representedClassName="NewEnquirySources" syncable="YES" codeGenerationType="class">
+        <attribute name="displayName" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Notifications" representedClassName="Notifications" syncable="YES" codeGenerationType="class">
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="created_at" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="is_read" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isAccepted" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="isPriority" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="msg" optional="YES" attributeType="String"/>
+        <attribute name="prospectType" optional="YES" attributeType="String"/>
+        <attribute name="refererenceItem" optional="YES" attributeType="String"/>
+        <attribute name="refererenceKind" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="updated_at" optional="YES" attributeType="String"/>
+        <attribute name="user_id" optional="YES" attributeType="String"/>
+        <attribute name="v" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="NotInterestedCause" representedClassName="NotInterestedCause" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="OtherPremiums" representedClassName="OtherPremiums" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="parentId" optional="YES" attributeType="String"/>
+        <relationship name="unitPremiums" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Units"/>
+    </entity>
+    <entity name="PaymentTowards" representedClassName="PaymentTowards" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Permissions" representedClassName="Permissions" syncable="YES" codeGenerationType="class">
+        <attribute name="bit" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String"/>
+        <attribute name="module" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="page" optional="YES" attributeType="String"/>
+        <relationship name="modules" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ModulePermissions"/>
+    </entity>
+    <entity name="PresalesPermissions" representedClassName="PresalesPermissions" syncable="YES" codeGenerationType="class">
+        <attribute name="calls" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="discountRequests" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="notInterested" optional="YES" attributeType="Boolean" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="offers" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="otherTasks" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="siteVisits" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    </entity>
     <entity name="Project" representedClassName="Project" syncable="YES">
-        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="builtUpArea" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="company_group" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="far" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="images" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
-        <attribute name="imagesTemp" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
-        <attribute name="incharge" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="landArea" optional="YES" attributeType="Transformable" customClassName="Dictionay&lt;String,Any&gt;" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="orderId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="proj_code" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="proj_type" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sanctions" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="segment" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="short_name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="stats" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="superBuiltUpArea" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="updateBy" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <relationship name="proStat" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TempObj" inverseName="newRelationship" inverseEntity="TempObj" syncable="YES"/>
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="blocksCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="builtUpArea" optional="YES" attributeType="Transformable"/>
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="company" optional="YES" attributeType="String"/>
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="far" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="images" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;"/>
+        <attribute name="imagesTemp" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;"/>
+        <attribute name="incharge" optional="YES" attributeType="String"/>
+        <attribute name="info" optional="YES" attributeType="String"/>
+        <attribute name="landArea" optional="YES" attributeType="Transformable" customClassName="Dictionay&lt;String,Any&gt;"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="proj_code" optional="YES" attributeType="String"/>
+        <attribute name="proj_type" optional="YES" attributeType="String"/>
+        <attribute name="sanctions" optional="YES" attributeType="Transformable"/>
+        <attribute name="segment" optional="YES" attributeType="String"/>
+        <attribute name="short_name" optional="YES" attributeType="String"/>
+        <attribute name="state" optional="YES" attributeType="String"/>
+        <attribute name="stats" optional="YES" attributeType="Transformable"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="superBuiltUpArea" optional="YES" attributeType="Transformable"/>
+        <attribute name="towersCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="unitsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updateBy" optional="YES" attributeType="Transformable"/>
+        <relationship name="proStat" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TempObj" inverseName="newRelationship" inverseEntity="TempObj"/>
+    </entity>
+    <entity name="ReceiptEntriesCount" representedClassName="ReceiptEntriesCount" syncable="YES" codeGenerationType="class">
+        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="tab" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalcollected" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="ReceiptEntry" representedClassName="ReceiptEntry" syncable="YES" codeGenerationType="class">
+        <attribute name="allocationBalance" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="allocationStatus" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="amount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="baseAmount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="block" optional="YES" attributeType="String"/>
+        <attribute name="bounceCharges" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="bounceCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="chequeDate" optional="YES" attributeType="String"/>
+        <attribute name="chequeReturnDate" optional="YES" attributeType="String"/>
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="createdBy" optional="YES" attributeType="String"/>
+        <attribute name="createdDate" optional="YES" attributeType="String"/>
+        <attribute name="curAmount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="currency" optional="YES" attributeType="String"/>
+        <attribute name="customer_customerID" optional="YES" attributeType="String"/>
+        <attribute name="customerEmail" optional="YES" attributeType="String"/>
+        <attribute name="customerId" optional="YES" attributeType="String"/>
+        <attribute name="customerName" optional="YES" attributeType="String"/>
+        <attribute name="customerPhone" optional="YES" attributeType="String"/>
+        <attribute name="depositDate" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="images" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="paymentMode" optional="YES" attributeType="String"/>
+        <attribute name="paymentTowards" optional="YES" attributeType="String"/>
+        <attribute name="phoneCode" optional="YES" attributeType="String"/>
+        <attribute name="project" optional="YES" attributeType="String"/>
+        <attribute name="projectBank" optional="YES" attributeType="String"/>
+        <attribute name="projectName" optional="YES" attributeType="String"/>
+        <attribute name="receiptLocalId" optional="YES" attributeType="String"/>
+        <attribute name="receiptNumber" optional="YES" attributeType="String"/>
+        <attribute name="receiptType" optional="YES" attributeType="String"/>
+        <attribute name="referenceNumber" optional="YES" attributeType="String"/>
+        <attribute name="representStatus" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="returnReason" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="tab" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="taxAmount" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="tower" optional="YES" attributeType="String"/>
+        <attribute name="unitDescription" optional="YES" attributeType="String"/>
+        <attribute name="unitDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="unitId" optional="YES" attributeType="String"/>
+        <attribute name="unitIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="unitStatus" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updateByDate" optional="YES" attributeType="String"/>
+        <attribute name="v" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="chequeBank" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChequeBank"/>
+        <relationship name="updateBy" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="UpdateBy"/>
+    </entity>
+    <entity name="Reviews" representedClassName="Reviews" syncable="YES" codeGenerationType="class">
+        <attribute name="checked" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="createdDate" optional="YES" attributeType="String"/>
+        <attribute name="days" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="level" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="reviewStatus" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="reviewType" optional="YES" attributeType="String"/>
+        <attribute name="role" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="RRUser" representedClassName="RRUser" syncable="YES" codeGenerationType="class">
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="company_group_name" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="phone" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 32" valueTransformerName="" usesScalarValueType="YES" customClassName=".USER_ROLE_TYPE"/>
+        <attribute name="typeName" optional="YES" attributeType="String"/>
+        <relationship name="presales" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PresalesPermissions"/>
+        <relationship name="userRoles" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="RRUserRole"/>
+    </entity>
+    <entity name="RRUserRole" representedClassName="RRUserRole" syncable="YES" codeGenerationType="class">
+        <attribute name="create" optional="YES" attributeType="String"/>
+        <attribute name="delete" optional="YES" attributeType="String"/>
+        <attribute name="edit" optional="YES" attributeType="String"/>
+        <attribute name="isOrgRole" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="permissionsID" optional="YES" attributeType="String"/>
+        <attribute name="roleID" optional="YES" attributeType="String"/>
+        <attribute name="view" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Schemes" representedClassName="Schemes" syncable="YES" codeGenerationType="class">
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="description1" optional="YES" attributeType="String"/>
+        <attribute name="endDate" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="project" optional="YES" attributeType="String"/>
+        <attribute name="startDate" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SoldUnitProjects" representedClassName="SoldUnitProjects" syncable="YES" codeGenerationType="class">
+        <attribute name="projectID" optional="YES" attributeType="String"/>
+        <attribute name="projectName" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="SoldUnits" representedClassName="SoldUnits" syncable="YES" codeGenerationType="class">
+        <attribute name="blockId" optional="YES" attributeType="String"/>
+        <attribute name="blockIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="blockingReason" optional="YES" attributeType="String"/>
+        <attribute name="blockName" optional="YES" attributeType="String"/>
+        <attribute name="bookingform" optional="YES" attributeType="String"/>
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="customer" optional="YES" attributeType="String"/>
+        <attribute name="didUploadAllImages" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="facing" optional="YES" attributeType="String"/>
+        <attribute name="floorDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="floorIndex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="floorPremium" optional="YES" attributeType="String"/>
+        <attribute name="handOverStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isOffline" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="landowner" optional="YES" attributeType="String"/>
+        <attribute name="manageUnitStatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="otherPremiums" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="projectId" optional="YES" attributeType="String"/>
+        <attribute name="projectName" optional="YES" attributeType="String"/>
+        <attribute name="sectionIndex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sectionTitle" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="syncDirty" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="towerForFloat" optional="YES" attributeType="String"/>
+        <attribute name="towerId" optional="YES" attributeType="String"/>
+        <attribute name="towerIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="towerName" optional="YES" attributeType="String"/>
+        <attribute name="unitDescription" optional="YES" attributeType="String"/>
+        <attribute name="unitDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="unitIndex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="unitTypeID" optional="YES" attributeType="String"/>
+        <attribute name="unitTypeName" optional="YES" attributeType="String"/>
+        <relationship name="handOverHistory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UnitHandOverHistory"/>
+        <relationship name="handOverUnits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TowerHandOverItems"/>
+        <relationship name="towerHandOverUnits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TowerHandOverItems"/>
+        <relationship name="updateBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UpdateBy"/>
+    </entity>
+    <entity name="SoldUnitTowers" representedClassName="SoldUnitTowers" syncable="YES" codeGenerationType="class">
+        <attribute name="blockIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="blockName" optional="YES" attributeType="String"/>
+        <attribute name="project" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="projectId" optional="YES" attributeType="String"/>
+        <attribute name="towerIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="towerName" optional="YES" attributeType="String"/>
     </entity>
     <entity name="SourceStatuses" representedClassName="SourceStatuses" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sType" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="label" optional="YES" attributeType="String"/>
+        <attribute name="sType" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="SubStatuses" representedClassName="SubStatuses" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="parentId" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sType" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="label" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="parentId" optional="YES" attributeType="String"/>
+        <attribute name="sType" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="TempObj" representedClassName="TempObj" syncable="YES" codeGenerationType="class">
-        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="proStat" inverseEntity="Project" syncable="YES"/>
+        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="blocks" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Blocks" inverseName="blockStats" inverseEntity="Blocks"/>
+        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="proStat" inverseEntity="Project"/>
+    </entity>
+    <entity name="TowerHandOverItems" representedClassName="TowerHandOverItems" syncable="YES" codeGenerationType="class">
+        <attribute name="company" optional="YES" attributeType="String"/>
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="complaintDate" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="complaintDesc" optional="YES" attributeType="String"/>
+        <attribute name="complaintimgUrls" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="complaintlocation" optional="YES" attributeType="String"/>
+        <attribute name="creviewLevels" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="enabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="groupdId" optional="YES" attributeType="String"/>
+        <attribute name="groupdName" optional="YES" attributeType="String"/>
+        <attribute name="handOverStatus" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="hasOfflineImages" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="ireviewLevels" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isNewItem" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isOffline" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isTowerHandOver" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isUploaded" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="itemId" optional="YES" attributeType="String"/>
+        <attribute name="mandatory" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="offlineImges" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="tower" optional="YES" attributeType="String"/>
+        <attribute name="unit" optional="YES" attributeType="String"/>
+        <attribute name="updatedOn" optional="YES" attributeType="String"/>
+        <relationship name="customerReviews" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reviews"/>
+        <relationship name="internalReviews" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Reviews"/>
+        <relationship name="itemHistory" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UnitHandOverItemHistory"/>
+    </entity>
+    <entity name="Towers" representedClassName="Towers" syncable="YES" codeGenerationType="class">
+        <attribute name="block" optional="YES" attributeType="String"/>
+        <attribute name="blockName" optional="YES" attributeType="String"/>
+        <attribute name="builtUpArea" optional="YES" attributeType="Transformable"/>
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="handedoveritems" optional="YES" attributeType="Transformable"/>
+        <attribute name="hasImages" optional="YES" attributeType="Boolean"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="images" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="landArea" optional="YES" attributeType="Transformable"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="project" optional="YES" attributeType="String"/>
+        <attribute name="short_name" optional="YES" attributeType="String"/>
+        <attribute name="starting_floor" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="superBuiltUpArea" optional="YES" attributeType="Transformable"/>
+        <attribute name="total_floors" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="towerIndex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="towerType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="units_per_floor" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="unitsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="updatedBy" optional="YES" attributeType="Transformable"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="UnitCarParks" representedClassName="UnitCarParks" syncable="YES" codeGenerationType="class">
+        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="cType" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="parentId" optional="YES" attributeType="String"/>
+        <relationship name="unit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Units" inverseName="carParkings" inverseEntity="Units"/>
+    </entity>
+    <entity name="UnitHandOverHistory" representedClassName="UnitHandOverHistory" syncable="YES" codeGenerationType="class">
+        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="modifiedDate" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="user" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="UnitHandOverItemHistory" representedClassName="UnitHandOverItemHistory" syncable="YES" codeGenerationType="class">
+        <attribute name="handOverStatus" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imgUrl" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="itemDescription" optional="YES" attributeType="String"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
+        <attribute name="modifiedDate" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="user" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Units" representedClassName="Units" syncable="YES" codeGenerationType="class">
+        <attribute name="agreeValItemRate" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="balconyArea" optional="YES" attributeType="Decimal" defaultValueString="0"/>
+        <attribute name="balconyAreaUOM" optional="YES" attributeType="String"/>
+        <attribute name="bathRooms" optional="YES" attributeType="Decimal" defaultValueString="0"/>
+        <attribute name="bedRooms" optional="YES" attributeType="Decimal" defaultValueString="0"/>
+        <attribute name="billingElementForPricing" optional="YES" attributeType="Transformable"/>
+        <attribute name="block" optional="YES" attributeType="String"/>
+        <attribute name="blockingReason" optional="YES" attributeType="String"/>
+        <attribute name="blockName" optional="YES" attributeType="String"/>
+        <attribute name="bookingform" optional="YES" attributeType="Transformable"/>
+        <attribute name="bookingFormID" optional="YES" attributeType="String"/>
+        <attribute name="bookingFormSatus" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="capetAreaUOM" optional="YES" attributeType="String"/>
+        <attribute name="carParksCount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="carpetArea" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="clientId" optional="YES" attributeType="String"/>
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="description1" optional="YES" attributeType="String"/>
+        <attribute name="facing" optional="YES" attributeType="String"/>
+        <attribute name="floor" optional="YES" attributeType="Transformable"/>
+        <attribute name="floorDisplayName" optional="YES" attributeType="String"/>
+        <attribute name="floorIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="floorPlanImages" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="floorPremium" optional="YES" attributeType="String"/>
+        <attribute name="gst" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="handOverStatus" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hasImages" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="hasLandOwner" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="manageUnitStatus" optional="YES" attributeType="Integer 16" usesScalarValueType="YES"/>
+        <attribute name="manageUnitStatusStr" optional="YES" attributeType="String"/>
+        <attribute name="otherPremiums" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="otherPremiumsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="premiumRate" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="project" optional="YES" attributeType="String"/>
+        <attribute name="rate" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="salesPersonEmail" optional="YES" attributeType="String"/>
+        <attribute name="salesPersonId" optional="YES" attributeType="String"/>
+        <attribute name="salesPersonUserInfoEmail" optional="YES" attributeType="String"/>
+        <attribute name="salesPersonUserInfoId" optional="YES" attributeType="String"/>
+        <attribute name="salesPersonUserInfoName" optional="YES" attributeType="String"/>
+        <attribute name="salesPersonUserInfoPhone" optional="YES" attributeType="String"/>
+        <attribute name="salevalue" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="schemes" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="sectionIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sectionTitle" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="superBuiltUpArea" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
+        <attribute name="superBuiltUpAreaUOM" optional="YES" attributeType="String"/>
+        <attribute name="totalCost" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="tower" optional="YES" attributeType="String"/>
+        <attribute name="towerImageExist" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="towerName" optional="YES" attributeType="String"/>
+        <attribute name="towerType" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="type" optional="YES" attributeType="Binary"/>
+        <attribute name="typeName" optional="YES" attributeType="String"/>
+        <attribute name="unitDisplayName" attributeType="String"/>
+        <attribute name="unitIndex" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="unitNo" optional="YES" attributeType="Transformable"/>
+        <attribute name="updatedBy" optional="YES" attributeType="Transformable"/>
+        <attribute name="v" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
+        <relationship name="allOtherPremiums" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="OtherPremiums"/>
+        <relationship name="bookedClient" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BookingFormClients"/>
+        <relationship name="carParkings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="UnitCarParks" inverseName="unit" inverseEntity="UnitCarParks"/>
+        <relationship name="extraPremiums" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Units" inverseName="extraPremiums" inverseEntity="Units"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LandOwner"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="UnitStatus" representedClassName="UnitStatus" syncable="YES" codeGenerationType="class">
+        <attribute name="color" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="UnitTypes" representedClassName="UnitTypes" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="UpdateBy" representedClassName="UpdateBy" syncable="YES" codeGenerationType="class">
+        <attribute name="approval_id" optional="YES" attributeType="String"/>
+        <attribute name="approval_type" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="String"/>
+        <attribute name="descp" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isApproval" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="parentId" optional="YES" attributeType="String"/>
+        <attribute name="src" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="user" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="Vehicle" representedClassName="Vehicle" syncable="YES" codeGenerationType="class">
+        <attribute name="company_group" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="plateNo" optional="YES" attributeType="String"/>
+        <attribute name="projectId" optional="YES" attributeType="String"/>
+        <attribute name="projectName" optional="YES" attributeType="String"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="vehicleType" optional="YES" attributeType="String"/>
+        <relationship name="drivers" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Driver" inverseName="vehicles" inverseEntity="Driver"/>
     </entity>
     <elements>
-        <element name="Driver" positionX="-513" positionY="-126" width="128" height="45"/>
-        <element name="Project" positionX="-686" positionY="-279" width="128" height="405"/>
-        <element name="TempObj" positionX="-333" positionY="-36" width="128" height="88"/>
-        <element name="SourceStatuses" positionX="-513" positionY="-126" width="128" height="90"/>
-        <element name="SubStatuses" positionX="-504" positionY="-117" width="128" height="120"/>
+        <element name="ApprovalHistory" positionX="-684" positionY="-279" width="128" height="270"/>
+        <element name="ApprovalPricingInfo" positionX="-666" positionY="-153" width="128" height="330"/>
+        <element name="Approvals" positionX="-684" positionY="-171" width="128" height="1033"/>
+        <element name="AWS_S3Config" positionX="-684" positionY="-171" width="128" height="105"/>
+        <element name="BillingInfo" positionX="-197.1015625" positionY="146.87890625" width="128" height="373"/>
+        <element name="Blocks" positionX="-666" positionY="-153" width="128" height="315"/>
+        <element name="BookingFormClients" positionX="-1046.390625" positionY="-289.875" width="128" height="133"/>
+        <element name="ChequeBank" positionX="-648" positionY="-135" width="128" height="105"/>
+        <element name="Commissions" positionX="-684" positionY="-171" width="128" height="135"/>
+        <element name="CosReceipts" positionX="-666" positionY="-153" width="128" height="268"/>
+        <element name="Currency" positionX="-675" positionY="-162" width="128" height="105"/>
+        <element name="CustomerBudgets" positionX="-648" positionY="-135" width="128" height="73"/>
+        <element name="CustomerOutstanding" positionX="-675" positionY="-162" width="128" height="478"/>
+        <element name="Driver" positionX="-504.69140625" positionY="-138.74609375" width="128" height="150"/>
+        <element name="Employee" positionX="-684" positionY="-171" width="128" height="178"/>
+        <element name="EnquirySources" positionX="-684" positionY="-171" width="128" height="75"/>
+        <element name="FetchedProjects" positionX="-684" positionY="-171" width="128" height="75"/>
+        <element name="HOFailedImages" positionX="-675" positionY="-162" width="128" height="105"/>
+        <element name="LandOwner" positionX="-666" positionY="-153" width="128" height="195"/>
+        <element name="MissedImages" positionX="-684" positionY="-171" width="128" height="90"/>
+        <element name="ModifiedHandOverItem" positionX="-684" positionY="-171" width="128" height="45"/>
+        <element name="ModulePermissions" positionX="-675" positionY="-162" width="128" height="90"/>
+        <element name="NewEnquirySources" positionX="-684" positionY="-171" width="128" height="90"/>
+        <element name="Notifications" positionX="-684" positionY="-171" width="128" height="253"/>
+        <element name="NotInterestedCause" positionX="-846" positionY="-162" width="128" height="88"/>
+        <element name="OtherPremiums" positionX="-675" positionY="-162" width="128" height="105"/>
+        <element name="PaymentTowards" positionX="-666" positionY="-153" width="128" height="90"/>
+        <element name="Permissions" positionX="-684" positionY="-171" width="128" height="135"/>
+        <element name="PresalesPermissions" positionX="-648" positionY="-180" width="128" height="135"/>
+        <element name="Project" positionX="-885.1015625" positionY="-314.76171875" width="128" height="465"/>
+        <element name="ReceiptEntriesCount" positionX="-684" positionY="-171" width="128" height="120"/>
+        <element name="ReceiptEntry" positionX="-684" positionY="-171" width="128" height="750"/>
+        <element name="Reviews" positionX="-666" positionY="-153" width="128" height="180"/>
+        <element name="RRUser" positionX="-684" positionY="-171" width="128" height="210"/>
+        <element name="RRUserRole" positionX="-684" positionY="-171" width="128" height="165"/>
+        <element name="Schemes" positionX="-684" positionY="-171" width="128" height="150"/>
+        <element name="SoldUnitProjects" positionX="-684" positionY="-171" width="128" height="75"/>
+        <element name="SoldUnits" positionX="-684" positionY="-171" width="128" height="600"/>
+        <element name="SoldUnitTowers" positionX="-684" positionY="-171" width="128" height="135"/>
+        <element name="SourceStatuses" positionX="-507.07421875" positionY="-307.41796875" width="128" height="90"/>
+        <element name="SubStatuses" positionX="-344.72265625" positionY="-236.64453125" width="128" height="120"/>
+        <element name="TempObj" positionX="-333" positionY="-36" width="128" height="105"/>
+        <element name="TowerHandOverItems" positionX="-675" positionY="-162" width="128" height="465"/>
+        <element name="Towers" positionX="-675" positionY="-162" width="128" height="360"/>
+        <element name="UnitCarParks" positionX="-684" positionY="-171" width="128" height="120"/>
+        <element name="UnitHandOverHistory" positionX="-657" positionY="-144" width="128" height="105"/>
+        <element name="UnitHandOverItemHistory" positionX="-684" positionY="-171" width="128" height="165"/>
+        <element name="Units" positionX="-1049.86328125" positionY="142.359375" width="128" height="1019"/>
+        <element name="UnitStatus" positionX="-657" positionY="-144" width="128" height="90"/>
+        <element name="UnitTypes" positionX="-639" positionY="-126" width="128" height="73"/>
+        <element name="UpdateBy" positionX="-666" positionY="-153" width="128" height="180"/>
+        <element name="Vehicle" positionX="-685.94140625" positionY="-257.33203125" width="128" height="165"/>
     </elements>
 </model>

@@ -1,21 +1,41 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+#platform :ios, '10.0'
 
-target 'ReRoot' do
+target 'REroot' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
   # Pods for ReRoot
 
-  pod 'SideMenu', '~> 5.0'
-  pod 'ReachabilitySwift', '~> 4.3'
-  pod 'Alamofire', '~> 4.7.3'
-  pod 'PKHUD', '~> 5.2'
-  pod 'KeychainAccess', '~> 3.1'
-  pod 'IQKeyboardManagerSwift', '~> 6.1.1'
-  pod 'SDWebImage', '~> 4.4.2'
+  pod 'SideMenu'
+  pod 'ReachabilitySwift'
+  pod 'Alamofire','~> 5.0.0'
+  pod 'PKHUD', '~> 5.0'
+  pod 'DLRadioButton'
+  pod 'KeychainAccess'
+  pod 'IQKeyboardManagerSwift'
+#  pod 'SDWebImage', '~> 4.4.2'
+  pod 'SDWebImage', '~> 5.8'
   pod 'JJFloatingActionButton'
-  pod 'DropDown', '~> 2.3.4'
+  pod 'FloatingPanel'
+#  pod 'FittedSheets'
+#  pod 'DropDown', '~> 2.3.4'
+  pod 'Siren'
+#  pod 'Fabric'
+#  pod 'Firebase/Analytics'
+#  pod 'Firebase/Crashlytics'
+  pod 'FirebaseCrashlytics', '~> 8.11'
+
+# Add the pod for Firebase Crashlytics
+#pod 'Firebase/Crashlytics'
+
+# Recommended: Add the Firebase pod for Google Analytics
+pod 'Firebase/Analytics'
+
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+#  pod 'AWSS3', '~> 2.9.7'
+  pod 'AWSS3'
 
   target 'ReRootTests' do
     inherit! :search_paths

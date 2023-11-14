@@ -72,6 +72,10 @@ extension CAPSPageMenu {
     func setUpUserInterface() {
         let viewsDictionary = ["menuScrollView":menuScrollView, "controllerScrollView":controllerScrollView]
         
+        let subviewsss = menuScrollView.subviews
+        for subView in subviewsss{
+            subView.removeFromSuperview()
+        }
         // Set up controller scroll view
         controllerScrollView.isPagingEnabled = true
         controllerScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -128,7 +132,9 @@ extension CAPSPageMenu {
         self.view.backgroundColor = configuration.viewBackgroundColor
         menuScrollView.backgroundColor = configuration.scrollMenuBackgroundColor
     }
-    
+    func resetTitleForControllerWithIndex(){
+        
+    }
     func configureUserInterface() {
         // Add tap gesture recognizer to controller scroll view to recognize menu item selection
         let menuItemTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CAPSPageMenu.handleMenuItemTap(_:)))

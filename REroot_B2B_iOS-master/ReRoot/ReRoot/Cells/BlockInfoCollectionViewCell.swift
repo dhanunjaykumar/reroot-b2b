@@ -10,6 +10,9 @@ import UIKit
 
 class BlockInfoCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet weak var trailingConstraintOfStatusTypeLabel: NSLayoutConstraint!
+    @IBOutlet weak var leadContraintOfStatusTypeLabel: NSLayoutConstraint!
+    @IBOutlet var widthConstraintOfBlockCell: NSLayoutConstraint!
     @IBOutlet var mSubContentView: UIView!
     @IBOutlet var mStatusTypeNumberLabel: UILabel!
     @IBOutlet var mStatusTypeLabel: UILabel!

@@ -12,6 +12,9 @@ class ColorCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet var subContentView: UIView!
     
+    @IBOutlet weak var trailingOfColorLabel: NSLayoutConstraint!
+    @IBOutlet weak var leadingOfColorLabel: NSLayoutConstraint!
+    @IBOutlet weak var heightOfContentView: NSLayoutConstraint!
     @IBOutlet var widthOfSubContentView: NSLayoutConstraint!
     @IBOutlet var statusTitleLabel: UILabel!
     @IBOutlet var statusColorIndicatorView: UIView!

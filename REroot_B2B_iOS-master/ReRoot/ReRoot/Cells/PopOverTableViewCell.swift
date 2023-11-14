@@ -10,6 +10,8 @@ import UIKit
 
 class PopOverTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var leadingOfSubView: NSLayoutConstraint!
+
     @IBOutlet var leadingOfTitleLabel: NSLayoutConstraint!
     @IBOutlet var widthOfImageHolderView: NSLayoutConstraint!
     @IBOutlet var roundedView: UIView!

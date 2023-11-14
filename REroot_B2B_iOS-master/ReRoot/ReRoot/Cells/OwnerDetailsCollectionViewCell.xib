@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ownerDetailsCell" id="gTV-IL-0wX" customClass="OwnerDetailsCollectionViewCell" customModule="REroot" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="170"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H5s-1k-y2r">
+                        <rect key="frame" x="10" y="4" width="300" height="162"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7t0-OS-vzg">
+                                <rect key="frame" x="8" y="8" width="196" height="17.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="P6O-U1-wo2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQX-06-kq1">
+                                <rect key="frame" x="8" y="25.5" width="196" height="17.5"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="14"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbi-yk-uv6">
+                                <rect key="frame" x="8" y="43" width="196" height="17.5"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" translatesAutoresizingMaskIntoConstraints="NO" id="R6S-CE-p21">
+                                <rect key="frame" x="212" y="8" width="80" height="91"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" priority="900" constant="91" id="SCD-6C-XC7"/>
+                                    <constraint firstAttribute="width" constant="80" id="fWt-wt-lHU"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVE-oh-Hv3">
+                                <rect key="frame" x="204" y="114" width="88" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kaF-cN-8ix"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="14"/>
+                                <state key="normal" title="View Details"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A4y-Dg-JXC">
+                                <rect key="frame" x="8" y="114" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="JJh-Yp-lim"/>
+                                    <constraint firstAttribute="height" constant="40" id="JiC-va-YKc"/>
+                                </constraints>
+                                <state key="normal" image="call"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGu-gW-fgk">
+                                <rect key="frame" x="56" y="114" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="5zP-w9-GKy"/>
+                                    <constraint firstAttribute="height" constant="40" id="czI-8m-CA5"/>
+                                </constraints>
+                                <state key="normal" image="whatsapp"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8GE-4n-uYe">
+                                <rect key="frame" x="104" y="114" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="NdM-tA-k6o"/>
+                                    <constraint firstAttribute="height" constant="40" id="cjY-HI-ULA"/>
+                                </constraints>
+                                <state key="normal" image="email"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="tVE-oh-Hv3" secondAttribute="bottom" constant="8" id="4qp-MJ-Frc"/>
+                            <constraint firstAttribute="trailing" secondItem="R6S-CE-p21" secondAttribute="trailing" constant="8" id="8Fu-2P-x1j"/>
+                            <constraint firstItem="xQX-06-kq1" firstAttribute="top" secondItem="7t0-OS-vzg" secondAttribute="bottom" id="9Bs-Xj-zRv"/>
+                            <constraint firstItem="tVE-oh-Hv3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="R6S-CE-p21" secondAttribute="bottom" constant="8" id="AHd-1v-9ma"/>
+                            <constraint firstItem="R6S-CE-p21" firstAttribute="leading" secondItem="tbi-yk-uv6" secondAttribute="trailing" constant="8" symbolic="YES" id="AIo-vk-uzR"/>
+                            <constraint firstItem="tbi-yk-uv6" firstAttribute="top" secondItem="xQX-06-kq1" secondAttribute="bottom" id="Ahb-d5-HJ6"/>
+                            <constraint firstItem="R6S-CE-p21" firstAttribute="leading" secondItem="xQX-06-kq1" secondAttribute="trailing" constant="8" symbolic="YES" id="Efv-ZG-pzd"/>
+                            <constraint firstItem="A4y-Dg-JXC" firstAttribute="top" secondItem="vGu-gW-fgk" secondAttribute="top" id="JtD-H7-Af4"/>
+                            <constraint firstItem="vGu-gW-fgk" firstAttribute="top" secondItem="8GE-4n-uYe" secondAttribute="top" id="N8w-sd-lwM"/>
+                            <constraint firstItem="7t0-OS-vzg" firstAttribute="top" secondItem="H5s-1k-y2r" secondAttribute="top" constant="8" id="NwD-c7-nmW"/>
+                            <constraint firstItem="R6S-CE-p21" firstAttribute="leading" secondItem="7t0-OS-vzg" secondAttribute="trailing" constant="8" symbolic="YES" id="Owk-dS-d6H"/>
+                            <constraint firstItem="tbi-yk-uv6" firstAttribute="leading" secondItem="A4y-Dg-JXC" secondAttribute="leading" id="QPa-o1-K5K"/>
+                            <constraint firstItem="A4y-Dg-JXC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="tbi-yk-uv6" secondAttribute="bottom" constant="4" id="V2d-3P-mwQ"/>
+                            <constraint firstItem="7t0-OS-vzg" firstAttribute="leading" secondItem="xQX-06-kq1" secondAttribute="leading" id="XLQ-WN-zu9"/>
+                            <constraint firstItem="8GE-4n-uYe" firstAttribute="leading" secondItem="vGu-gW-fgk" secondAttribute="trailing" constant="8" symbolic="YES" id="eiz-yM-91h"/>
+                            <constraint firstAttribute="bottom" secondItem="vGu-gW-fgk" secondAttribute="bottom" constant="8" id="fcZ-mC-2DE"/>
+                            <constraint firstItem="tVE-oh-Hv3" firstAttribute="trailing" secondItem="R6S-CE-p21" secondAttribute="trailing" id="hHD-Pn-mKv"/>
+                            <constraint firstItem="R6S-CE-p21" firstAttribute="top" secondItem="H5s-1k-y2r" secondAttribute="top" constant="8" id="hgG-eH-kvW"/>
+                            <constraint firstAttribute="bottom" secondItem="A4y-Dg-JXC" secondAttribute="bottom" constant="8" id="iN2-5K-r1A"/>
+                            <constraint firstItem="7t0-OS-vzg" firstAttribute="leading" secondItem="H5s-1k-y2r" secondAttribute="leading" constant="8" id="l9T-x1-pnp"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="moo-bB-eF7"/>
+                            <constraint firstItem="vGu-gW-fgk" firstAttribute="leading" secondItem="A4y-Dg-JXC" secondAttribute="trailing" constant="8" symbolic="YES" id="pI0-Gc-oL8"/>
+                            <constraint firstItem="A4y-Dg-JXC" firstAttribute="leading" secondItem="H5s-1k-y2r" secondAttribute="leading" constant="8" id="uc7-P8-NCM"/>
+                            <constraint firstItem="8GE-4n-uYe" firstAttribute="bottom" secondItem="vGu-gW-fgk" secondAttribute="bottom" id="vGb-62-seW"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="H5s-1k-y2r" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="B5z-gS-B0Q"/>
+                <constraint firstItem="H5s-1k-y2r" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="CaN-Zp-ddG"/>
+                <constraint firstAttribute="trailing" secondItem="H5s-1k-y2r" secondAttribute="trailing" constant="10" id="CkI-dl-t5f"/>
+                <constraint firstAttribute="bottom" secondItem="H5s-1k-y2r" secondAttribute="bottom" constant="4" id="Pzp-nM-aCF"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="callButton" destination="A4y-Dg-JXC" id="9qo-fd-cD9"/>
+                <outlet property="editDetailsButton" destination="tVE-oh-Hv3" id="eyB-Gs-Txg"/>
+                <outlet property="emailButton" destination="8GE-4n-uYe" id="ogz-YL-2rx"/>
+                <outlet property="emailIDLabel" destination="tbi-yk-uv6" id="XXk-Bi-mYZ"/>
+                <outlet property="imageView" destination="R6S-CE-p21" id="gpe-BS-5UL"/>
+                <outlet property="nameLabel" destination="7t0-OS-vzg" id="dXq-zP-lNY"/>
+                <outlet property="phoneNumberLabel" destination="xQX-06-kq1" id="Fhe-iN-fFq"/>
+                <outlet property="subContentView" destination="H5s-1k-y2r" id="6Gb-JD-DRj"/>
+                <outlet property="whatsappButton" destination="vGu-gW-fgk" id="6K2-rW-d8V"/>
+            </connections>
+            <point key="canvasLocation" x="150.72463768115944" y="87.723214285714278"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="call" width="40" height="40"/>
+        <image name="email" width="40" height="40"/>
+        <image name="photo" width="96" height="97"/>
+        <image name="whatsapp" width="40" height="40"/>
+    </resources>
+</document>

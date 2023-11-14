@@ -14,6 +14,7 @@ class BlockDetailsTableViewCell: UITableViewCell {
     @IBOutlet var mTowersInfoLabel: UILabel!
     @IBOutlet var mBlockNameLabel: UILabel!
     @IBOutlet var mCollectionView: CustomCollectionView!
+    @IBOutlet var unitsCountLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

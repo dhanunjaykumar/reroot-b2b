@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AgreementStatusTrackerViewController" customModule="REroot" customModuleProvider="target">
+            <connections>
+                <outlet property="titleView" destination="fDi-On-2Xz" id="qvN-L0-rbU"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDi-On-2Xz">
+                    <rect key="frame" x="0.0" y="44" width="414" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNJ-cj-gXy">
+                            <rect key="frame" x="8" y="0.0" width="50" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="gDK-Jo-a38"/>
+                                <constraint firstAttribute="height" constant="60" id="koY-nV-4el"/>
+                            </constraints>
+                            <state key="normal" image="back"/>
+                            <connections>
+                                <action selector="back:" destination="-1" eventType="touchUpInside" id="Dd2-3g-aZC"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7AF-lR-lEa">
+                            <rect key="frame" x="306" y="0.0" width="50" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="Juz-Js-VR7"/>
+                                <constraint firstAttribute="width" constant="50" id="sfG-4I-0ko"/>
+                            </constraints>
+                            <state key="normal" image="reports"/>
+                            <connections>
+                                <action selector="showReports:" destination="-1" eventType="touchUpInside" id="cxn-Q5-hoM"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NBn-rr-468">
+                            <rect key="frame" x="356" y="0.0" width="50" height="60"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notifications" translatesAutoresizingMaskIntoConstraints="NO" id="ypB-VE-FOs">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="60"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4De-jc-IEZ">
+                                    <rect key="frame" x="24" y="9" width="20" height="20"/>
+                                    <color key="backgroundColor" red="0.32549019610000002" green="0.57647058819999997" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="Hhb-pZ-nzY"/>
+                                        <constraint firstAttribute="height" constant="20" id="WfJ-iU-3wh"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="4De-jc-IEZ" firstAttribute="top" secondItem="NBn-rr-468" secondAttribute="top" constant="9" id="CVJ-1b-hIm"/>
+                                <constraint firstAttribute="trailing" secondItem="ypB-VE-FOs" secondAttribute="trailing" id="HfT-QQ-G78"/>
+                                <constraint firstItem="ypB-VE-FOs" firstAttribute="leading" secondItem="NBn-rr-468" secondAttribute="leading" id="IqY-Pb-ont"/>
+                                <constraint firstItem="ypB-VE-FOs" firstAttribute="top" secondItem="NBn-rr-468" secondAttribute="top" id="T9H-OI-RHs"/>
+                                <constraint firstAttribute="width" constant="50" id="Tue-Ee-WMm"/>
+                                <constraint firstAttribute="height" constant="60" id="bm1-Nb-N2n"/>
+                                <constraint firstAttribute="bottom" secondItem="4De-jc-IEZ" secondAttribute="bottom" constant="31" id="dDV-xq-SR1"/>
+                                <constraint firstAttribute="bottom" secondItem="ypB-VE-FOs" secondAttribute="bottom" id="fNr-SJ-LEg"/>
+                                <constraint firstItem="4De-jc-IEZ" firstAttribute="leading" secondItem="NBn-rr-468" secondAttribute="leading" constant="24" id="jfa-sS-HsY"/>
+                            </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="xUq-cn-S8n" appends="YES" id="hsQ-a2-RVp"/>
+                            </connections>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AGREEMENT STATUS TRACKER" lineBreakMode="clip" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.25" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kjm-yt-EJu">
+                            <rect key="frame" x="66" y="0.0" width="241" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="241" id="QCB-ot-61K"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="17"/>
+                            <color key="textColor" red="0.20392156859999999" green="0.28627450980000002" blue="0.36862745099999999" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="jNJ-cj-gXy" firstAttribute="top" secondItem="fDi-On-2Xz" secondAttribute="top" id="0cL-nf-MhN"/>
+                        <constraint firstItem="jNJ-cj-gXy" firstAttribute="baseline" secondItem="7AF-lR-lEa" secondAttribute="baseline" id="I4p-dS-oiu"/>
+                        <constraint firstItem="kjm-yt-EJu" firstAttribute="bottom" secondItem="7AF-lR-lEa" secondAttribute="bottom" id="OCH-bJ-zxH"/>
+                        <constraint firstItem="jNJ-cj-gXy" firstAttribute="leading" secondItem="fDi-On-2Xz" secondAttribute="leadingMargin" id="XWm-Kl-For"/>
+                        <constraint firstAttribute="height" constant="60" id="ZjH-nF-S3v"/>
+                        <constraint firstItem="NBn-rr-468" firstAttribute="leading" secondItem="kjm-yt-EJu" secondAttribute="trailing" constant="49" id="bKM-I2-7pL"/>
+                        <constraint firstItem="kjm-yt-EJu" firstAttribute="top" secondItem="7AF-lR-lEa" secondAttribute="top" id="m9I-gk-dye"/>
+                        <constraint firstItem="7AF-lR-lEa" firstAttribute="top" secondItem="NBn-rr-468" secondAttribute="top" id="rcz-7E-eaZ"/>
+                        <constraint firstItem="7AF-lR-lEa" firstAttribute="bottom" secondItem="NBn-rr-468" secondAttribute="bottom" id="sem-Ey-09G"/>
+                        <constraint firstItem="kjm-yt-EJu" firstAttribute="leading" secondItem="jNJ-cj-gXy" secondAttribute="trailing" constant="8" symbolic="YES" id="tRi-Lw-feh"/>
+                        <constraint firstItem="jNJ-cj-gXy" firstAttribute="top" secondItem="kjm-yt-EJu" secondAttribute="top" id="wf0-Ia-2pZ"/>
+                        <constraint firstItem="NBn-rr-468" firstAttribute="trailing" secondItem="fDi-On-2Xz" secondAttribute="trailingMargin" id="xej-03-oNa"/>
+                        <constraint firstItem="NBn-rr-468" firstAttribute="leading" secondItem="7AF-lR-lEa" secondAttribute="trailing" id="yMo-eb-Yiq"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fDi-On-2Xz" secondAttribute="trailing" id="9qV-LV-5kG"/>
+                <constraint firstItem="fDi-On-2Xz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Hvz-DE-a4r"/>
+                <constraint firstItem="fDi-On-2Xz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="zyQ-zk-16A"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="xUq-cn-S8n" appends="YES" id="vS7-bF-itO"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="130.58035714285714"/>
+        </view>
+        <tapGestureRecognizer id="xUq-cn-S8n">
+            <connections>
+                <action selector="showNotifications:" destination="-1" id="i5c-tK-Ouz"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="back" width="24" height="24"/>
+        <image name="notifications" width="24" height="24"/>
+        <image name="reports" width="24" height="24"/>
+    </resources>
+</document>

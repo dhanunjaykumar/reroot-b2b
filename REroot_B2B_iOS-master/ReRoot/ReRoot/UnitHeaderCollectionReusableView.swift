@@ -10,4 +10,7 @@ import UIKit
 
 class UnitHeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var viewTowerPlanButton: UIButton!
+    @IBOutlet var heightOfPlanButton: NSLayoutConstraint!
+    
 }

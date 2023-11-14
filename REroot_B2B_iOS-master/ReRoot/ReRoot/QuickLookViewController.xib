@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Medium.otf">
+            <string>Montserrat-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QuickLookViewController" customModule="REroot" customModuleProvider="target">
+            <connections>
+                <outlet property="collectionView" destination="1hf-tI-RxL" id="031-Ar-b5a"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XCe-Xf-T31">
+                    <rect key="frame" x="0.0" y="44" width="414" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NhX-be-9QY">
+                            <rect key="frame" x="0.0" y="0.0" width="70" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="AaW-mf-xRA"/>
+                            </constraints>
+                            <state key="normal" image="back"/>
+                            <connections>
+                                <action selector="back:" destination="-1" eventType="touchUpInside" id="FZX-sX-WOp"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DOWNLOADS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXO-X3-sfV">
+                            <rect key="frame" x="149" y="14.5" width="116" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="D0t-88-5gB"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="107" id="jpj-P6-p2u"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="NhX-be-9QY" firstAttribute="leading" secondItem="XCe-Xf-T31" secondAttribute="leading" id="EE7-lJ-hnR"/>
+                        <constraint firstItem="NhX-be-9QY" firstAttribute="top" secondItem="XCe-Xf-T31" secondAttribute="top" id="NBR-QX-6q0"/>
+                        <constraint firstItem="OXO-X3-sfV" firstAttribute="centerX" secondItem="XCe-Xf-T31" secondAttribute="centerX" id="Qrf-fd-hfi"/>
+                        <constraint firstAttribute="bottom" secondItem="NhX-be-9QY" secondAttribute="bottom" id="c4G-Tn-RF7"/>
+                        <constraint firstAttribute="height" constant="50" id="kI5-qe-irA"/>
+                        <constraint firstItem="OXO-X3-sfV" firstAttribute="centerY" secondItem="XCe-Xf-T31" secondAttribute="centerY" id="tMb-Eb-ibq"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="1hf-tI-RxL">
+                    <rect key="frame" x="0.0" y="102" width="414" height="760"/>
+                    <color key="backgroundColor" red="0.19607843137254902" green="0.20000000000000001" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="42w-Ck-GyJ">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="XCe-Xf-T31" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5gT-cI-quw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="1hf-tI-RxL" secondAttribute="bottom" id="Nms-pA-EfH"/>
+                <constraint firstItem="1hf-tI-RxL" firstAttribute="top" secondItem="XCe-Xf-T31" secondAttribute="bottom" constant="8" symbolic="YES" id="Ty9-01-kPh"/>
+                <constraint firstItem="XCe-Xf-T31" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="fNg-dR-3Cc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="XCe-Xf-T31" secondAttribute="trailing" id="liE-3d-a9x"/>
+                <constraint firstItem="1hf-tI-RxL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="pQk-7C-hWg"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1hf-tI-RxL" secondAttribute="trailing" id="zkm-fZ-GzX"/>
+            </constraints>
+            <point key="canvasLocation" x="-355.07246376811599" y="94.419642857142847"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="back" width="24" height="24"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

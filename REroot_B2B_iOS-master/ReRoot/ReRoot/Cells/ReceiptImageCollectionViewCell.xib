@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="receiptImage" id="gTV-IL-0wX" customClass="ReceiptImageCollectionViewCell" customModule="REroot" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="93" height="91"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="93" height="91"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ov0-If-SZZ">
+                        <rect key="frame" x="0.0" y="0.0" width="93" height="91"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KPf-K0-kyP">
+                                <rect key="frame" x="0.0" y="0.0" width="93" height="91"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="91" id="1bN-tZ-X1q"/>
+                                    <constraint firstAttribute="width" constant="93" id="FYy-1Z-FiR"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kdK-0V-kII">
+                                <rect key="frame" x="69" y="0.0" width="24" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="MZ5-G0-WKa"/>
+                                    <constraint firstAttribute="width" constant="24" id="xjn-os-IZi"/>
+                                </constraints>
+                                <state key="normal" image="delete"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="91" id="Amc-pH-Jeq"/>
+                            <constraint firstAttribute="trailing" secondItem="KPf-K0-kyP" secondAttribute="trailing" id="DF9-9g-Nei"/>
+                            <constraint firstItem="KPf-K0-kyP" firstAttribute="top" secondItem="Ov0-If-SZZ" secondAttribute="top" id="EqR-nD-bid"/>
+                            <constraint firstAttribute="bottom" secondItem="KPf-K0-kyP" secondAttribute="bottom" id="Uh9-Io-MJr"/>
+                            <constraint firstItem="kdK-0V-kII" firstAttribute="top" secondItem="KPf-K0-kyP" secondAttribute="top" id="gMJ-Vg-UeC"/>
+                            <constraint firstItem="kdK-0V-kII" firstAttribute="trailing" secondItem="KPf-K0-kyP" secondAttribute="trailing" id="ma8-yd-aGH"/>
+                            <constraint firstAttribute="width" constant="93" id="y58-wM-WdJ"/>
+                            <constraint firstItem="KPf-K0-kyP" firstAttribute="leading" secondItem="Ov0-If-SZZ" secondAttribute="leading" id="zG9-pF-djc"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Ov0-If-SZZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="211-dp-051"/>
+                <constraint firstItem="Ov0-If-SZZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="nHs-fl-Kfx"/>
+                <constraint firstAttribute="bottom" secondItem="Ov0-If-SZZ" secondAttribute="bottom" id="sRz-V2-cfz"/>
+                <constraint firstAttribute="trailing" secondItem="Ov0-If-SZZ" secondAttribute="trailing" id="tiK-c4-2bT"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="beleteButton" destination="kdK-0V-kII" id="jtj-AI-OIX"/>
+                <outlet property="receiptImageView" destination="KPf-K0-kyP" id="3Dy-R3-AuE"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="135.9375"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="delete" width="24" height="24"/>
+    </resources>
+</document>
