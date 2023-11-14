@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Driver" representedClassName="Driver" syncable="YES" codeGenerationType="class"/>
+    <entity name="Project" representedClassName="Project" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="builtUpArea" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="company_group" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="far" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="images" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
+        <attribute name="imagesTemp" optional="YES" attributeType="Transformable" customClassName="Array&lt;String&gt;" syncable="YES"/>
+        <attribute name="incharge" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="landArea" optional="YES" attributeType="Transformable" customClassName="Dictionay&lt;String,Any&gt;" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="proj_code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="proj_type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sanctions" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="segment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="short_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="stats" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="superBuiltUpArea" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="updateBy" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <relationship name="proStat" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TempObj" inverseName="newRelationship" inverseEntity="TempObj" syncable="YES"/>
+    </entity>
+    <entity name="SourceStatuses" representedClassName="SourceStatuses" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sType" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="SubStatuses" representedClassName="SubStatuses" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="label" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parentId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sType" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="TempObj" representedClassName="TempObj" syncable="YES" codeGenerationType="class">
+        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="newRelationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Project" inverseName="proStat" inverseEntity="Project" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Driver" positionX="-513" positionY="-126" width="128" height="45"/>
+        <element name="Project" positionX="-686" positionY="-279" width="128" height="405"/>
+        <element name="TempObj" positionX="-333" positionY="-36" width="128" height="88"/>
+        <element name="SourceStatuses" positionX="-513" positionY="-126" width="128" height="90"/>
+        <element name="SubStatuses" positionX="-504" positionY="-117" width="128" height="120"/>
+    </elements>
+</model>

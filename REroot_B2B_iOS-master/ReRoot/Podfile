@@ -1,0 +1,30 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'ReRoot' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for ReRoot
+
+  pod 'SideMenu', '~> 5.0'
+  pod 'ReachabilitySwift', '~> 4.3'
+  pod 'Alamofire', '~> 4.7.3'
+  pod 'PKHUD', '~> 5.2'
+  pod 'KeychainAccess', '~> 3.1'
+  pod 'IQKeyboardManagerSwift', '~> 6.1.1'
+  pod 'SDWebImage', '~> 4.4.2'
+  pod 'JJFloatingActionButton'
+  pod 'DropDown', '~> 2.3.4'
+
+  target 'ReRootTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'ReRootUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

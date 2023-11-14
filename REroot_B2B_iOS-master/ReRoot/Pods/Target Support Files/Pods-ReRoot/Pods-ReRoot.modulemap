@@ -1,0 +1,6 @@
+framework module Pods_ReRoot {
+  umbrella header "Pods-ReRoot-umbrella.h"
+
+  export *
+  module * { export * }
+}

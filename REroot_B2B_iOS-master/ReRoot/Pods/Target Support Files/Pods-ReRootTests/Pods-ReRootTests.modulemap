@@ -1,0 +1,6 @@
+framework module Pods_ReRootTests {
+  umbrella header "Pods-ReRootTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Bold.otf">
+            <string>Montserrat-Bold</string>
+        </array>
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="blockCell" id="6ze-xu-bna" customClass="BlockInfoCollectionViewCell" customModule="ReRoot" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDC-Gn-s89">
+                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBQ-eB-0fs">
+                                <rect key="frame" x="0.0" y="15" width="70" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="bg1-IX-kGD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5D-TN-buu">
+                                <rect key="frame" x="8" y="35" width="54" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="v4y-Uz-gL9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="10"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="tBQ-eB-0fs" secondAttribute="trailing" id="6en-cq-VRA"/>
+                            <constraint firstItem="tBQ-eB-0fs" firstAttribute="leading" secondItem="fDC-Gn-s89" secondAttribute="leading" id="CiT-0i-jZW"/>
+                            <constraint firstAttribute="height" constant="70" id="Lkc-Bb-AKX"/>
+                            <constraint firstItem="tBQ-eB-0fs" firstAttribute="trailing" secondItem="d5D-TN-buu" secondAttribute="trailing" constant="8" id="Mlh-ol-Hz6"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="64" id="WRw-TH-qss"/>
+                            <constraint firstItem="d5D-TN-buu" firstAttribute="top" secondItem="tBQ-eB-0fs" secondAttribute="bottom" id="ekr-eH-C8A"/>
+                            <constraint firstItem="tBQ-eB-0fs" firstAttribute="top" secondItem="fDC-Gn-s89" secondAttribute="top" constant="15" id="myX-uB-zv8"/>
+                            <constraint firstAttribute="bottom" secondItem="d5D-TN-buu" secondAttribute="bottom" constant="15" id="ncB-tX-inS"/>
+                            <constraint firstItem="tBQ-eB-0fs" firstAttribute="leading" secondItem="d5D-TN-buu" secondAttribute="leading" constant="-8" id="oFF-3u-dLq"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="fDC-Gn-s89" secondAttribute="trailing" id="EOX-7s-ExY"/>
+                <constraint firstItem="fDC-Gn-s89" firstAttribute="top" secondItem="6ze-xu-bna" secondAttribute="top" id="FCH-8N-CUa"/>
+                <constraint firstAttribute="bottom" secondItem="fDC-Gn-s89" secondAttribute="bottom" id="R5a-SY-ngE"/>
+                <constraint firstItem="fDC-Gn-s89" firstAttribute="leading" secondItem="6ze-xu-bna" secondAttribute="leading" id="hBw-2K-pFL"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="btU-xL-KFA"/>
+            <size key="customSize" width="49" height="73"/>
+            <connections>
+                <outlet property="mStatusTypeLabel" destination="d5D-TN-buu" id="He8-oh-agS"/>
+                <outlet property="mStatusTypeNumberLabel" destination="tBQ-eB-0fs" id="2Wx-2L-Hio"/>
+                <outlet property="mSubContentView" destination="fDC-Gn-s89" id="2Z0-m7-p4a"/>
+            </connections>
+            <point key="canvasLocation" x="1" y="235"/>
+        </collectionViewCell>
+    </objects>
+</document>

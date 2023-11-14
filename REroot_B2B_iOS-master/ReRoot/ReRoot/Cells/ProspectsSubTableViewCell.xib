@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="prospectSubCell" id="KGk-i7-Jjw" customClass="ProspectsSubTableViewCell" customModule="ReRoot" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5IT-Zy-TaQ">
+                        <rect key="frame" x="8" y="0.0" width="304" height="45"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZ9-Xp-DfR">
+                                <rect key="frame" x="70" y="0.0" width="164" height="45"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                <color key="textColor" red="0.20392156862745098" green="0.28627450980392155" blue="0.36862745098039218" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qZ9-Xp-DfR" firstAttribute="top" secondItem="5IT-Zy-TaQ" secondAttribute="top" id="BHa-y7-Ar4"/>
+                            <constraint firstAttribute="height" constant="45" id="WJJ-uf-lFA"/>
+                            <constraint firstAttribute="bottom" secondItem="qZ9-Xp-DfR" secondAttribute="bottom" id="gk5-um-anF"/>
+                            <constraint firstItem="qZ9-Xp-DfR" firstAttribute="centerX" secondItem="5IT-Zy-TaQ" secondAttribute="centerX" id="kJ4-IZ-eQt"/>
+                        </constraints>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="project_icon" translatesAutoresizingMaskIntoConstraints="NO" id="LY7-Fo-isL">
+                        <rect key="frame" x="8" y="0.0" width="50" height="45"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="raA-hG-21V"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igK-0K-irb">
+                        <rect key="frame" x="256" y="17" width="48" height="11"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="Oyk-Qm-Xmc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="9"/>
+                        <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" red="0.94509803921568625" green="0.96862745098039216" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="igK-0K-irb" firstAttribute="leading" secondItem="qZ9-Xp-DfR" secondAttribute="trailing" constant="14" id="0mF-Bg-zWJ"/>
+                    <constraint firstItem="5IT-Zy-TaQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="3Hc-Ol-6JW"/>
+                    <constraint firstItem="igK-0K-irb" firstAttribute="centerY" secondItem="LY7-Fo-isL" secondAttribute="centerY" id="3z6-yK-IQ9"/>
+                    <constraint firstItem="qZ9-Xp-DfR" firstAttribute="leading" secondItem="LY7-Fo-isL" secondAttribute="trailing" constant="20" id="6hs-D2-bV3"/>
+                    <constraint firstItem="5IT-Zy-TaQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="DDL-XD-JBR"/>
+                    <constraint firstItem="LY7-Fo-isL" firstAttribute="leading" secondItem="5IT-Zy-TaQ" secondAttribute="leading" id="GDy-eH-8T9"/>
+                    <constraint firstItem="igK-0K-irb" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="M4B-6j-stW"/>
+                    <constraint firstItem="LY7-Fo-isL" firstAttribute="top" secondItem="5IT-Zy-TaQ" secondAttribute="top" id="M9T-44-GwY"/>
+                    <constraint firstItem="5IT-Zy-TaQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="U7B-wR-OXg"/>
+                    <constraint firstAttribute="bottom" secondItem="5IT-Zy-TaQ" secondAttribute="bottom" constant="4" id="gBc-ie-VCA"/>
+                    <constraint firstItem="LY7-Fo-isL" firstAttribute="bottom" secondItem="5IT-Zy-TaQ" secondAttribute="bottom" id="qlw-C0-mSn"/>
+                    <constraint firstAttribute="trailing" secondItem="5IT-Zy-TaQ" secondAttribute="trailing" constant="8" id="yAs-lw-eOl"/>
+                    <constraint firstItem="igK-0K-irb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="yBY-a4-sRd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="mImageView" destination="LY7-Fo-isL" id="2OF-wg-Z4t"/>
+                <outlet property="prospectCountLabel" destination="igK-0K-irb" id="n7D-Xa-Gnw"/>
+                <outlet property="prospectTypeLabel" destination="qZ9-Xp-DfR" id="KcD-vt-Eht"/>
+                <outlet property="subContentView" destination="5IT-Zy-TaQ" id="rtL-Sl-e3q"/>
+            </connections>
+            <point key="canvasLocation" x="40" y="46.326836581709152"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="project_icon" width="24" height="24"/>
+    </resources>
+</document>

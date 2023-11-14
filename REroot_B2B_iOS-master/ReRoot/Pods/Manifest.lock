@@ -1,0 +1,50 @@
+PODS:
+  - Alamofire (4.7.3)
+  - DropDown (2.3.6)
+  - IQKeyboardManagerSwift (6.1.1)
+  - JJFloatingActionButton (0.10.0)
+  - KeychainAccess (3.1.1)
+  - PKHUD (5.2.0)
+  - ReachabilitySwift (4.3.0)
+  - SDWebImage (4.4.2):
+    - SDWebImage/Core (= 4.4.2)
+  - SDWebImage/Core (4.4.2)
+  - SideMenu (5.0.1)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.7.3)
+  - DropDown (~> 2.3.4)
+  - IQKeyboardManagerSwift (~> 6.1.1)
+  - JJFloatingActionButton
+  - KeychainAccess (~> 3.1)
+  - PKHUD (~> 5.2)
+  - ReachabilitySwift (~> 4.3)
+  - SDWebImage (~> 4.4.2)
+  - SideMenu (~> 5.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - DropDown
+    - IQKeyboardManagerSwift
+    - JJFloatingActionButton
+    - KeychainAccess
+    - PKHUD
+    - ReachabilitySwift
+    - SDWebImage
+    - SideMenu
+
+SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  DropDown: e8bfbce001b2e6b7e8abfdd42e12b565712d84f4
+  IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
+  JJFloatingActionButton: 7e9e924d0819ebeb6a566dade9d5dbed63ff8add
+  KeychainAccess: 7bd430028059754a3debab3cfc0bd1fc7fb85df3
+  PKHUD: dd5357ac65f26115c35c4a68e9b328053326c5fe
+  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
+  SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
+  SideMenu: 87efd943737bb83aedf0358884d09fcf5576636d
+
+PODFILE CHECKSUM: 06b3fb5f81b3bcee2eef498b0e7cc97e9caa82c4
+
+COCOAPODS: 1.5.0

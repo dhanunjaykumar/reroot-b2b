@@ -1,0 +1,1291 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03728DDA30960C1C46019C04 /* Pods_ReRootUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19FEC7736ABFDB29BC2650C0 /* Pods_ReRootUITests.framework */; };
+		51AB8E5CF3E4A27A6DEBADFC /* Pods_ReRootTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B3A691FF50B252AF687476D /* Pods_ReRootTests.framework */; };
+		64003C862151D86400A2E38D /* ProspectsSubTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64003C842151D86400A2E38D /* ProspectsSubTableViewCell.swift */; };
+		64003C872151D86400A2E38D /* ProspectsSubTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64003C852151D86400A2E38D /* ProspectsSubTableViewCell.xib */; };
+		641442E020FD8E830028DFBE /* PopOverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641442DF20FD8E830028DFBE /* PopOverTableViewCell.swift */; };
+		6417EBC1215A0D88007D2A3C /* CustomerDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6417EBC0215A0D88007D2A3C /* CustomerDetailsViewController.swift */; };
+		6417EBC4215A31A8007D2A3C /* CustomerDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6417EBC2215A31A8007D2A3C /* CustomerDetailsTableViewCell.swift */; };
+		6417EBC5215A31A8007D2A3C /* CustomerDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6417EBC3215A31A8007D2A3C /* CustomerDetailsTableViewCell.xib */; };
+		6417EBC7215A6B94007D2A3C /* CallsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6417EBC6215A6B94007D2A3C /* CallsViewController.swift */; };
+		6417EBC9215A6B9C007D2A3C /* OffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6417EBC8215A6B9C007D2A3C /* OffersViewController.swift */; };
+		6417EBCB215A6BA4007D2A3C /* SiteVisitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6417EBCA215A6BA4007D2A3C /* SiteVisitsViewController.swift */; };
+		6417EBCD215A6BB4007D2A3C /* DiscountRequestsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6417EBCC215A6BB4007D2A3C /* DiscountRequestsViewController.swift */; };
+		6417EBCF215A6BBE007D2A3C /* OtherTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6417EBCE215A6BBE007D2A3C /* OtherTasksViewController.swift */; };
+		6417EBD1215A6BC7007D2A3C /* NotInterestedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6417EBD0215A6BC7007D2A3C /* NotInterestedViewController.swift */; };
+		6417EBD3215A75AF007D2A3C /* LeadsAndOpportunitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6417EBD2215A75AF007D2A3C /* LeadsAndOpportunitiesViewController.swift */; };
+		641DAD6921257FA7009AB6E4 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DAD6821257FA7009AB6E4 /* DatePickerViewController.swift */; };
+		641DC23B20F64D0A007EE821 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DC23A20F64D0A007EE821 /* ProjectsViewController.swift */; };
+		641DC28020F665C1007EE821 /* ProjectDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641DC27E20F665C1007EE821 /* ProjectDetailsTableViewCell.swift */; };
+		641DC28120F665C1007EE821 /* ProjectDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 641DC27F20F665C1007EE821 /* ProjectDetailsTableViewCell.xib */; };
+		6427974D210B373E00FCF2CC /* BlockDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6427974C210B373E00FCF2CC /* BlockDetailsView.swift */; };
+		6427974F210B433600FCF2CC /* UnitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6427974E210B433600FCF2CC /* UnitCollectionViewCell.swift */; };
+		64279751210B436900FCF2CC /* UnitHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64279750210B436900FCF2CC /* UnitHeaderCollectionReusableView.swift */; };
+		642FFC0820EB884E0076A781 /* LeftMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 642FFC0720EB884E0076A781 /* LeftMenuTableViewCell.swift */; };
+		642FFC2F20EBCB0C0076A781 /* Montserrat-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC0A20EBCB0C0076A781 /* Montserrat-MediumItalic.otf */; };
+		642FFC3020EBCB0C0076A781 /* Montserrat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC0B20EBCB0C0076A781 /* Montserrat-Bold.otf */; };
+		642FFC3120EBCB0C0076A781 /* Montserrat-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC0C20EBCB0C0076A781 /* Montserrat-BlackItalic.otf */; };
+		642FFC3220EBCB0C0076A781 /* SIL Open Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC0D20EBCB0C0076A781 /* SIL Open Font License.txt */; };
+		642FFC3320EBCB0C0076A781 /* MontserratAlternates-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC0E20EBCB0C0076A781 /* MontserratAlternates-Black.otf */; };
+		642FFC3420EBCB0C0076A781 /* MontserratAlternates-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC0F20EBCB0C0076A781 /* MontserratAlternates-LightItalic.otf */; };
+		642FFC3520EBCB0C0076A781 /* MontserratAlternates-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1020EBCB0C0076A781 /* MontserratAlternates-Medium.otf */; };
+		642FFC3620EBCB0C0076A781 /* Montserrat-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1120EBCB0C0076A781 /* Montserrat-BoldItalic.otf */; };
+		642FFC3720EBCB0C0076A781 /* Montserrat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1220EBCB0C0076A781 /* Montserrat-Light.otf */; };
+		642FFC3820EBCB0C0076A781 /* Montserrat-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1320EBCB0C0076A781 /* Montserrat-ThinItalic.otf */; };
+		642FFC3920EBCB0C0076A781 /* Montserrat-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1420EBCB0C0076A781 /* Montserrat-Thin.otf */; };
+		642FFC3A20EBCB0C0076A781 /* MontserratAlternates-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1520EBCB0C0076A781 /* MontserratAlternates-MediumItalic.otf */; };
+		642FFC3B20EBCB0C0076A781 /* Montserrat-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1620EBCB0C0076A781 /* Montserrat-ExtraLight.otf */; };
+		642FFC3C20EBCB0C0076A781 /* MontserratAlternates-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1720EBCB0C0076A781 /* MontserratAlternates-BlackItalic.otf */; };
+		642FFC3D20EBCB0C0076A781 /* MontserratAlternates-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1820EBCB0C0076A781 /* MontserratAlternates-Bold.otf */; };
+		642FFC3E20EBCB0C0076A781 /* MontserratAlternates-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1920EBCB0C0076A781 /* MontserratAlternates-ExtraLightItalic.otf */; };
+		642FFC3F20EBCB0C0076A781 /* MontserratAlternates-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1A20EBCB0C0076A781 /* MontserratAlternates-Thin.otf */; };
+		642FFC4020EBCB0C0076A781 /* Montserrat-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1B20EBCB0C0076A781 /* Montserrat-LightItalic.otf */; };
+		642FFC4120EBCB0C0076A781 /* Montserrat-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1C20EBCB0C0076A781 /* Montserrat-Medium.otf */; };
+		642FFC4220EBCB0C0076A781 /* MontserratAlternates-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1D20EBCB0C0076A781 /* MontserratAlternates-SemiBoldItalic.otf */; };
+		642FFC4320EBCB0C0076A781 /* Montserrat-SemiBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1E20EBCB0C0076A781 /* Montserrat-SemiBoldItalic.otf */; };
+		642FFC4420EBCB0C0076A781 /* Montserrat-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC1F20EBCB0C0076A781 /* Montserrat-ExtraBoldItalic.otf */; };
+		642FFC4520EBCB0C0076A781 /* Montserrat-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2020EBCB0C0076A781 /* Montserrat-Italic.otf */; };
+		642FFC4620EBCB0C0076A781 /* MontserratAlternates-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2120EBCB0C0076A781 /* MontserratAlternates-SemiBold.otf */; };
+		642FFC4720EBCB0C0076A781 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2220EBCB0C0076A781 /* Montserrat-Regular.otf */; };
+		642FFC4820EBCB0C0076A781 /* MontserratAlternates-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2320EBCB0C0076A781 /* MontserratAlternates-ExtraBold.otf */; };
+		642FFC4920EBCB0C0076A781 /* MontserratAlternates-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2420EBCB0C0076A781 /* MontserratAlternates-BoldItalic.otf */; };
+		642FFC4A20EBCB0C0076A781 /* Montserrat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2520EBCB0C0076A781 /* Montserrat-ExtraBold.otf */; };
+		642FFC4B20EBCB0C0076A781 /* Montserrat-ExtraLightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2620EBCB0C0076A781 /* Montserrat-ExtraLightItalic.otf */; };
+		642FFC4C20EBCB0C0076A781 /* MontserratAlternates-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2720EBCB0C0076A781 /* MontserratAlternates-Light.otf */; };
+		642FFC4D20EBCB0C0076A781 /* MontserratAlternates-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2820EBCB0C0076A781 /* MontserratAlternates-ExtraLight.otf */; };
+		642FFC4E20EBCB0C0076A781 /* MontserratAlternates-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2920EBCB0C0076A781 /* MontserratAlternates-Regular.otf */; };
+		642FFC4F20EBCB0C0076A781 /* MontserratAlternates-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2A20EBCB0C0076A781 /* MontserratAlternates-ThinItalic.otf */; };
+		642FFC5020EBCB0C0076A781 /* Montserrat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2B20EBCB0C0076A781 /* Montserrat-Black.otf */; };
+		642FFC5120EBCB0C0076A781 /* MontserratAlternates-ExtraBoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2C20EBCB0C0076A781 /* MontserratAlternates-ExtraBoldItalic.otf */; };
+		642FFC5220EBCB0C0076A781 /* MontserratAlternates-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2D20EBCB0C0076A781 /* MontserratAlternates-Italic.otf */; };
+		642FFC5320EBCB0C0076A781 /* Montserrat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 642FFC2E20EBCB0C0076A781 /* Montserrat-SemiBold.otf */; };
+		6440DFFE2163747C00F5321A /* ProspectDatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6440DFFD2163747C00F5321A /* ProspectDatePickerViewController.swift */; };
+		6440E0002164984900F5321A /* ProjectSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6440DFFF2164984900F5321A /* ProjectSelectionViewController.swift */; };
+		6440E0022164C08700F5321A /* DiscountRequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6440E0012164C08700F5321A /* DiscountRequestViewController.swift */; };
+		6440E0042164D2DC00F5321A /* AddNewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6440E0032164D2DC00F5321A /* AddNewTaskViewController.swift */; };
+		644D52852157261C00C6BD25 /* ProspectsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 644D52832157261C00C6BD25 /* ProspectsTableViewCell.swift */; };
+		644D52862157261C00C6BD25 /* ProspectsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 644D52842157261C00C6BD25 /* ProspectsTableViewCell.xib */; };
+		6457DC452171B2FC00115291 /* DiscountRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6457DC432171B2FC00115291 /* DiscountRequestTableViewCell.swift */; };
+		6457DC462171B2FC00115291 /* DiscountRequestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6457DC442171B2FC00115291 /* DiscountRequestTableViewCell.xib */; };
+		64750DDF2154F93800087A7F /* RegisterSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64750DDE2154F93800087A7F /* RegisterSearchTableViewCell.swift */; };
+		64750DE12154F97300087A7F /* RegistrationSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64750DE02154F97300087A7F /* RegistrationSearchViewController.swift */; };
+		6479C63F2137C2A90070DED0 /* PreSalesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6479C63E2137C2A90070DED0 /* PreSalesViewController.swift */; };
+		647D383D21098906000FB32E /* JsonModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 647D383C21098906000FB32E /* JsonModels.swift */; };
+		648191E82170F19900ACFE4A /* ColorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648191E62170F19900ACFE4A /* ColorCollectionViewCell.swift */; };
+		648191E92170F19900ACFE4A /* ColorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 648191E72170F19900ACFE4A /* ColorCollectionViewCell.xib */; };
+		64891C0221593CF400297859 /* RegistrationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64891C0121593CF400297859 /* RegistrationsViewController.swift */; };
+		64891C05215940A300297859 /* RegistrationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64891C03215940A300297859 /* RegistrationsTableViewCell.swift */; };
+		64891C06215940A300297859 /* RegistrationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64891C04215940A300297859 /* RegistrationsTableViewCell.xib */; };
+		648A324F215F35C000F8E58F /* LeadsPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 648A324E215F35C000F8E58F /* LeadsPopUpViewController.swift */; };
+		648D583F21416D5E00BC9D00 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 648D583D21416D5D00BC9D00 /* Crashlytics.framework */; };
+		648D584021416D5E00BC9D00 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 648D583E21416D5E00BC9D00 /* Fabric.framework */; };
+		649065DD20FA2F8800898F69 /* CustomCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649065DC20FA2F8800898F69 /* CustomCollectionView.swift */; };
+		64958F1A2136C4E20064989B /* SingleUnitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64958F182136C4E20064989B /* SingleUnitCollectionViewCell.swift */; };
+		64958F1B2136C4E20064989B /* SingleUnitCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64958F192136C4E20064989B /* SingleUnitCollectionViewCell.xib */; };
+		64958F1D2136CECE0064989B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64958F1C2136CECE0064989B /* SettingsViewController.swift */; };
+		64958F1F2136D5A90064989B /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64958F1E2136D5A90064989B /* SettingsTableViewCell.swift */; };
+		6497DD0920ECCAE6004B9041 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6497DD0820ECCAE6004B9041 /* ForgotPasswordViewController.swift */; };
+		6497DD4820ED36EF004B9041 /* HomeMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6497DD4720ED36EF004B9041 /* HomeMenuTableViewCell.swift */; };
+		649AE0D7210B95A100CD4F41 /* BookUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649AE0D6210B95A100CD4F41 /* BookUnitViewController.swift */; };
+		649C6A692167178900314617 /* URLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649C6A682167178900314617 /* URLViewController.swift */; };
+		64A0782320F9C263007EDFE7 /* ProjectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0782220F9C263007EDFE7 /* ProjectDetailsViewController.swift */; };
+		64A0782820F9DB1C007EDFE7 /* BlockDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0782620F9DB1C007EDFE7 /* BlockDetailsTableViewCell.swift */; };
+		64A0782920F9DB1C007EDFE7 /* BlockDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64A0782720F9DB1C007EDFE7 /* BlockDetailsTableViewCell.xib */; };
+		64A0782C20F9E1B5007EDFE7 /* BlockInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0782A20F9E1B5007EDFE7 /* BlockInfoCollectionViewCell.swift */; };
+		64A0782D20F9E1B5007EDFE7 /* BlockInfoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64A0782B20F9E1B5007EDFE7 /* BlockInfoCollectionViewCell.xib */; };
+		64B05522218171CB007DCDCA /* ChangePassWordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B05521218171CB007DCDCA /* ChangePassWordViewController.swift */; };
+		64B0E69D20EB0ACC008D7563 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B0E69C20EB0ACC008D7563 /* AppDelegate.swift */; };
+		64B0E69F20EB0ACC008D7563 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B0E69E20EB0ACC008D7563 /* LoginViewController.swift */; };
+		64B0E6A220EB0ACC008D7563 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64B0E6A020EB0ACC008D7563 /* Main.storyboard */; };
+		64B0E6A520EB0ACC008D7563 /* ReRoot.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 64B0E6A320EB0ACC008D7563 /* ReRoot.xcdatamodeld */; };
+		64B0E6A720EB0ACD008D7563 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 64B0E6A620EB0ACD008D7563 /* Assets.xcassets */; };
+		64B0E6AA20EB0ACD008D7563 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64B0E6A820EB0ACD008D7563 /* LaunchScreen.storyboard */; };
+		64B0E6B520EB0ACD008D7563 /* ReRootTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B0E6B420EB0ACD008D7563 /* ReRootTests.swift */; };
+		64B0E6C020EB0ACD008D7563 /* ReRootUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B0E6BF20EB0ACD008D7563 /* ReRootUITests.swift */; };
+		64B0E6CE20EB1128008D7563 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B0E6CD20EB1128008D7563 /* LeftMenuViewController.swift */; };
+		64B0E6D020EB1C59008D7563 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B0E6CF20EB1C59008D7563 /* HomeViewController.swift */; };
+		64B0E6D220EB3B7A008D7563 /* RRUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64B0E6D120EB3B7A008D7563 /* RRUtilities.swift */; };
+		64BBA92D216CAD2A00CA12B5 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BBA92C216CAD2A00CA12B5 /* WebViewController.swift */; };
+		64BF297820F8BA2C00CDA549 /* Project+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BF297620F8BA2C00CDA549 /* Project+CoreDataClass.swift */; };
+		64BF297920F8BA2C00CDA549 /* Project+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BF297720F8BA2C00CDA549 /* Project+CoreDataProperties.swift */; };
+		64BF99D2215EB1ED0073B327 /* ProspectsStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BF99D1215EB1ED0073B327 /* ProspectsStatusViewController.swift */; };
+		64BF99D7215EB4030073B327 /* ProspectStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64BF99D5215EB4030073B327 /* ProspectStatusTableViewCell.swift */; };
+		64BF99D8215EB4030073B327 /* ProspectStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64BF99D6215EB4030073B327 /* ProspectStatusTableViewCell.xib */; };
+		64C1CB9F212829D90074F285 /* KMPlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C1CB9D212829D90074F285 /* KMPlaceholderTextView.swift */; };
+		64C5DD30214B81910050AB48 /* CAPSPageMenu+UIGestureRecognizerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5DD29214B81910050AB48 /* CAPSPageMenu+UIGestureRecognizerDelegate.swift */; };
+		64C5DD31214B81910050AB48 /* CAPSPageMenu+Options.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5DD2A214B81910050AB48 /* CAPSPageMenu+Options.swift */; };
+		64C5DD32214B81910050AB48 /* MenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5DD2B214B81910050AB48 /* MenuItemView.swift */; };
+		64C5DD33214B81910050AB48 /* CAPSPageMenu+UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5DD2C214B81910050AB48 /* CAPSPageMenu+UIScrollViewDelegate.swift */; };
+		64C5DD34214B81910050AB48 /* CAPSPageMenu+UIConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5DD2D214B81910050AB48 /* CAPSPageMenu+UIConfiguration.swift */; };
+		64C5DD35214B81910050AB48 /* CAPSPageMenuConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5DD2E214B81910050AB48 /* CAPSPageMenuConfiguration.swift */; };
+		64C5DD36214B81910050AB48 /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5DD2F214B81910050AB48 /* CAPSPageMenu.swift */; };
+		64C5DD38214B88EB0050AB48 /* ProjectWiseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5DD37214B88EB0050AB48 /* ProjectWiseViewController.swift */; };
+		64C5DD3A214B893C0050AB48 /* SalesPersonWiseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5DD39214B893C0050AB48 /* SalesPersonWiseViewController.swift */; };
+		64C5DD3C214B8A1E0050AB48 /* EnquiryWiseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C5DD3B214B8A1E0050AB48 /* EnquiryWiseViewController.swift */; };
+		64D7431A21301B380028C8CB /* PopUpHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64D7431921301B380028C8CB /* PopUpHeaderView.swift */; };
+		64D7431C21301B590028C8CB /* PopUpHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64D7431B21301B590028C8CB /* PopUpHeaderView.xib */; };
+		64DB3898215CEA73000E9CB8 /* CommonProspectsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64DB3896215CEA73000E9CB8 /* CommonProspectsTableViewCell.swift */; };
+		64DB3899215CEA73000E9CB8 /* CommonProspectsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64DB3897215CEA73000E9CB8 /* CommonProspectsTableViewCell.xib */; };
+		64E4608520F8452000BBFB03 /* DBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E4608420F8452000BBFB03 /* DBModel.swift */; };
+		64E616EA2168B93F00B6D74B /* VechicleAndDriverSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E616E92168B93F00B6D74B /* VechicleAndDriverSelectionViewController.swift */; };
+		64E914D220FCA521007E5801 /* ButtonView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64E914D120FCA521007E5801 /* ButtonView.xib */; };
+		64E914D420FCA610007E5801 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E914D320FCA610007E5801 /* ButtonView.swift */; };
+		64E914D620FCC24D007E5801 /* PopOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64E914D520FCC24D007E5801 /* PopOverViewController.swift */; };
+		64EFD7B020EB4A43002B69BF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EFD7AF20EB4A43002B69BF /* Constants.swift */; };
+		64F00FBD2176FEB40086FC2E /* PlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F00FBB2176FEB40086FC2E /* PlanViewController.swift */; };
+		64F982F8216608CC002A1964 /* NotInterestedStatusHandleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F982F7216608CC002A1964 /* NotInterestedStatusHandleViewController.swift */; };
+		64F9E06A216F21870029A323 /* SendOfferPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64F9E069216F21870029A323 /* SendOfferPopUpViewController.swift */; };
+		64FA75BA2153FE640061684A /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FA75B92153FE640061684A /* RegistrationViewController.swift */; };
+		87B9200F280E988933F045F7 /* Pods_ReRoot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E862B54C14ACF075E02FF75 /* Pods_ReRoot.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		64B0E6B120EB0ACD008D7563 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 64B0E69120EB0ACC008D7563 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 64B0E69820EB0ACC008D7563;
+			remoteInfo = ReRoot;
+		};
+		64B0E6BC20EB0ACD008D7563 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 64B0E69120EB0ACC008D7563 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 64B0E69820EB0ACC008D7563;
+			remoteInfo = ReRoot;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		19FEC7736ABFDB29BC2650C0 /* Pods_ReRootUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReRootUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		35D4B3E3C09CD44CF19E8884 /* Pods-ReRoot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReRoot.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReRoot/Pods-ReRoot.release.xcconfig"; sourceTree = "<group>"; };
+		4C3753EC34059FEBEF96FCCD /* Pods-ReRootUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReRootUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReRootUITests/Pods-ReRootUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4E862B54C14ACF075E02FF75 /* Pods_ReRoot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReRoot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B3A691FF50B252AF687476D /* Pods_ReRootTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReRootTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		64003C842151D86400A2E38D /* ProspectsSubTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectsSubTableViewCell.swift; sourceTree = "<group>"; };
+		64003C852151D86400A2E38D /* ProspectsSubTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProspectsSubTableViewCell.xib; sourceTree = "<group>"; };
+		641442DF20FD8E830028DFBE /* PopOverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverTableViewCell.swift; sourceTree = "<group>"; };
+		6417EBC0215A0D88007D2A3C /* CustomerDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetailsViewController.swift; sourceTree = "<group>"; };
+		6417EBC2215A31A8007D2A3C /* CustomerDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		6417EBC3215A31A8007D2A3C /* CustomerDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomerDetailsTableViewCell.xib; sourceTree = "<group>"; };
+		6417EBC6215A6B94007D2A3C /* CallsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallsViewController.swift; sourceTree = "<group>"; };
+		6417EBC8215A6B9C007D2A3C /* OffersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersViewController.swift; sourceTree = "<group>"; };
+		6417EBCA215A6BA4007D2A3C /* SiteVisitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SiteVisitsViewController.swift; sourceTree = "<group>"; };
+		6417EBCC215A6BB4007D2A3C /* DiscountRequestsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountRequestsViewController.swift; sourceTree = "<group>"; };
+		6417EBCE215A6BBE007D2A3C /* OtherTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherTasksViewController.swift; sourceTree = "<group>"; };
+		6417EBD0215A6BC7007D2A3C /* NotInterestedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotInterestedViewController.swift; sourceTree = "<group>"; };
+		6417EBD2215A75AF007D2A3C /* LeadsAndOpportunitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeadsAndOpportunitiesViewController.swift; sourceTree = "<group>"; };
+		641DAD6821257FA7009AB6E4 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		641DC23A20F64D0A007EE821 /* ProjectsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
+		641DC27E20F665C1007EE821 /* ProjectDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		641DC27F20F665C1007EE821 /* ProjectDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectDetailsTableViewCell.xib; sourceTree = "<group>"; };
+		6427974C210B373E00FCF2CC /* BlockDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDetailsView.swift; sourceTree = "<group>"; };
+		6427974E210B433600FCF2CC /* UnitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitCollectionViewCell.swift; sourceTree = "<group>"; };
+		64279750210B436900FCF2CC /* UnitHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		642FFC0720EB884E0076A781 /* LeftMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewCell.swift; sourceTree = "<group>"; };
+		642FFC0A20EBCB0C0076A781 /* Montserrat-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-MediumItalic.otf"; sourceTree = "<group>"; };
+		642FFC0B20EBCB0C0076A781 /* Montserrat-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.otf"; sourceTree = "<group>"; };
+		642FFC0C20EBCB0C0076A781 /* Montserrat-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BlackItalic.otf"; sourceTree = "<group>"; };
+		642FFC0D20EBCB0C0076A781 /* SIL Open Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "SIL Open Font License.txt"; sourceTree = "<group>"; };
+		642FFC0E20EBCB0C0076A781 /* MontserratAlternates-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-Black.otf"; sourceTree = "<group>"; };
+		642FFC0F20EBCB0C0076A781 /* MontserratAlternates-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-LightItalic.otf"; sourceTree = "<group>"; };
+		642FFC1020EBCB0C0076A781 /* MontserratAlternates-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-Medium.otf"; sourceTree = "<group>"; };
+		642FFC1120EBCB0C0076A781 /* Montserrat-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-BoldItalic.otf"; sourceTree = "<group>"; };
+		642FFC1220EBCB0C0076A781 /* Montserrat-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Light.otf"; sourceTree = "<group>"; };
+		642FFC1320EBCB0C0076A781 /* Montserrat-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ThinItalic.otf"; sourceTree = "<group>"; };
+		642FFC1420EBCB0C0076A781 /* Montserrat-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Thin.otf"; sourceTree = "<group>"; };
+		642FFC1520EBCB0C0076A781 /* MontserratAlternates-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-MediumItalic.otf"; sourceTree = "<group>"; };
+		642FFC1620EBCB0C0076A781 /* Montserrat-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLight.otf"; sourceTree = "<group>"; };
+		642FFC1720EBCB0C0076A781 /* MontserratAlternates-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-BlackItalic.otf"; sourceTree = "<group>"; };
+		642FFC1820EBCB0C0076A781 /* MontserratAlternates-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-Bold.otf"; sourceTree = "<group>"; };
+		642FFC1920EBCB0C0076A781 /* MontserratAlternates-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-ExtraLightItalic.otf"; sourceTree = "<group>"; };
+		642FFC1A20EBCB0C0076A781 /* MontserratAlternates-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-Thin.otf"; sourceTree = "<group>"; };
+		642FFC1B20EBCB0C0076A781 /* Montserrat-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-LightItalic.otf"; sourceTree = "<group>"; };
+		642FFC1C20EBCB0C0076A781 /* Montserrat-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.otf"; sourceTree = "<group>"; };
+		642FFC1D20EBCB0C0076A781 /* MontserratAlternates-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-SemiBoldItalic.otf"; sourceTree = "<group>"; };
+		642FFC1E20EBCB0C0076A781 /* Montserrat-SemiBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBoldItalic.otf"; sourceTree = "<group>"; };
+		642FFC1F20EBCB0C0076A781 /* Montserrat-ExtraBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBoldItalic.otf"; sourceTree = "<group>"; };
+		642FFC2020EBCB0C0076A781 /* Montserrat-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Italic.otf"; sourceTree = "<group>"; };
+		642FFC2120EBCB0C0076A781 /* MontserratAlternates-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-SemiBold.otf"; sourceTree = "<group>"; };
+		642FFC2220EBCB0C0076A781 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
+		642FFC2320EBCB0C0076A781 /* MontserratAlternates-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-ExtraBold.otf"; sourceTree = "<group>"; };
+		642FFC2420EBCB0C0076A781 /* MontserratAlternates-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-BoldItalic.otf"; sourceTree = "<group>"; };
+		642FFC2520EBCB0C0076A781 /* Montserrat-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraBold.otf"; sourceTree = "<group>"; };
+		642FFC2620EBCB0C0076A781 /* Montserrat-ExtraLightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-ExtraLightItalic.otf"; sourceTree = "<group>"; };
+		642FFC2720EBCB0C0076A781 /* MontserratAlternates-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-Light.otf"; sourceTree = "<group>"; };
+		642FFC2820EBCB0C0076A781 /* MontserratAlternates-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-ExtraLight.otf"; sourceTree = "<group>"; };
+		642FFC2920EBCB0C0076A781 /* MontserratAlternates-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-Regular.otf"; sourceTree = "<group>"; };
+		642FFC2A20EBCB0C0076A781 /* MontserratAlternates-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-ThinItalic.otf"; sourceTree = "<group>"; };
+		642FFC2B20EBCB0C0076A781 /* Montserrat-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.otf"; sourceTree = "<group>"; };
+		642FFC2C20EBCB0C0076A781 /* MontserratAlternates-ExtraBoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-ExtraBoldItalic.otf"; sourceTree = "<group>"; };
+		642FFC2D20EBCB0C0076A781 /* MontserratAlternates-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MontserratAlternates-Italic.otf"; sourceTree = "<group>"; };
+		642FFC2E20EBCB0C0076A781 /* Montserrat-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.otf"; sourceTree = "<group>"; };
+		6440DFFD2163747C00F5321A /* ProspectDatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectDatePickerViewController.swift; sourceTree = "<group>"; };
+		6440DFFF2164984900F5321A /* ProjectSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSelectionViewController.swift; sourceTree = "<group>"; };
+		6440E0012164C08700F5321A /* DiscountRequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountRequestViewController.swift; sourceTree = "<group>"; };
+		6440E0032164D2DC00F5321A /* AddNewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTaskViewController.swift; sourceTree = "<group>"; };
+		644D52832157261C00C6BD25 /* ProspectsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectsTableViewCell.swift; sourceTree = "<group>"; };
+		644D52842157261C00C6BD25 /* ProspectsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProspectsTableViewCell.xib; sourceTree = "<group>"; };
+		6457DC432171B2FC00115291 /* DiscountRequestTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountRequestTableViewCell.swift; sourceTree = "<group>"; };
+		6457DC442171B2FC00115291 /* DiscountRequestTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscountRequestTableViewCell.xib; sourceTree = "<group>"; };
+		64750DDE2154F93800087A7F /* RegisterSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSearchTableViewCell.swift; sourceTree = "<group>"; };
+		64750DE02154F97300087A7F /* RegistrationSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationSearchViewController.swift; sourceTree = "<group>"; };
+		6479C63E2137C2A90070DED0 /* PreSalesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreSalesViewController.swift; sourceTree = "<group>"; };
+		647D383C21098906000FB32E /* JsonModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonModels.swift; sourceTree = "<group>"; };
+		648191E62170F19900ACFE4A /* ColorCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCollectionViewCell.swift; sourceTree = "<group>"; };
+		648191E72170F19900ACFE4A /* ColorCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ColorCollectionViewCell.xib; sourceTree = "<group>"; };
+		64891C0121593CF400297859 /* RegistrationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationsViewController.swift; sourceTree = "<group>"; };
+		64891C03215940A300297859 /* RegistrationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationsTableViewCell.swift; sourceTree = "<group>"; };
+		64891C04215940A300297859 /* RegistrationsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationsTableViewCell.xib; sourceTree = "<group>"; };
+		648A324E215F35C000F8E58F /* LeadsPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeadsPopUpViewController.swift; sourceTree = "<group>"; };
+		648D583D21416D5D00BC9D00 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		648D583E21416D5E00BC9D00 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		649065DC20FA2F8800898F69 /* CustomCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionView.swift; sourceTree = "<group>"; };
+		64958F182136C4E20064989B /* SingleUnitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleUnitCollectionViewCell.swift; sourceTree = "<group>"; };
+		64958F192136C4E20064989B /* SingleUnitCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleUnitCollectionViewCell.xib; sourceTree = "<group>"; };
+		64958F1C2136CECE0064989B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		64958F1E2136D5A90064989B /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
+		6497DD0820ECCAE6004B9041 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		6497DD4720ED36EF004B9041 /* HomeMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMenuTableViewCell.swift; sourceTree = "<group>"; };
+		649AE0D6210B95A100CD4F41 /* BookUnitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookUnitViewController.swift; sourceTree = "<group>"; };
+		649C6A682167178900314617 /* URLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLViewController.swift; sourceTree = "<group>"; };
+		64A0782220F9C263007EDFE7 /* ProjectDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailsViewController.swift; sourceTree = "<group>"; };
+		64A0782620F9DB1C007EDFE7 /* BlockDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		64A0782720F9DB1C007EDFE7 /* BlockDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockDetailsTableViewCell.xib; sourceTree = "<group>"; };
+		64A0782A20F9E1B5007EDFE7 /* BlockInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		64A0782B20F9E1B5007EDFE7 /* BlockInfoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BlockInfoCollectionViewCell.xib; sourceTree = "<group>"; };
+		64B05521218171CB007DCDCA /* ChangePassWordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePassWordViewController.swift; sourceTree = "<group>"; };
+		64B0E69920EB0ACC008D7563 /* ReRoot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReRoot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		64B0E69C20EB0ACC008D7563 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		64B0E69E20EB0ACC008D7563 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		64B0E6A120EB0ACC008D7563 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		64B0E6A420EB0ACC008D7563 /* ReRoot.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReRoot.xcdatamodel; sourceTree = "<group>"; };
+		64B0E6A620EB0ACD008D7563 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		64B0E6A920EB0ACD008D7563 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		64B0E6AB20EB0ACD008D7563 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64B0E6B020EB0ACD008D7563 /* ReRootTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReRootTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		64B0E6B420EB0ACD008D7563 /* ReRootTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReRootTests.swift; sourceTree = "<group>"; };
+		64B0E6B620EB0ACD008D7563 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64B0E6BB20EB0ACD008D7563 /* ReRootUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReRootUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		64B0E6BF20EB0ACD008D7563 /* ReRootUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReRootUITests.swift; sourceTree = "<group>"; };
+		64B0E6C120EB0ACD008D7563 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		64B0E6CD20EB1128008D7563 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
+		64B0E6CF20EB1C59008D7563 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		64B0E6D120EB3B7A008D7563 /* RRUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RRUtilities.swift; sourceTree = "<group>"; };
+		64BBA92C216CAD2A00CA12B5 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		64BF297620F8BA2C00CDA549 /* Project+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Project+CoreDataClass.swift"; path = "tempdata/Project+CoreDataClass.swift"; sourceTree = "<group>"; };
+		64BF297720F8BA2C00CDA549 /* Project+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Project+CoreDataProperties.swift"; path = "tempdata/Project+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		64BF99D1215EB1ED0073B327 /* ProspectsStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectsStatusViewController.swift; sourceTree = "<group>"; };
+		64BF99D5215EB4030073B327 /* ProspectStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProspectStatusTableViewCell.swift; sourceTree = "<group>"; };
+		64BF99D6215EB4030073B327 /* ProspectStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProspectStatusTableViewCell.xib; sourceTree = "<group>"; };
+		64C1CB9D212829D90074F285 /* KMPlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMPlaceholderTextView.swift; sourceTree = "<group>"; };
+		64C1CB9E212829D90074F285 /* KMPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KMPlaceholderTextView.h; sourceTree = "<group>"; };
+		64C5DD29214B81910050AB48 /* CAPSPageMenu+UIGestureRecognizerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAPSPageMenu+UIGestureRecognizerDelegate.swift"; sourceTree = "<group>"; };
+		64C5DD2A214B81910050AB48 /* CAPSPageMenu+Options.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAPSPageMenu+Options.swift"; sourceTree = "<group>"; };
+		64C5DD2B214B81910050AB48 /* MenuItemView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuItemView.swift; sourceTree = "<group>"; };
+		64C5DD2C214B81910050AB48 /* CAPSPageMenu+UIScrollViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAPSPageMenu+UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
+		64C5DD2D214B81910050AB48 /* CAPSPageMenu+UIConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CAPSPageMenu+UIConfiguration.swift"; sourceTree = "<group>"; };
+		64C5DD2E214B81910050AB48 /* CAPSPageMenuConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenuConfiguration.swift; sourceTree = "<group>"; };
+		64C5DD2F214B81910050AB48 /* CAPSPageMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
+		64C5DD37214B88EB0050AB48 /* ProjectWiseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectWiseViewController.swift; sourceTree = "<group>"; };
+		64C5DD39214B893C0050AB48 /* SalesPersonWiseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesPersonWiseViewController.swift; sourceTree = "<group>"; };
+		64C5DD3B214B8A1E0050AB48 /* EnquiryWiseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnquiryWiseViewController.swift; sourceTree = "<group>"; };
+		64D7431921301B380028C8CB /* PopUpHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpHeaderView.swift; sourceTree = "<group>"; };
+		64D7431B21301B590028C8CB /* PopUpHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PopUpHeaderView.xib; sourceTree = "<group>"; };
+		64DB3896215CEA73000E9CB8 /* CommonProspectsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonProspectsTableViewCell.swift; sourceTree = "<group>"; };
+		64DB3897215CEA73000E9CB8 /* CommonProspectsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommonProspectsTableViewCell.xib; sourceTree = "<group>"; };
+		64E4608420F8452000BBFB03 /* DBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBModel.swift; sourceTree = "<group>"; };
+		64E616E92168B93F00B6D74B /* VechicleAndDriverSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VechicleAndDriverSelectionViewController.swift; sourceTree = "<group>"; };
+		64E914D120FCA521007E5801 /* ButtonView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ButtonView.xib; sourceTree = "<group>"; };
+		64E914D320FCA610007E5801 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		64E914D520FCC24D007E5801 /* PopOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopOverViewController.swift; sourceTree = "<group>"; };
+		64EFD7AF20EB4A43002B69BF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		64F00FBB2176FEB40086FC2E /* PlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanViewController.swift; sourceTree = "<group>"; };
+		64F982F7216608CC002A1964 /* NotInterestedStatusHandleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotInterestedStatusHandleViewController.swift; sourceTree = "<group>"; };
+		64F9E069216F21870029A323 /* SendOfferPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendOfferPopUpViewController.swift; sourceTree = "<group>"; };
+		64FA75B92153FE640061684A /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		973DFB4780F1C22AAC3F1655 /* Pods-ReRoot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReRoot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReRoot/Pods-ReRoot.debug.xcconfig"; sourceTree = "<group>"; };
+		C847396E1195B6FACAEA06B2 /* Pods-ReRootTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReRootTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReRootTests/Pods-ReRootTests.debug.xcconfig"; sourceTree = "<group>"; };
+		DB7DA7760AA30AB29DE8DD68 /* Pods-ReRootUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReRootUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReRootUITests/Pods-ReRootUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E910D03AF68BAD29826BDD43 /* Pods-ReRootTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReRootTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReRootTests/Pods-ReRootTests.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		64B0E69620EB0ACC008D7563 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				648D583F21416D5E00BC9D00 /* Crashlytics.framework in Frameworks */,
+				87B9200F280E988933F045F7 /* Pods_ReRoot.framework in Frameworks */,
+				648D584021416D5E00BC9D00 /* Fabric.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64B0E6AD20EB0ACD008D7563 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51AB8E5CF3E4A27A6DEBADFC /* Pods_ReRootTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64B0E6B820EB0ACD008D7563 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03728DDA30960C1C46019C04 /* Pods_ReRootUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1A9C41360EE04F04426BC601 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				973DFB4780F1C22AAC3F1655 /* Pods-ReRoot.debug.xcconfig */,
+				35D4B3E3C09CD44CF19E8884 /* Pods-ReRoot.release.xcconfig */,
+				C847396E1195B6FACAEA06B2 /* Pods-ReRootTests.debug.xcconfig */,
+				E910D03AF68BAD29826BDD43 /* Pods-ReRootTests.release.xcconfig */,
+				DB7DA7760AA30AB29DE8DD68 /* Pods-ReRootUITests.debug.xcconfig */,
+				4C3753EC34059FEBEF96FCCD /* Pods-ReRootUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		641DC27D20F6659B007EE821 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				642FFC0720EB884E0076A781 /* LeftMenuTableViewCell.swift */,
+				6497DD4720ED36EF004B9041 /* HomeMenuTableViewCell.swift */,
+				641DC27E20F665C1007EE821 /* ProjectDetailsTableViewCell.swift */,
+				641DC27F20F665C1007EE821 /* ProjectDetailsTableViewCell.xib */,
+				64A0782620F9DB1C007EDFE7 /* BlockDetailsTableViewCell.swift */,
+				64A0782720F9DB1C007EDFE7 /* BlockDetailsTableViewCell.xib */,
+				64A0782A20F9E1B5007EDFE7 /* BlockInfoCollectionViewCell.swift */,
+				64A0782B20F9E1B5007EDFE7 /* BlockInfoCollectionViewCell.xib */,
+				649065DC20FA2F8800898F69 /* CustomCollectionView.swift */,
+				641442DF20FD8E830028DFBE /* PopOverTableViewCell.swift */,
+				64958F182136C4E20064989B /* SingleUnitCollectionViewCell.swift */,
+				64958F192136C4E20064989B /* SingleUnitCollectionViewCell.xib */,
+				648191E62170F19900ACFE4A /* ColorCollectionViewCell.swift */,
+				648191E72170F19900ACFE4A /* ColorCollectionViewCell.xib */,
+				64958F1E2136D5A90064989B /* SettingsTableViewCell.swift */,
+				64003C842151D86400A2E38D /* ProspectsSubTableViewCell.swift */,
+				64003C852151D86400A2E38D /* ProspectsSubTableViewCell.xib */,
+				644D52832157261C00C6BD25 /* ProspectsTableViewCell.swift */,
+				644D52842157261C00C6BD25 /* ProspectsTableViewCell.xib */,
+				64D7431921301B380028C8CB /* PopUpHeaderView.swift */,
+				6457DC432171B2FC00115291 /* DiscountRequestTableViewCell.swift */,
+				6457DC442171B2FC00115291 /* DiscountRequestTableViewCell.xib */,
+				64891C03215940A300297859 /* RegistrationsTableViewCell.swift */,
+				64891C04215940A300297859 /* RegistrationsTableViewCell.xib */,
+				64DB3896215CEA73000E9CB8 /* CommonProspectsTableViewCell.swift */,
+				64DB3897215CEA73000E9CB8 /* CommonProspectsTableViewCell.xib */,
+				64BF99D5215EB4030073B327 /* ProspectStatusTableViewCell.swift */,
+				64BF99D6215EB4030073B327 /* ProspectStatusTableViewCell.xib */,
+				64750DDE2154F93800087A7F /* RegisterSearchTableViewCell.swift */,
+				6417EBC2215A31A8007D2A3C /* CustomerDetailsTableViewCell.swift */,
+				6417EBC3215A31A8007D2A3C /* CustomerDetailsTableViewCell.xib */,
+				64D7431B21301B590028C8CB /* PopUpHeaderView.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		642FFC0920EBCB0C0076A781 /* montserrat */ = {
+			isa = PBXGroup;
+			children = (
+				642FFC0A20EBCB0C0076A781 /* Montserrat-MediumItalic.otf */,
+				642FFC0B20EBCB0C0076A781 /* Montserrat-Bold.otf */,
+				642FFC0C20EBCB0C0076A781 /* Montserrat-BlackItalic.otf */,
+				642FFC0D20EBCB0C0076A781 /* SIL Open Font License.txt */,
+				642FFC0E20EBCB0C0076A781 /* MontserratAlternates-Black.otf */,
+				642FFC0F20EBCB0C0076A781 /* MontserratAlternates-LightItalic.otf */,
+				642FFC1020EBCB0C0076A781 /* MontserratAlternates-Medium.otf */,
+				642FFC1120EBCB0C0076A781 /* Montserrat-BoldItalic.otf */,
+				642FFC1220EBCB0C0076A781 /* Montserrat-Light.otf */,
+				642FFC1320EBCB0C0076A781 /* Montserrat-ThinItalic.otf */,
+				642FFC1420EBCB0C0076A781 /* Montserrat-Thin.otf */,
+				642FFC1520EBCB0C0076A781 /* MontserratAlternates-MediumItalic.otf */,
+				642FFC1620EBCB0C0076A781 /* Montserrat-ExtraLight.otf */,
+				642FFC1720EBCB0C0076A781 /* MontserratAlternates-BlackItalic.otf */,
+				642FFC1820EBCB0C0076A781 /* MontserratAlternates-Bold.otf */,
+				642FFC1920EBCB0C0076A781 /* MontserratAlternates-ExtraLightItalic.otf */,
+				642FFC1A20EBCB0C0076A781 /* MontserratAlternates-Thin.otf */,
+				642FFC1B20EBCB0C0076A781 /* Montserrat-LightItalic.otf */,
+				642FFC1C20EBCB0C0076A781 /* Montserrat-Medium.otf */,
+				642FFC1D20EBCB0C0076A781 /* MontserratAlternates-SemiBoldItalic.otf */,
+				642FFC1E20EBCB0C0076A781 /* Montserrat-SemiBoldItalic.otf */,
+				642FFC1F20EBCB0C0076A781 /* Montserrat-ExtraBoldItalic.otf */,
+				642FFC2020EBCB0C0076A781 /* Montserrat-Italic.otf */,
+				642FFC2120EBCB0C0076A781 /* MontserratAlternates-SemiBold.otf */,
+				642FFC2220EBCB0C0076A781 /* Montserrat-Regular.otf */,
+				642FFC2320EBCB0C0076A781 /* MontserratAlternates-ExtraBold.otf */,
+				642FFC2420EBCB0C0076A781 /* MontserratAlternates-BoldItalic.otf */,
+				642FFC2520EBCB0C0076A781 /* Montserrat-ExtraBold.otf */,
+				642FFC2620EBCB0C0076A781 /* Montserrat-ExtraLightItalic.otf */,
+				642FFC2720EBCB0C0076A781 /* MontserratAlternates-Light.otf */,
+				642FFC2820EBCB0C0076A781 /* MontserratAlternates-ExtraLight.otf */,
+				642FFC2920EBCB0C0076A781 /* MontserratAlternates-Regular.otf */,
+				642FFC2A20EBCB0C0076A781 /* MontserratAlternates-ThinItalic.otf */,
+				642FFC2B20EBCB0C0076A781 /* Montserrat-Black.otf */,
+				642FFC2C20EBCB0C0076A781 /* MontserratAlternates-ExtraBoldItalic.otf */,
+				642FFC2D20EBCB0C0076A781 /* MontserratAlternates-Italic.otf */,
+				642FFC2E20EBCB0C0076A781 /* Montserrat-SemiBold.otf */,
+			);
+			path = montserrat;
+			sourceTree = "<group>";
+		};
+		6432275820F8840600707A5D /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		64B0E69020EB0ACC008D7563 = {
+			isa = PBXGroup;
+			children = (
+				64B0E69B20EB0ACC008D7563 /* ReRoot */,
+				64B0E6B320EB0ACD008D7563 /* ReRootTests */,
+				64B0E6BE20EB0ACD008D7563 /* ReRootUITests */,
+				64B0E69A20EB0ACC008D7563 /* Products */,
+				1A9C41360EE04F04426BC601 /* Pods */,
+				E2C9ED5CA94C444F2F0B4ADC /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		64B0E69A20EB0ACC008D7563 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				64B0E69920EB0ACC008D7563 /* ReRoot.app */,
+				64B0E6B020EB0ACD008D7563 /* ReRootTests.xctest */,
+				64B0E6BB20EB0ACD008D7563 /* ReRootUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		64B0E69B20EB0ACC008D7563 /* ReRoot */ = {
+			isa = PBXGroup;
+			children = (
+				64BF297620F8BA2C00CDA549 /* Project+CoreDataClass.swift */,
+				64BF297720F8BA2C00CDA549 /* Project+CoreDataProperties.swift */,
+				642FFC0920EBCB0C0076A781 /* montserrat */,
+				64B0E69C20EB0ACC008D7563 /* AppDelegate.swift */,
+				6497DD0820ECCAE6004B9041 /* ForgotPasswordViewController.swift */,
+				6432275820F8840600707A5D /* CoreData */,
+				64B0E69E20EB0ACC008D7563 /* LoginViewController.swift */,
+				64B0E6CD20EB1128008D7563 /* LeftMenuViewController.swift */,
+				64B0E6CF20EB1C59008D7563 /* HomeViewController.swift */,
+				649C6A682167178900314617 /* URLViewController.swift */,
+				64C5DD28214B81910050AB48 /* PageMenu */,
+				641DC27D20F6659B007EE821 /* Cells */,
+				641DC23A20F64D0A007EE821 /* ProjectsViewController.swift */,
+				64A0782220F9C263007EDFE7 /* ProjectDetailsViewController.swift */,
+				6479C63E2137C2A90070DED0 /* PreSalesViewController.swift */,
+				64C5DD37214B88EB0050AB48 /* ProjectWiseViewController.swift */,
+				64C5DD39214B893C0050AB48 /* SalesPersonWiseViewController.swift */,
+				64C5DD3B214B8A1E0050AB48 /* EnquiryWiseViewController.swift */,
+				6417EBD2215A75AF007D2A3C /* LeadsAndOpportunitiesViewController.swift */,
+				64BF99D1215EB1ED0073B327 /* ProspectsStatusViewController.swift */,
+				6440DFFD2163747C00F5321A /* ProspectDatePickerViewController.swift */,
+				6440DFFF2164984900F5321A /* ProjectSelectionViewController.swift */,
+				6440E0012164C08700F5321A /* DiscountRequestViewController.swift */,
+				6440E0032164D2DC00F5321A /* AddNewTaskViewController.swift */,
+				648A324E215F35C000F8E58F /* LeadsPopUpViewController.swift */,
+				64FA75B92153FE640061684A /* RegistrationViewController.swift */,
+				64750DE02154F97300087A7F /* RegistrationSearchViewController.swift */,
+				64891C0121593CF400297859 /* RegistrationsViewController.swift */,
+				6417EBC0215A0D88007D2A3C /* CustomerDetailsViewController.swift */,
+				6417EBC6215A6B94007D2A3C /* CallsViewController.swift */,
+				6417EBC8215A6B9C007D2A3C /* OffersViewController.swift */,
+				6417EBCA215A6BA4007D2A3C /* SiteVisitsViewController.swift */,
+				6417EBCC215A6BB4007D2A3C /* DiscountRequestsViewController.swift */,
+				6417EBCE215A6BBE007D2A3C /* OtherTasksViewController.swift */,
+				6417EBD0215A6BC7007D2A3C /* NotInterestedViewController.swift */,
+				64F982F7216608CC002A1964 /* NotInterestedStatusHandleViewController.swift */,
+				64E616E92168B93F00B6D74B /* VechicleAndDriverSelectionViewController.swift */,
+				64F9E069216F21870029A323 /* SendOfferPopUpViewController.swift */,
+				649AE0D6210B95A100CD4F41 /* BookUnitViewController.swift */,
+				64958F1C2136CECE0064989B /* SettingsViewController.swift */,
+				64B05521218171CB007DCDCA /* ChangePassWordViewController.swift */,
+				64F00FBB2176FEB40086FC2E /* PlanViewController.swift */,
+				64C1CB9E212829D90074F285 /* KMPlaceholderTextView.h */,
+				64C1CB9D212829D90074F285 /* KMPlaceholderTextView.swift */,
+				64E914D120FCA521007E5801 /* ButtonView.xib */,
+				64E914D320FCA610007E5801 /* ButtonView.swift */,
+				6427974C210B373E00FCF2CC /* BlockDetailsView.swift */,
+				64E914D520FCC24D007E5801 /* PopOverViewController.swift */,
+				641DAD6821257FA7009AB6E4 /* DatePickerViewController.swift */,
+				64BBA92C216CAD2A00CA12B5 /* WebViewController.swift */,
+				64E4608420F8452000BBFB03 /* DBModel.swift */,
+				6427974E210B433600FCF2CC /* UnitCollectionViewCell.swift */,
+				64279750210B436900FCF2CC /* UnitHeaderCollectionReusableView.swift */,
+				647D383C21098906000FB32E /* JsonModels.swift */,
+				64B0E6D120EB3B7A008D7563 /* RRUtilities.swift */,
+				64EFD7AF20EB4A43002B69BF /* Constants.swift */,
+				64B0E6A020EB0ACC008D7563 /* Main.storyboard */,
+				64B0E6A620EB0ACD008D7563 /* Assets.xcassets */,
+				64B0E6A820EB0ACD008D7563 /* LaunchScreen.storyboard */,
+				64B0E6AB20EB0ACD008D7563 /* Info.plist */,
+				64B0E6A320EB0ACC008D7563 /* ReRoot.xcdatamodeld */,
+			);
+			path = ReRoot;
+			sourceTree = "<group>";
+		};
+		64B0E6B320EB0ACD008D7563 /* ReRootTests */ = {
+			isa = PBXGroup;
+			children = (
+				64B0E6B420EB0ACD008D7563 /* ReRootTests.swift */,
+				64B0E6B620EB0ACD008D7563 /* Info.plist */,
+			);
+			path = ReRootTests;
+			sourceTree = "<group>";
+		};
+		64B0E6BE20EB0ACD008D7563 /* ReRootUITests */ = {
+			isa = PBXGroup;
+			children = (
+				64B0E6BF20EB0ACD008D7563 /* ReRootUITests.swift */,
+				64B0E6C120EB0ACD008D7563 /* Info.plist */,
+			);
+			path = ReRootUITests;
+			sourceTree = "<group>";
+		};
+		64C5DD28214B81910050AB48 /* PageMenu */ = {
+			isa = PBXGroup;
+			children = (
+				64C5DD29214B81910050AB48 /* CAPSPageMenu+UIGestureRecognizerDelegate.swift */,
+				64C5DD2A214B81910050AB48 /* CAPSPageMenu+Options.swift */,
+				64C5DD2B214B81910050AB48 /* MenuItemView.swift */,
+				64C5DD2C214B81910050AB48 /* CAPSPageMenu+UIScrollViewDelegate.swift */,
+				64C5DD2D214B81910050AB48 /* CAPSPageMenu+UIConfiguration.swift */,
+				64C5DD2E214B81910050AB48 /* CAPSPageMenuConfiguration.swift */,
+				64C5DD2F214B81910050AB48 /* CAPSPageMenu.swift */,
+			);
+			path = PageMenu;
+			sourceTree = "<group>";
+		};
+		E2C9ED5CA94C444F2F0B4ADC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				648D583D21416D5D00BC9D00 /* Crashlytics.framework */,
+				648D583E21416D5E00BC9D00 /* Fabric.framework */,
+				4E862B54C14ACF075E02FF75 /* Pods_ReRoot.framework */,
+				5B3A691FF50B252AF687476D /* Pods_ReRootTests.framework */,
+				19FEC7736ABFDB29BC2650C0 /* Pods_ReRootUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		64B0E69820EB0ACC008D7563 /* ReRoot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 64B0E6C420EB0ACD008D7563 /* Build configuration list for PBXNativeTarget "ReRoot" */;
+			buildPhases = (
+				CB329C610D5C6AF520FA1EDB /* [CP] Check Pods Manifest.lock */,
+				64B0E69520EB0ACC008D7563 /* Sources */,
+				64B0E69620EB0ACC008D7563 /* Frameworks */,
+				64B0E69720EB0ACC008D7563 /* Resources */,
+				5224C70AE180D94C98437A6E /* [CP] Embed Pods Frameworks */,
+				648D583C21416D3F00BC9D00 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReRoot;
+			productName = ReRoot;
+			productReference = 64B0E69920EB0ACC008D7563 /* ReRoot.app */;
+			productType = "com.apple.product-type.application";
+		};
+		64B0E6AF20EB0ACD008D7563 /* ReRootTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 64B0E6C720EB0ACD008D7563 /* Build configuration list for PBXNativeTarget "ReRootTests" */;
+			buildPhases = (
+				61AA1E24B81A4A455C8143CB /* [CP] Check Pods Manifest.lock */,
+				64B0E6AC20EB0ACD008D7563 /* Sources */,
+				64B0E6AD20EB0ACD008D7563 /* Frameworks */,
+				64B0E6AE20EB0ACD008D7563 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				64B0E6B220EB0ACD008D7563 /* PBXTargetDependency */,
+			);
+			name = ReRootTests;
+			productName = ReRootTests;
+			productReference = 64B0E6B020EB0ACD008D7563 /* ReRootTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		64B0E6BA20EB0ACD008D7563 /* ReRootUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 64B0E6CA20EB0ACD008D7563 /* Build configuration list for PBXNativeTarget "ReRootUITests" */;
+			buildPhases = (
+				7C52D11EF6AEC4174C318C44 /* [CP] Check Pods Manifest.lock */,
+				64B0E6B720EB0ACD008D7563 /* Sources */,
+				64B0E6B820EB0ACD008D7563 /* Frameworks */,
+				64B0E6B920EB0ACD008D7563 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				64B0E6BD20EB0ACD008D7563 /* PBXTargetDependency */,
+			);
+			name = ReRootUITests;
+			productName = ReRootUITests;
+			productReference = 64B0E6BB20EB0ACD008D7563 /* ReRootUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		64B0E69120EB0ACC008D7563 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = ReRoot;
+				TargetAttributes = {
+					64B0E69820EB0ACC008D7563 = {
+						CreatedOnToolsVersion = 9.4;
+					};
+					64B0E6AF20EB0ACD008D7563 = {
+						CreatedOnToolsVersion = 9.4;
+						TestTargetID = 64B0E69820EB0ACC008D7563;
+					};
+					64B0E6BA20EB0ACD008D7563 = {
+						CreatedOnToolsVersion = 9.4;
+						TestTargetID = 64B0E69820EB0ACC008D7563;
+					};
+				};
+			};
+			buildConfigurationList = 64B0E69420EB0ACC008D7563 /* Build configuration list for PBXProject "ReRoot" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 64B0E69020EB0ACC008D7563;
+			productRefGroup = 64B0E69A20EB0ACC008D7563 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64B0E69820EB0ACC008D7563 /* ReRoot */,
+				64B0E6AF20EB0ACD008D7563 /* ReRootTests */,
+				64B0E6BA20EB0ACD008D7563 /* ReRootUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		64B0E69720EB0ACC008D7563 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				644D52862157261C00C6BD25 /* ProspectsTableViewCell.xib in Resources */,
+				642FFC4820EBCB0C0076A781 /* MontserratAlternates-ExtraBold.otf in Resources */,
+				642FFC4A20EBCB0C0076A781 /* Montserrat-ExtraBold.otf in Resources */,
+				64A0782920F9DB1C007EDFE7 /* BlockDetailsTableViewCell.xib in Resources */,
+				642FFC5020EBCB0C0076A781 /* Montserrat-Black.otf in Resources */,
+				642FFC3220EBCB0C0076A781 /* SIL Open Font License.txt in Resources */,
+				64DB3899215CEA73000E9CB8 /* CommonProspectsTableViewCell.xib in Resources */,
+				642FFC4E20EBCB0C0076A781 /* MontserratAlternates-Regular.otf in Resources */,
+				64891C06215940A300297859 /* RegistrationsTableViewCell.xib in Resources */,
+				642FFC3320EBCB0C0076A781 /* MontserratAlternates-Black.otf in Resources */,
+				642FFC4B20EBCB0C0076A781 /* Montserrat-ExtraLightItalic.otf in Resources */,
+				642FFC3020EBCB0C0076A781 /* Montserrat-Bold.otf in Resources */,
+				642FFC3C20EBCB0C0076A781 /* MontserratAlternates-BlackItalic.otf in Resources */,
+				642FFC5320EBCB0C0076A781 /* Montserrat-SemiBold.otf in Resources */,
+				64B0E6AA20EB0ACD008D7563 /* LaunchScreen.storyboard in Resources */,
+				642FFC3620EBCB0C0076A781 /* Montserrat-BoldItalic.otf in Resources */,
+				642FFC4F20EBCB0C0076A781 /* MontserratAlternates-ThinItalic.otf in Resources */,
+				641DC28120F665C1007EE821 /* ProjectDetailsTableViewCell.xib in Resources */,
+				642FFC3820EBCB0C0076A781 /* Montserrat-ThinItalic.otf in Resources */,
+				64D7431C21301B590028C8CB /* PopUpHeaderView.xib in Resources */,
+				642FFC3520EBCB0C0076A781 /* MontserratAlternates-Medium.otf in Resources */,
+				642FFC3A20EBCB0C0076A781 /* MontserratAlternates-MediumItalic.otf in Resources */,
+				642FFC3B20EBCB0C0076A781 /* Montserrat-ExtraLight.otf in Resources */,
+				642FFC3120EBCB0C0076A781 /* Montserrat-BlackItalic.otf in Resources */,
+				642FFC4120EBCB0C0076A781 /* Montserrat-Medium.otf in Resources */,
+				642FFC3E20EBCB0C0076A781 /* MontserratAlternates-ExtraLightItalic.otf in Resources */,
+				642FFC5120EBCB0C0076A781 /* MontserratAlternates-ExtraBoldItalic.otf in Resources */,
+				642FFC3420EBCB0C0076A781 /* MontserratAlternates-LightItalic.otf in Resources */,
+				642FFC4520EBCB0C0076A781 /* Montserrat-Italic.otf in Resources */,
+				64958F1B2136C4E20064989B /* SingleUnitCollectionViewCell.xib in Resources */,
+				648191E92170F19900ACFE4A /* ColorCollectionViewCell.xib in Resources */,
+				64A0782D20F9E1B5007EDFE7 /* BlockInfoCollectionViewCell.xib in Resources */,
+				642FFC4020EBCB0C0076A781 /* Montserrat-LightItalic.otf in Resources */,
+				642FFC3920EBCB0C0076A781 /* Montserrat-Thin.otf in Resources */,
+				642FFC3F20EBCB0C0076A781 /* MontserratAlternates-Thin.otf in Resources */,
+				642FFC4C20EBCB0C0076A781 /* MontserratAlternates-Light.otf in Resources */,
+				642FFC4420EBCB0C0076A781 /* Montserrat-ExtraBoldItalic.otf in Resources */,
+				642FFC4720EBCB0C0076A781 /* Montserrat-Regular.otf in Resources */,
+				642FFC2F20EBCB0C0076A781 /* Montserrat-MediumItalic.otf in Resources */,
+				64B0E6A720EB0ACD008D7563 /* Assets.xcassets in Resources */,
+				64BF99D8215EB4030073B327 /* ProspectStatusTableViewCell.xib in Resources */,
+				64B0E6A220EB0ACC008D7563 /* Main.storyboard in Resources */,
+				642FFC4D20EBCB0C0076A781 /* MontserratAlternates-ExtraLight.otf in Resources */,
+				642FFC4920EBCB0C0076A781 /* MontserratAlternates-BoldItalic.otf in Resources */,
+				642FFC3D20EBCB0C0076A781 /* MontserratAlternates-Bold.otf in Resources */,
+				642FFC5220EBCB0C0076A781 /* MontserratAlternates-Italic.otf in Resources */,
+				6457DC462171B2FC00115291 /* DiscountRequestTableViewCell.xib in Resources */,
+				642FFC4320EBCB0C0076A781 /* Montserrat-SemiBoldItalic.otf in Resources */,
+				642FFC4620EBCB0C0076A781 /* MontserratAlternates-SemiBold.otf in Resources */,
+				642FFC4220EBCB0C0076A781 /* MontserratAlternates-SemiBoldItalic.otf in Resources */,
+				6417EBC5215A31A8007D2A3C /* CustomerDetailsTableViewCell.xib in Resources */,
+				64E914D220FCA521007E5801 /* ButtonView.xib in Resources */,
+				642FFC3720EBCB0C0076A781 /* Montserrat-Light.otf in Resources */,
+				64003C872151D86400A2E38D /* ProspectsSubTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64B0E6AE20EB0ACD008D7563 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64B0E6B920EB0ACD008D7563 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5224C70AE180D94C98437A6E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ReRoot/Pods-ReRoot-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/JJFloatingActionButton/JJFloatingActionButton.framework",
+				"${BUILT_PRODUCTS_DIR}/KeychainAccess/KeychainAccess.framework",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJFloatingActionButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainAccess.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReRoot/Pods-ReRoot-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		61AA1E24B81A4A455C8143CB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReRootTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		648D583C21416D3F00BC9D00 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 084fbc69b26d2c68d796beb5de40f2125668dc64 5a4e7a21ce5c216d037c0af09a8867859949c8d13e155b97e2f63d81f418e44f";
+		};
+		7C52D11EF6AEC4174C318C44 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReRootUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB329C610D5C6AF520FA1EDB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReRoot-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		64B0E69520EB0ACC008D7563 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64C5DD3A214B893C0050AB48 /* SalesPersonWiseViewController.swift in Sources */,
+				6417EBD1215A6BC7007D2A3C /* NotInterestedViewController.swift in Sources */,
+				64BF99D2215EB1ED0073B327 /* ProspectsStatusViewController.swift in Sources */,
+				64958F1A2136C4E20064989B /* SingleUnitCollectionViewCell.swift in Sources */,
+				6417EBCF215A6BBE007D2A3C /* OtherTasksViewController.swift in Sources */,
+				6417EBC1215A0D88007D2A3C /* CustomerDetailsViewController.swift in Sources */,
+				64C5DD33214B81910050AB48 /* CAPSPageMenu+UIScrollViewDelegate.swift in Sources */,
+				64C5DD36214B81910050AB48 /* CAPSPageMenu.swift in Sources */,
+				64B0E6D220EB3B7A008D7563 /* RRUtilities.swift in Sources */,
+				64DB3898215CEA73000E9CB8 /* CommonProspectsTableViewCell.swift in Sources */,
+				642FFC0820EB884E0076A781 /* LeftMenuTableViewCell.swift in Sources */,
+				6440E0022164C08700F5321A /* DiscountRequestViewController.swift in Sources */,
+				64E914D620FCC24D007E5801 /* PopOverViewController.swift in Sources */,
+				644D52852157261C00C6BD25 /* ProspectsTableViewCell.swift in Sources */,
+				648A324F215F35C000F8E58F /* LeadsPopUpViewController.swift in Sources */,
+				64E914D420FCA610007E5801 /* ButtonView.swift in Sources */,
+				64C5DD30214B81910050AB48 /* CAPSPageMenu+UIGestureRecognizerDelegate.swift in Sources */,
+				64BBA92D216CAD2A00CA12B5 /* WebViewController.swift in Sources */,
+				649065DD20FA2F8800898F69 /* CustomCollectionView.swift in Sources */,
+				64750DDF2154F93800087A7F /* RegisterSearchTableViewCell.swift in Sources */,
+				64C5DD35214B81910050AB48 /* CAPSPageMenuConfiguration.swift in Sources */,
+				64B0E6D020EB1C59008D7563 /* HomeViewController.swift in Sources */,
+				64BF297820F8BA2C00CDA549 /* Project+CoreDataClass.swift in Sources */,
+				64891C05215940A300297859 /* RegistrationsTableViewCell.swift in Sources */,
+				649C6A692167178900314617 /* URLViewController.swift in Sources */,
+				64891C0221593CF400297859 /* RegistrationsViewController.swift in Sources */,
+				6479C63F2137C2A90070DED0 /* PreSalesViewController.swift in Sources */,
+				64C5DD31214B81910050AB48 /* CAPSPageMenu+Options.swift in Sources */,
+				64D7431A21301B380028C8CB /* PopUpHeaderView.swift in Sources */,
+				648191E82170F19900ACFE4A /* ColorCollectionViewCell.swift in Sources */,
+				6440E0042164D2DC00F5321A /* AddNewTaskViewController.swift in Sources */,
+				64C5DD3C214B8A1E0050AB48 /* EnquiryWiseViewController.swift in Sources */,
+				64F9E06A216F21870029A323 /* SendOfferPopUpViewController.swift in Sources */,
+				64F00FBD2176FEB40086FC2E /* PlanViewController.swift in Sources */,
+				64C1CB9F212829D90074F285 /* KMPlaceholderTextView.swift in Sources */,
+				6417EBC4215A31A8007D2A3C /* CustomerDetailsTableViewCell.swift in Sources */,
+				641DAD6921257FA7009AB6E4 /* DatePickerViewController.swift in Sources */,
+				64279751210B436900FCF2CC /* UnitHeaderCollectionReusableView.swift in Sources */,
+				64003C862151D86400A2E38D /* ProspectsSubTableViewCell.swift in Sources */,
+				64A0782C20F9E1B5007EDFE7 /* BlockInfoCollectionViewCell.swift in Sources */,
+				649AE0D7210B95A100CD4F41 /* BookUnitViewController.swift in Sources */,
+				6417EBD3215A75AF007D2A3C /* LeadsAndOpportunitiesViewController.swift in Sources */,
+				64C5DD34214B81910050AB48 /* CAPSPageMenu+UIConfiguration.swift in Sources */,
+				64B0E69F20EB0ACC008D7563 /* LoginViewController.swift in Sources */,
+				64B05522218171CB007DCDCA /* ChangePassWordViewController.swift in Sources */,
+				647D383D21098906000FB32E /* JsonModels.swift in Sources */,
+				64F982F8216608CC002A1964 /* NotInterestedStatusHandleViewController.swift in Sources */,
+				6417EBC9215A6B9C007D2A3C /* OffersViewController.swift in Sources */,
+				641442E020FD8E830028DFBE /* PopOverTableViewCell.swift in Sources */,
+				64958F1F2136D5A90064989B /* SettingsTableViewCell.swift in Sources */,
+				64A0782820F9DB1C007EDFE7 /* BlockDetailsTableViewCell.swift in Sources */,
+				64B0E69D20EB0ACC008D7563 /* AppDelegate.swift in Sources */,
+				6497DD0920ECCAE6004B9041 /* ForgotPasswordViewController.swift in Sources */,
+				64BF297920F8BA2C00CDA549 /* Project+CoreDataProperties.swift in Sources */,
+				6427974F210B433600FCF2CC /* UnitCollectionViewCell.swift in Sources */,
+				64E4608520F8452000BBFB03 /* DBModel.swift in Sources */,
+				64EFD7B020EB4A43002B69BF /* Constants.swift in Sources */,
+				6417EBCD215A6BB4007D2A3C /* DiscountRequestsViewController.swift in Sources */,
+				6427974D210B373E00FCF2CC /* BlockDetailsView.swift in Sources */,
+				6497DD4820ED36EF004B9041 /* HomeMenuTableViewCell.swift in Sources */,
+				64C5DD38214B88EB0050AB48 /* ProjectWiseViewController.swift in Sources */,
+				641DC28020F665C1007EE821 /* ProjectDetailsTableViewCell.swift in Sources */,
+				64958F1D2136CECE0064989B /* SettingsViewController.swift in Sources */,
+				6417EBCB215A6BA4007D2A3C /* SiteVisitsViewController.swift in Sources */,
+				6440DFFE2163747C00F5321A /* ProspectDatePickerViewController.swift in Sources */,
+				64750DE12154F97300087A7F /* RegistrationSearchViewController.swift in Sources */,
+				64FA75BA2153FE640061684A /* RegistrationViewController.swift in Sources */,
+				64BF99D7215EB4030073B327 /* ProspectStatusTableViewCell.swift in Sources */,
+				64E616EA2168B93F00B6D74B /* VechicleAndDriverSelectionViewController.swift in Sources */,
+				6417EBC7215A6B94007D2A3C /* CallsViewController.swift in Sources */,
+				64B0E6CE20EB1128008D7563 /* LeftMenuViewController.swift in Sources */,
+				6457DC452171B2FC00115291 /* DiscountRequestTableViewCell.swift in Sources */,
+				64A0782320F9C263007EDFE7 /* ProjectDetailsViewController.swift in Sources */,
+				641DC23B20F64D0A007EE821 /* ProjectsViewController.swift in Sources */,
+				64C5DD32214B81910050AB48 /* MenuItemView.swift in Sources */,
+				6440E0002164984900F5321A /* ProjectSelectionViewController.swift in Sources */,
+				64B0E6A520EB0ACC008D7563 /* ReRoot.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64B0E6AC20EB0ACD008D7563 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64B0E6B520EB0ACD008D7563 /* ReRootTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		64B0E6B720EB0ACD008D7563 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64B0E6C020EB0ACD008D7563 /* ReRootUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		64B0E6B220EB0ACD008D7563 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 64B0E69820EB0ACC008D7563 /* ReRoot */;
+			targetProxy = 64B0E6B120EB0ACD008D7563 /* PBXContainerItemProxy */;
+		};
+		64B0E6BD20EB0ACD008D7563 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 64B0E69820EB0ACC008D7563 /* ReRoot */;
+			targetProxy = 64B0E6BC20EB0ACD008D7563 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		64B0E6A020EB0ACC008D7563 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64B0E6A120EB0ACC008D7563 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		64B0E6A820EB0ACD008D7563 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64B0E6A920EB0ACD008D7563 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		64B0E6C220EB0ACD008D7563 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		64B0E6C320EB0ACD008D7563 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		64B0E6C520EB0ACD008D7563 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 973DFB4780F1C22AAC3F1655 /* Pods-ReRoot.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4MM743TR5P;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = ReRoot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.inResto.order;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		64B0E6C620EB0ACD008D7563 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35D4B3E3C09CD44CF19E8884 /* Pods-ReRoot.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4MM743TR5P;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = ReRoot/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.inResto.order;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		64B0E6C820EB0ACD008D7563 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C847396E1195B6FACAEA06B2 /* Pods-ReRootTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4MM743TR5P;
+				INFOPLIST_FILE = ReRootTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ReRoot.ReRootTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReRoot.app/ReRoot";
+			};
+			name = Debug;
+		};
+		64B0E6C920EB0ACD008D7563 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E910D03AF68BAD29826BDD43 /* Pods-ReRootTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4MM743TR5P;
+				INFOPLIST_FILE = ReRootTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ReRoot.ReRootTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ReRoot.app/ReRoot";
+			};
+			name = Release;
+		};
+		64B0E6CB20EB0ACD008D7563 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB7DA7760AA30AB29DE8DD68 /* Pods-ReRootUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ReRootUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ReRoot.ReRootUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ReRoot;
+			};
+			name = Debug;
+		};
+		64B0E6CC20EB0ACD008D7563 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C3753EC34059FEBEF96FCCD /* Pods-ReRootUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = ReRootUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ReRoot.ReRootUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ReRoot;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		64B0E69420EB0ACC008D7563 /* Build configuration list for PBXProject "ReRoot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64B0E6C220EB0ACD008D7563 /* Debug */,
+				64B0E6C320EB0ACD008D7563 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64B0E6C420EB0ACD008D7563 /* Build configuration list for PBXNativeTarget "ReRoot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64B0E6C520EB0ACD008D7563 /* Debug */,
+				64B0E6C620EB0ACD008D7563 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64B0E6C720EB0ACD008D7563 /* Build configuration list for PBXNativeTarget "ReRootTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64B0E6C820EB0ACD008D7563 /* Debug */,
+				64B0E6C920EB0ACD008D7563 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64B0E6CA20EB0ACD008D7563 /* Build configuration list for PBXNativeTarget "ReRootUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64B0E6CB20EB0ACD008D7563 /* Debug */,
+				64B0E6CC20EB0ACD008D7563 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		64B0E6A320EB0ACC008D7563 /* ReRoot.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				64B0E6A420EB0ACC008D7563 /* ReRoot.xcdatamodel */,
+			);
+			currentVersion = 64B0E6A420EB0ACC008D7563 /* ReRoot.xcdatamodel */;
+			path = ReRoot.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 64B0E69120EB0ACC008D7563 /* Project object */;
+}
