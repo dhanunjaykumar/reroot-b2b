@@ -52,12 +52,22 @@ public final class Siren: NSObject {
     /// The last date that an alert was presented to the user.
     private var alertPresentationDate: Date? = UserDefaults.alertPresentationDate
 
+    /// Prevents the update dialog from not displaying when the user swipes down
+    /// on a notification center notification to the bottom of screen when calling
+    /// the Siren.shared.wail notificaiton using the `.onForeground` performCheck option.
+     private var appDidBecomeActiveWorkItem: DispatchWorkItem?
+    
+    /// The minimal amount of time needed before calling the update notification
+    /// after entering the app from a notificaiton.
+    /// Refer to comment in `appDidBecomeActiveWorkItem` for more information.
+    private let appDidBecomeActiveWorkItemTimeDelay = 0.02
+    
     /// The App Store's unique identifier for an app.
     private var appID: Int?
-
+    
     /// The completion handler used to return the results or errors returned by Siren.
     private var resultsHandler: ResultsHandler?
-
+    
     /// The deinitialization method that clears out all observers,
     deinit {
         presentationManager.cleanUp()
@@ -81,7 +91,7 @@ public extension Siren {
         switch performCheck {
         case .onDemand:
             removeForegroundObservers()
-            performVersionCheck()
+            startVersionCheckFlow()
         case .onForeground:
             addForegroundObservers()
         }
@@ -102,11 +112,7 @@ public extension Siren {
         }
 
         DispatchQueue.main.async {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
 }
@@ -114,16 +120,25 @@ public extension Siren {
 // MARK: - Version Check and Alert Presentation Flow
 
 private extension Siren {
-    /// Initiates the unidirectional version checking flow.
-    func performVersionCheck() {
+    /// Initiates the version checking flow.
+    func startVersionCheckFlow() {
         alertPresentationDate = UserDefaults.alertPresentationDate
-        apiManager.performVersionCheckRequest { result in
-            switch result {
-            case .success(let apiModel):
+        Task {
+            await performVersionCheck()
+        }
+    }
+    
+    /// Initiatives the version check request.
+    func performVersionCheck() async {
+        do {
+            let apiModel = try await apiManager.performVersionCheckRequest()
+            DispatchQueue.main.async {
                 self.validate(apiModel: apiModel)
-            case .failure(let error):
-                self.resultsHandler?(.failure(error))
             }
+        } catch (let error as KnownError) {
+            self.resultsHandler?(.failure(error))
+        } catch {
+            // Do nothing. Silences exhaustive error.
         }
     }
 
@@ -190,22 +205,24 @@ private extension Siren {
     ///   - currentAppStoreVersion: The curren version of the app in the App Store.
     ///   - model: The iTunes Lookup Model.
     func determineIfAlertPresentationRulesAreSatisfied(forCurrentAppStoreVersion currentAppStoreVersion: String, andModel model: Model) {
-        // Did the user:
-        // - request to skip being prompted with version update alerts for a specific version
-        // - and is the latest App Store update the same version that was requested?
-        if let previouslySkippedVersion = UserDefaults.storedSkippedVersion,
-            let currentInstalledVersion = currentInstalledVersion,
-            !currentAppStoreVersion.isEmpty,
-            currentAppStoreVersion == previouslySkippedVersion {
-            resultsHandler?(.failure(.skipVersionUpdate(installedVersion: currentInstalledVersion,
-                                                        appStoreVersion: currentAppStoreVersion)))
-                return
-        }
-
         let updateType = DataParser.parseForUpdate(forInstalledVersion: currentInstalledVersion,
                                                    andAppStoreVersion: currentAppStoreVersion)
         do {
             let rules = try rulesManager.loadRulesForUpdateType(updateType)
+
+            // Did the user:
+            // - request to skip being prompted with version update alerts for a specific version
+            // - and is the latest App Store update the same version that was requested
+            // - and app is not forcing updates?
+            if let previouslySkippedVersion = UserDefaults.storedSkippedVersion,
+               let currentInstalledVersion = currentInstalledVersion,
+               !currentAppStoreVersion.isEmpty,
+               currentAppStoreVersion == previouslySkippedVersion,
+               rules.alertType != .force {
+                resultsHandler?(.failure(.skipVersionUpdate(installedVersion: currentInstalledVersion,
+                                                            appStoreVersion: currentAppStoreVersion)))
+                    return
+            }
 
             if rules.frequency == .immediately {
                 presentAlert(withRules: rules, forCurrentAppStoreVersion: currentAppStoreVersion, model: model, andUpdateType: updateType)
@@ -277,7 +294,14 @@ private extension Siren {
                          object: nil,
                          queue: nil) { [weak self] _ in
                             guard let self = self else { return }
-                            self.performVersionCheck()
+                            self.appDidBecomeActiveWorkItem = DispatchWorkItem {
+                                Task {
+                                    await self.performVersionCheck()
+                                }
+                            }
+                            if let appDidBecomeActiveWorkItem = self.appDidBecomeActiveWorkItem {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + self.appDidBecomeActiveWorkItemTimeDelay, execute: appDidBecomeActiveWorkItem)
+                            }
         }
     }
 
@@ -291,6 +315,8 @@ private extension Siren {
                              object: nil,
                              queue: nil) { [weak self] _ in
                                 guard let self = self else { return }
+                                self.appDidBecomeActiveWorkItem?.cancel()
+                                self.appDidBecomeActiveWorkItem = nil
                                 self.presentationManager.cleanUp()
             }
         }

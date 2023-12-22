@@ -95,8 +95,8 @@ class AddNewTaskViewController: UIViewController,DateSelectedFromTimePicker,Regi
 //            registerController.modalTransitionStyle = .crossDissolve
             registerController.shouldShowRadioButton = true
             let fpc = FloatingPanelController()
-            fpc.surfaceView.cornerRadius = 6.0
-            fpc.surfaceView.shadowHidden = false
+            fpc.surfaceView.layer.cornerCurve = 6.0
+            fpc.surfaceView.isHidden = false
             fpc.set(contentViewController: registerController)
             fpc.isRemovalInteractionEnabled = true // Optional: Let it removable by a swipe-down
             fpc.track(scrollView: registerController.tableView)
