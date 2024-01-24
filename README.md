@@ -1,6 +1,6 @@
 https://www.reroot.in/
 
-1.Lead management
+1. Lead management
 
 2. Sales management
 
