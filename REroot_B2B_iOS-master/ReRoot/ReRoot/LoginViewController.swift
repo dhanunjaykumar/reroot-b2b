@@ -42,10 +42,6 @@ class LoginViewController: UIViewController {
         
         passwordTextField.delegate = self
 
-//        #if DEBUG
-//        emailIdTextField.text = "admin@prestige.com"
-//        passwordTextField.text = "siso@123"
-//        #endif
 
 //        print(RRUtilities.sharedInstance.keychain["Cookie"])
         self.view.backgroundColor = UIColor.hexStringToUIColor(hex: "#00327f")

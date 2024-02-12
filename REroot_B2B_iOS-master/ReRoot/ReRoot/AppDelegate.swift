@@ -39,13 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         UIApplication.shared.applicationIconBadgeNumber = 0
 
-        let urlStrig : String = UserDefaults.standard.value(forKey: "url") as? String ?? ""  //RR123
+        let urlStrig : String = UserDefaults.standard.value(forKey: "url") as? String ?? ""
 
-//        #if DEBUG //192.168.0.104    // edp@ukn.co.in  //reroot@123   //52.66.34.235  //192.168.1.4 //172.16.20.53
-//            UserDefaults.standard.set("http://52.66.34.235:3000", forKey: "url")
-//            UserDefaults.standard.set("DEVELOPMENT", forKey: "mode") //10.130.201.129
-//            UserDefaults.standard.synchronize()
-//        #endif
         
         Siren.shared.wail() // Line 2
 
